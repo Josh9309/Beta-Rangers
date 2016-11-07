@@ -177,6 +177,11 @@ public abstract class Player : MonoBehaviour {
     {
         get { return superCost; }
     }
+
+    public bool FacingLeft
+    {
+        get { return facingLeft; }
+    }
     #endregion
 
     #region Methods
@@ -401,6 +406,17 @@ public abstract class Player : MonoBehaviour {
         if (!grounded)
         {
             airControl = false;
+        }
+        
+        //key pick up
+        if(coll.gameObject.tag == "Key")
+        {
+            if(coll.gameObject.GetComponent<Key>().Holder == null)//no one is holding the 
+            {
+                coll.gameObject.GetComponent<Key>().Holder = gameObject;
+                key = coll.gameObject.GetComponent<Key>();
+                key.pickedUp();
+            }
         }
     }
 
