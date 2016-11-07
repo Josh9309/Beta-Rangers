@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour {
+public abstract class Player : MonoBehaviour {
     //sets up a finite state to identify what type of ranger the player is.
     public enum RangerType {BlueRanger, RedRanger, GreenRanger, YellowRanger, BlackRanger, PinkRanger};
 
@@ -83,33 +83,33 @@ public class Player : MonoBehaviour {
 
     #region Attributes
     //basic ranger stats attributes
-    [SerializeField] private int health;
-    [SerializeField] private float attack1Power, attack2Power, attack3Power;
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpPower;
-    [SerializeField] private int superCost;
-    [SerializeField] private int superMax;
+    [SerializeField] protected int health;
+    [SerializeField] protected float attack1Power, attack2Power, attack3Power;
+    [SerializeField] protected float speed;
+    [SerializeField] protected float jumpPower;
+    [SerializeField] protected int superCost;
+    [SerializeField] protected int superMax;
 
     //basic player stats attributes
-    [SerializeField] private RangerType ranger; //this will hold what type of ranger this player is
-    [SerializeField] private int playerNum;
+    [SerializeField] protected RangerType ranger; //this will hold what type of ranger this player is
+    [SerializeField] protected int playerNum;
     private int superCurrent;
     private Color playerColor;
     private Key key;
 
     //basic ranger physic attributes
-    [SerializeField] private bool facingLeft;
-    private Vector3 postition;
-    private Vector2 velocity;
-    [SerializeField] private bool grounded;
-    [SerializeField] private Transform groundCheck;
-    private Rigidbody2D rBody;
+    [SerializeField] protected bool facingLeft;
+    protected Vector3 postition;
+    protected Vector2 velocity;
+    [SerializeField] protected bool grounded;
+    [SerializeField] protected Transform groundCheck;
+    protected Rigidbody2D rBody;
     private bool airControl;
     [SerializeField] private LayerMask ground;
 
     //other attributes
-    private InputSettings input = new InputSettings();
-    private WorldController worldControl;
+    protected InputSettings input = new InputSettings();
+    protected WorldController worldControl;
     #endregion
 
     #region Properties
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour {
     #region Methods
     
     // Use this for initialization
-    void Start () {
+    protected virtual void Start () {
         //get the world Controller
         //worldControl = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>();
 
@@ -194,41 +194,14 @@ public class Player : MonoBehaviour {
         postition = transform.position;
         rBody = GetComponent<Rigidbody2D>();
         rBody.mass = 1.0f;
-
-        //setup the ranger stats based on rangerType
-        switch (ranger)
-        {
-            case RangerType.RedRanger:
-                break;
-
-            case RangerType.BlueRanger:
-                break;
-
-            case RangerType.GreenRanger:
-                break;
-
-            case RangerType.YellowRanger:
-                break;
-
-            case RangerType.BlackRanger:
-                break;
-
-            case RangerType.PinkRanger:
-                break;
-        }
-
-
 	}
 	
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         GetInput();//gets all the input from the player
         IsGrounded(); //checks if the ranger is grounded
         Move(); // moves the ranger based on player input
-        Jump();
-
-        //reset btn inputs
-        input.ResetBtns();
+        Jump(); // makes the ranger jump based on player input
 
         //stop ranger velocity if there is no input and ranger is grounded
         if (input.fwdInput == 0 && input.jumpInput == 0 && grounded) //if there is no input and the character is on the ground
@@ -242,7 +215,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void GetInput()
+    protected void GetInput()
     {
         //gets all value based input checks
         input.fwdInput = Input.GetAxis(input.HORIZONTAL_AXIS);
@@ -276,7 +249,7 @@ public class Player : MonoBehaviour {
 
     }
 
-    private void IsGrounded() //used to see whether or not the ranger is grounded
+    protected void IsGrounded() //used to see whether or not the ranger is grounded
     {
         //start off by assuming ranger is not grounded
         grounded = false;
@@ -291,19 +264,19 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void Flip() //used to flip the ranger asset
+    protected void Flip() //used to flip the ranger asset
     {
         facingLeft = !facingLeft;
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y);
     }
 
-    private void CheckIsAlive() //used to check if player is still alive
+    protected void CheckIsAlive() //used to check if player is still alive
     {
 
     }
 
     #region GameMechanic/Movement Methods
-    private void Move() //this method controls how the ranger moves
+    protected void Move() //this method controls how the ranger moves
     {
         if(Mathf.Abs(input.fwdInput)> input.delay) //make sure the input is greater than the input.delay
         {
@@ -328,7 +301,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void Jump() //used to make the player jump
+    protected void Jump() //used to make the player jump
     {
         if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
@@ -337,40 +310,35 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void Dodge()
+    protected void Dodge()
     {
 
     }
 
-    private void Attack1()
+    protected virtual void Attack1()
     {
 
     }
 
-    private void Attack2()
-    {
+    abstract protected void Attack2();
 
-    }
 
-    private void SuperAttack()
-    {
-
-    }
+    abstract protected void SuperAttack();
 
     #endregion
-    public void DestroyRanger()
+    public virtual void DestroyRanger()
     {
         Destroy(gameObject);
         Debug.Log("Ranger has been destroyed");
 
     }
 
-    public double ModHealth(double mod) //adds/subtracts from health
+    public int ModHealth(int mod) //adds/subtracts from health
     {
         throw new System.Exception("Method not implemented yet");
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    protected virtual void OnCollisionEnter2D(Collision2D coll)
     {
         if (!grounded)
         {
@@ -378,12 +346,12 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void OnCollisionExit2D(Collision2D coll)
+    protected virtual void OnCollisionExit2D(Collision2D coll)
     {
         airControl = true;
     }
 
-    void OnDrawGizmos() //used to draw gizmos for debugging
+    protected virtual void OnDrawGizmos() //used to draw gizmos for debugging
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(groundCheck.position, 0.3f);
