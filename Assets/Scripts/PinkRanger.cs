@@ -8,6 +8,7 @@ public class PinkRanger : Player {
     protected override void Start()
     {
         base.Start();
+        playerColor = new Color(255, 105, 180);
     }
 
     // Update is called once per frame

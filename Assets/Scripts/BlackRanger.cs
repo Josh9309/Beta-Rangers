@@ -8,6 +8,7 @@ public class BlackRanger : Player {
     protected override void Start()
     {
         base.Start();
+        playerColor = Color.black;
     }
 
     // Update is called once per frame
