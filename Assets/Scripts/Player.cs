@@ -203,6 +203,7 @@ public abstract class Player : MonoBehaviour {
         IsGrounded(); //checks if the ranger is grounded
         Move(); // moves the ranger based on player input
         Jump(); // makes the ranger jump based on player input
+        Dodge();
         Attack1();
 
         //stop ranger velocity if there is no input and ranger is grounded
@@ -215,6 +216,17 @@ public abstract class Player : MonoBehaviour {
         {
             airControl = true;
         }
+
+        ///Remove Later After First Build
+        if (input.pause)
+        {
+            Application.LoadLevel(0);
+        }
+        if(Input.GetButtonDown("Back"))
+        {
+            Application.Quit();
+        }
+        ///////////////////////////////
     }
 
     protected void GetInput()
@@ -247,6 +259,10 @@ public abstract class Player : MonoBehaviour {
         if (!input.attack2)
         {
             input.attack2 = Input.GetButtonDown(input.ATTACK2_AXIS);
+        }
+        if (!input.pause)
+        {
+            input.pause = Input.GetButtonDown(input.PAUSE_AXIS);
         }
 
     }
@@ -317,7 +333,17 @@ public abstract class Player : MonoBehaviour {
 
     protected void Dodge()
     {
-
+        if (input.dodge && grounded) //a dodge button has been pressed
+        {
+            if(input.dodgeInput > 0)
+            {
+                rBody.AddForce(new Vector2(5000f, 0f));
+            }
+            else
+            {
+                rBody.AddForce(new Vector2(-5000f, 0f));
+            }
+        }
     }
 
     protected virtual void Attack1()

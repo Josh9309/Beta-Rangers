@@ -42,7 +42,7 @@ Transform:
   m_GameObject: {fileID: 196544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.21000004, y: -1.62, z: 0}
-  m_LocalScale: {x: .469920486, y: .469920486, z: .469920486}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 487440}
   m_Father: {fileID: 0}
@@ -165,6 +165,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: attack3Power
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
