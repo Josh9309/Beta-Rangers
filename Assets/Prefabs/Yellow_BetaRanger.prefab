@@ -101,8 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 110
   attack1Power: 15
-  attack2Power: 20
-  attack3Power: 35
+  attack2Power: 30
+  attack3Power: 60
   speed: 15
   jumpPower: 900
   superCost: 15
@@ -153,6 +153,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack1Power
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2Power
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack3Power
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

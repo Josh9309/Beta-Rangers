@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e199b3638c05943aed7f1c17ce0f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  attack1Power: 80
-  attack2Power: 160
-  attack3Power: 400
+  health: 180
+  attack1Power: 10
+  attack2Power: 50
+  attack3Power: 90
   speed: 15
   jumpPower: 900
   superCost: 15
@@ -149,7 +149,23 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: attack1Power
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2Power
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack3Power
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 103898}
