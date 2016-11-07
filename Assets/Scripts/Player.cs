@@ -84,7 +84,7 @@ public abstract class Player : MonoBehaviour {
     #region Attributes
     //basic ranger stats attributes
     [SerializeField] protected int health;
-    [SerializeField] protected int attack1Power, attack2Power, attack3Power;
+    [SerializeField] protected float attack1Power, attack2Power, attack3Power;
     [SerializeField] protected float speed;
     [SerializeField] protected float jumpPower;
     [SerializeField] protected int superCost;
@@ -94,7 +94,7 @@ public abstract class Player : MonoBehaviour {
     [SerializeField] protected RangerType ranger; //this will hold what type of ranger this player is
     [SerializeField] protected int playerNum;
     private int superCurrent;
-    protected Color playerColor;
+    private Color playerColor;
     private Key key;
 
     //basic ranger physic attributes
@@ -202,7 +202,6 @@ public abstract class Player : MonoBehaviour {
         IsGrounded(); //checks if the ranger is grounded
         Move(); // moves the ranger based on player input
         Jump(); // makes the ranger jump based on player input
-        Attack1();
 
         //stop ranger velocity if there is no input and ranger is grounded
         if (input.fwdInput == 0 && input.jumpInput == 0 && grounded) //if there is no input and the character is on the ground
@@ -318,34 +317,7 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void Attack1()
     {
-        if (input.attack1)
-        {
-            int attack1Range = 2; //the range of the melee attack for the ranger
-            Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
 
-            if (facingLeft)
-            {
-                cols = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attack1Range, transform.position.y + 1));  // gets all colliders within attack range
-                Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attack1Range, transform.position.y), playerColor, 2, false); //draws the debug line for attack
-            }
-            else
-            {
-                cols = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + attack1Range, transform.position.y + 1));  // gets all colliders within attack range
-                Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + attack1Range, transform.position.y), playerColor, 2, false); //draws the debug line for attack
-            }
-
-            foreach(Collider2D thing in cols)
-            {
-                if(thing.tag == "Player" && thing != gameObject.GetComponent<Collider2D>()) //checks to make sure the thing is another ranger and not yourself
-                {
-                    Player ranger = thing.GetComponent<Player>();
-
-                    ranger.ModHealth(-attack1Power);
-
-                    Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
-                }
-            }
-        }
     }
 
     abstract protected void Attack2();
@@ -361,9 +333,9 @@ public abstract class Player : MonoBehaviour {
 
     }
 
-    public void ModHealth(int mod) //adds/subtracts from health
+    public int ModHealth(int mod) //adds/subtracts from health
     {
-        Health += mod;
+        throw new System.Exception("Method not implemented yet");
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D coll)

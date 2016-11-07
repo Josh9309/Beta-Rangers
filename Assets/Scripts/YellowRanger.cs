@@ -8,7 +8,6 @@ public class YellowRanger : Player {
     protected override void Start()
     {
         base.Start();
-        playerColor = Color.yellow;
     }
 
     // Update is called once per frame
