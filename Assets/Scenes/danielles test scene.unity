@@ -692,7 +692,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11427962, guid: 8820164d0bd359241861a1d315af5418, type: 2}
       propertyPath: playerNum
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11427962, guid: 8820164d0bd359241861a1d315af5418, type: 2}
       propertyPath: jumpPower
