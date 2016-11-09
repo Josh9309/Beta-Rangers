@@ -94,7 +94,7 @@ public abstract class Player : MonoBehaviour {
     [SerializeField] protected RangerType ranger; //this will hold what type of ranger this player is
     [SerializeField] protected int playerNum;
     protected int superCurrent;
-    protected Color playerColor;
+    [SerializeField] protected Color playerColor;
     private Key key;
 
     //basic ranger physic attributes
@@ -409,13 +409,20 @@ public abstract class Player : MonoBehaviour {
         }
         
         //key pick up
-        if(coll.gameObject.tag == "Key")
+        if(coll.gameObject.tag == "Key")//colliding with the key
         {
             if(coll.gameObject.GetComponent<Key>().Holder == null)//no one is holding the 
             {
                 coll.gameObject.GetComponent<Key>().Holder = gameObject;
                 key = coll.gameObject.GetComponent<Key>();
                 key.pickedUp();
+            }
+        }
+        if(coll.gameObject.tag == "Goal")//colliding with their goal
+        {
+            if(key != null && playerColor == coll.gameObject.GetComponent<Goal>().RangerColor)//has the key and same color
+            {
+
             }
         }
     }

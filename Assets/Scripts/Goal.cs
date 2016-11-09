@@ -4,7 +4,7 @@ using System.Collections;
 public class Goal : MonoBehaviour {
 
     ///attributes
-    private Color rangerColor;
+    [SerializeField] private Color rangerColor;
     private Rigidbody2D rBody;
 
     ///Properties
@@ -21,6 +21,9 @@ public class Goal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if(rangerColor != GetComponent<SpriteRenderer>().color)
+        {
+            GetComponent<SpriteRenderer>().color = rangerColor;
+        }
 	}
 }
