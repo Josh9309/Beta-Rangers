@@ -182,6 +182,16 @@ public abstract class Player : MonoBehaviour {
     {
         get { return facingLeft; }
     }
+
+    public int Attack2Power
+    {
+        get { return attack2Power; }
+    }
+
+    public int Attack3Power
+    {
+        get { return attack3Power; }
+    }
     #endregion
 
     #region Methods
@@ -389,6 +399,7 @@ public abstract class Player : MonoBehaviour {
     abstract protected void SuperAttack();
 
     #endregion
+
     public virtual void DestroyRanger()
     {
         Destroy(gameObject);

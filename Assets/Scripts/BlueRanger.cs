@@ -6,7 +6,7 @@ public class BlueRanger : Player {
 
     #region Attributes
     [SerializeField] private GameObject IceShurikenPrefab;
-    private int shurikenMax; //max amount of shurikens allowed to be thrown at once on screen
+    private int shurikenMax = 5; //max amount of shurikens allowed to be thrown at once on screen
     private int shurikenCount = 0; //current shurikens on the screen
     #endregion
 
@@ -39,7 +39,7 @@ public class BlueRanger : Player {
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
+        Attack2();
 
         //reset btn inputs
         input.ResetBtns();
@@ -50,19 +50,16 @@ public class BlueRanger : Player {
     {
         if(input.attack2 && shurikenCount < shurikenMax) //checks to make sure button has been pressed and that we have not hit max shurikens on the screen
         {
-            IceShuriken shurikenScript;
             GameObject iceShuriken;
 
-            if (facingLeft)
+            //makes the ice shuriken depending on the direction player is facing
+            if (facingLeft) 
             {
                 iceShuriken = Instantiate(IceShurikenPrefab, new Vector3(gameObject.transform.position.x - 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
-                shurikenScript = iceShuriken.GetComponent<IceShuriken>();
-
             }
             else
             {
                 iceShuriken = Instantiate(IceShurikenPrefab, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
-                shurikenScript = iceShuriken.GetComponent<IceShuriken>();
             }
         }
     }
