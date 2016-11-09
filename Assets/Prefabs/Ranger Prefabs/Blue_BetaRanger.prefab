@@ -109,6 +109,7 @@ MonoBehaviour:
   superMax: 200
   ranger: 0
   playerNum: 1
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   facingLeft: 1
   grounded: 0
   groundCheck: {fileID: 472484}
@@ -141,7 +142,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 59ca5dc2a7c6f8047b9b54a690d85508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
@@ -179,6 +180,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
