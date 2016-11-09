@@ -56,10 +56,12 @@ public class BlueRanger : Player {
             if (facingLeft) 
             {
                 iceShuriken = Instantiate(IceShurikenPrefab, new Vector3(gameObject.transform.position.x - 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
+                shurikenCount++;
             }
             else
             {
                 iceShuriken = Instantiate(IceShurikenPrefab, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
+                shurikenCount++;
             }
         }
     }

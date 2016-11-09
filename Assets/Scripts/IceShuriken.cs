@@ -52,6 +52,7 @@ public class IceShuriken : MonoBehaviour {
             thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
             Debug.Log(thing.name + "hit with ice shuriken for " + damage);
             Destroy(gameObject); //destroys the shuriken
+            blueRanger.ShurikenCount--;
             
         }
         else if(thing.name == "Blue_BetaRanger")
@@ -61,6 +62,7 @@ public class IceShuriken : MonoBehaviour {
         else //if collison is not a ranger then destroys ice shuriken
         {
             Destroy(gameObject);
+            blueRanger.ShurikenCount--;
         }
     }
 
