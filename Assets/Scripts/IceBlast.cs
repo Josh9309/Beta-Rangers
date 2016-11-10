@@ -9,6 +9,7 @@ public class IceBlast : MonoBehaviour {
     private float speed = 5.0f; //speed of ice blast
     public bool moveLeft = true; //direction of ice blast
     private int damage; //ice blast damage value
+    [SerializeField] private float freezeTime = 2; //how many seconds enemy ranger will be frozen for
     [SerializeField]
     private float rotationSpeed = 150.0f; // how fast it rotates
     private BlueRanger blueRanger;
@@ -42,11 +43,23 @@ public class IceBlast : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D thing)
     {
+        Player enemyRanger;
+
         if (thing.tag == "Player" && thing.name != "Blue_BetaRanger") //if collision is with another ranger
         {
-            thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
+            enemyRanger = thing.gameObject.GetComponent<Player>();
+            enemyRanger.ModHealth(-damage); //gets the base player script and inflicts the damage on the player
+
             Debug.Log(thing.name + "hit with ice blast for " + damage);
-            Destroy(gameObject); //destroys the ice blast
+
+            //start frozen Corroutine
+            StartCoroutine(blueRanger.WorldControl.Frozen(enemyRanger.PlayerNum, freezeTime, gameObject));
+            //turn off sprite render and make rigidbody position frozen until frozen corroutine destroys ice blast shard.
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<Collider2D>().enabled = false;
+            rBody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
+
+           // Destroy(gameObject); //destroys the ice blast
         }
         else if (thing.name == "Blue_BetaRanger")
         {

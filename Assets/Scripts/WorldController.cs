@@ -9,10 +9,10 @@ public class WorldController : MonoBehaviour {
 
     [SerializeField] private cMenu currentMenu;
     [SerializeField] private cLevel currentLevel;
-    private Player player1;
-    private Player player2;
-    private Player player3;
-    private Player player4;
+    [SerializeField] private Player player1;
+    [SerializeField] private Player player2;
+    [SerializeField] private Player player3;
+    [SerializeField] private Player player4;
     [SerializeField] private GameObject prefabRangerRed;
     [SerializeField] private GameObject prefabRangerBlue;
     [SerializeField] private GameObject prefabRangerYellow;
@@ -88,5 +88,62 @@ public class WorldController : MonoBehaviour {
     void levelSelect()
     {
 
+    }
+
+    public IEnumerator Frozen(int playNum, float freezeTime, GameObject iceBlastShard)
+    {
+        Player enemyRanger;
+        SpriteRenderer rangerRender;
+        switch (playNum)
+        {
+            case 1:
+                enemyRanger = player1;
+                rangerRender = enemyRanger.gameObject.GetComponent<SpriteRenderer>();
+
+                Debug.Log(enemyRanger.name + " is Frozen!");
+                enemyRanger.frozen = true;
+                rangerRender.color = Color.cyan;
+                break;
+
+            case 2:
+                enemyRanger = player2;
+                rangerRender = enemyRanger.gameObject.GetComponent<SpriteRenderer>();
+
+                Debug.Log(enemyRanger.name + " is Frozen!");
+                enemyRanger.frozen = true;
+                rangerRender.color = Color.cyan;
+                break;
+
+            case 3:
+                enemyRanger = player3;
+                rangerRender = enemyRanger.gameObject.GetComponent<SpriteRenderer>();
+
+                Debug.Log(enemyRanger.name + " is Frozen!");
+                enemyRanger.frozen = true;
+                rangerRender.color = Color.cyan;
+                break;
+
+            case 4:
+                enemyRanger = player4;
+                rangerRender = enemyRanger.gameObject.GetComponent<SpriteRenderer>();
+
+                Debug.Log(enemyRanger.name + " is Frozen!");
+                enemyRanger.frozen = true;
+                rangerRender.color = Color.cyan;
+                break;
+
+            default:
+                Debug.LogError("Player number passed into frozen corroutine was invalid");
+                enemyRanger = null; //this should not trigger unless their is an error
+                rangerRender = null;
+                break;
+        }
+
+        yield return new WaitForSeconds(freezeTime);
+
+        Debug.Log(enemyRanger.name + " is Unfrozen!");
+        enemyRanger.frozen = false;
+        rangerRender.color = Color.white;
+        Destroy(iceBlastShard);
     }
 }

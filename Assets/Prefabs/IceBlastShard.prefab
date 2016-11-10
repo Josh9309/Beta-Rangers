@@ -73,6 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   moveLeft: 1
+  freezeTime: 2
   rotationSpeed: 200
 --- !u!212 &21299440
 SpriteRenderer:
@@ -116,6 +117,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: rotationSpeed
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

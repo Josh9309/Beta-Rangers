@@ -250,7 +250,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.73588562
+  orthographic size: 11.875823
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -460,6 +460,14 @@ Prefab:
       propertyPath: m_TagString
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 11457388, guid: fbd369e9eadf90441981d46eece66bc5, type: 2}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 524724104}
+    - target: {fileID: 11457388, guid: fbd369e9eadf90441981d46eece66bc5, type: 2}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 762103845}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbd369e9eadf90441981d46eece66bc5, type: 2}
   m_IsPrefabParent: 0
@@ -551,6 +559,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8424d207cae51ef40bfd5201e08ed86c, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &524724104 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11424060, guid: 49606ad964cd9fe4a97e2993de935dac,
+    type: 2}
+  m_PrefabInternal: {fileID: 1080662751}
+  m_Script: {fileID: 11500000, guid: 33e122e29ccdf21408afea33569a46c2, type: 3}
 --- !u!1001 &720793807
 Prefab:
   m_ObjectHideFlags: 0
@@ -605,6 +619,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 405418, guid: 49606ad964cd9fe4a97e2993de935dac, type: 2}
   m_PrefabInternal: {fileID: 1080662751}
+--- !u!114 &762103845 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11468940, guid: 56db18af7b148024cb096617259f6a1b,
+    type: 2}
+  m_PrefabInternal: {fileID: 307365202}
+  m_Script: {fileID: 11500000, guid: 45f3fabe234a5a044bb1f02469cba23d, type: 3}
 --- !u!1001 &762280135
 Prefab:
   m_ObjectHideFlags: 0

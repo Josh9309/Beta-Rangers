@@ -116,7 +116,7 @@ public abstract class Player : MonoBehaviour {
     protected WorldController worldControl;
 
     //Status effects attributes
-    protected bool frozen = false;
+    public bool frozen = false;
     #endregion
 
     #region Properties
@@ -204,6 +204,11 @@ public abstract class Player : MonoBehaviour {
     public int Attack3Power
     {
         get { return attack3Power; }
+    }
+
+    public WorldController WorldControl
+    {
+        get { return worldControl; }
     }
     #endregion
 
