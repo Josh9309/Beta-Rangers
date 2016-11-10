@@ -109,6 +109,7 @@ MonoBehaviour:
   superMax: 200
   ranger: 2
   playerNum: 1
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   facingLeft: 1
   grounded: 0
   groundCheck: {fileID: 429288}
@@ -140,7 +141,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 22bf297de98f4e94e84c018def5913a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
@@ -171,6 +172,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 22bf297de98f4e94e84c018def5913a7,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196448}

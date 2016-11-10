@@ -23,7 +23,7 @@ public class Goal : MonoBehaviour {
 	void Update () {
 	    if(rangerColor != GetComponent<SpriteRenderer>().color)
         {
-            GetComponent<SpriteRenderer>().color = rangerColor;
+            GetComponent<SpriteRenderer>().color = new Color(rangerColor.r, rangerColor.g, rangerColor.b, 1f);
         }
 	}
 }
