@@ -6,6 +6,7 @@ public class BlueRanger : Player {
 
     #region Attributes
     [SerializeField] private GameObject IceShurikenPrefab;
+    [SerializeField] private GameObject IceBlastPrefab;
     private int shurikenMax = 5; //max amount of shurikens allowed to be thrown at once on screen
     private int shurikenCount = 0; //current shurikens on the screen
     #endregion
@@ -40,6 +41,7 @@ public class BlueRanger : Player {
     {
         base.FixedUpdate();
         Attack2();
+        SuperAttack();
 
         //reset btn inputs
         input.ResetBtns();
@@ -69,6 +71,19 @@ public class BlueRanger : Player {
     //ICE FREEZE ATTACK
     protected override void SuperAttack()
     {
-        throw new NotImplementedException();
+        if(input.attack3)
+        {
+            GameObject iceBlast;
+
+            //makes the ice blast depending on the direction player is facing
+            if (facingLeft)
+            {
+                iceBlast = Instantiate(IceBlastPrefab, new Vector3(gameObject.transform.position.x - 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
+            }
+            else
+            {
+                iceBlast = Instantiate(IceBlastPrefab, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
+            }
+        }
     }
 }

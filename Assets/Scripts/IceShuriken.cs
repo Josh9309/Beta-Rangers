@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class IceShuriken : MonoBehaviour {
     #region Attributes
     [SerializeField] private float speed = 5.0f; //speed of shuriken

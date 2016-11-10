@@ -110,6 +110,9 @@ public abstract class Player : MonoBehaviour {
     //other attributes
     protected InputSettings input = new InputSettings();
     protected WorldController worldControl;
+
+    //Status effects attributes
+    protected bool frozen = false;
     #endregion
 
     #region Properties
@@ -199,7 +202,7 @@ public abstract class Player : MonoBehaviour {
     // Use this for initialization
     protected virtual void Start () {
         //get the world Controller
-        //worldControl = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>();
+        worldControl = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>();
 
         //setup input
         input.ConfigureInput(PlayerNum);
@@ -216,11 +219,13 @@ public abstract class Player : MonoBehaviour {
         CheckIsAlive(); //Checks to make sure the player is in fact alive
         GetInput();//gets all the input from the player
         IsGrounded(); //checks if the ranger is grounded
-        Move(); // moves the ranger based on player input
-        Jump(); // makes the ranger jump based on player input
-        Dodge();
-        Attack1();
-
+        if (!frozen)
+        {
+            Move(); // moves the ranger based on player input
+            Jump(); // makes the ranger jump based on player input
+            Dodge();
+            Attack1();
+        }
         //stop ranger velocity if there is no input and ranger is grounded
         if (input.fwdInput == 0 && input.jumpInput == 0 && grounded) //if there is no input and the character is on the ground
         {
@@ -274,6 +279,10 @@ public abstract class Player : MonoBehaviour {
         if (!input.attack2)
         {
             input.attack2 = Input.GetButtonDown(input.ATTACK2_AXIS);
+        }
+        if (!input.attack3)
+        {
+            input.attack3 = Input.GetButtonDown(input.ATTACK3_AXIS);
         }
         if (!input.pause)
         {

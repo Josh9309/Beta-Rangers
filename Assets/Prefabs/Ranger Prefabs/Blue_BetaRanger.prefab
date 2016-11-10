@@ -109,13 +109,15 @@ MonoBehaviour:
   superMax: 200
   ranger: 0
   playerNum: 1
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   facingLeft: 1
   grounded: 0
   groundCheck: {fileID: 472484}
   ground:
     serializedVersion: 2
     m_Bits: 4294967295
-  IceShurikenPrefab: {fileID: 0}
+  IceShurikenPrefab: {fileID: 193604, guid: c6f952cfb7b29934f8d6806e013189ea, type: 2}
+  IceBlastPrefab: {fileID: 191896, guid: 32346837141add14fadcec3bc605ca68, type: 2}
 --- !u!212 &21235824
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -180,6 +182,14 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: IceShurikenPrefab
+      value: 
+      objectReference: {fileID: 193604, guid: c6f952cfb7b29934f8d6806e013189ea, type: 2}
+    - target: {fileID: 0}
+      propertyPath: IceBlastPrefab
+      value: 
+      objectReference: {fileID: 191896, guid: 32346837141add14fadcec3bc605ca68, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155624}
