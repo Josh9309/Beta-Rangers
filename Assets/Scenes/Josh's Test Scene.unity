@@ -911,6 +911,10 @@ Prefab:
       propertyPath: IceShurikenPrefab
       value: 
       objectReference: {fileID: 193604, guid: c6f952cfb7b29934f8d6806e013189ea, type: 2}
+    - target: {fileID: 11424060, guid: 49606ad964cd9fe4a97e2993de935dac, type: 2}
+      propertyPath: attack1SuperValue
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49606ad964cd9fe4a97e2993de935dac, type: 2}
   m_IsPrefabParent: 0

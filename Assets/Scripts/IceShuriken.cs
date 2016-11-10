@@ -9,6 +9,7 @@ public class IceShuriken : MonoBehaviour {
     public bool moveLeft = true; //direction of shuriken
     private int damage; //shurikens damage value
     [SerializeField] private float rotationSpeed = 150.0f; // how fast it rotates
+    [SerializeField] private int superValue; //the value added to the super meter current
     private BlueRanger blueRanger;
     private Rigidbody2D rBody2D;
     #endregion
@@ -52,6 +53,7 @@ public class IceShuriken : MonoBehaviour {
         if(thing.tag == "Player" && thing.name != "Blue_BetaRanger") //if collision is with another ranger
         {
             thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
+            blueRanger.SuperCurrent += superValue; //adds super value to current super meter value.
             Debug.Log(thing.name + "hit with ice shuriken for " + damage);
             Destroy(gameObject); //destroys the shuriken
             blueRanger.ShurikenCount--;

@@ -10,8 +10,8 @@ public class IceBlast : MonoBehaviour {
     public bool moveLeft = true; //direction of ice blast
     private int damage; //ice blast damage value
     [SerializeField] private float freezeTime = 2; //how many seconds enemy ranger will be frozen for
-    [SerializeField]
-    private float rotationSpeed = 150.0f; // how fast it rotates
+    [SerializeField] private int frozenDamage = 5; //this is the damage frozen ranger take while they are frozen
+    [SerializeField] private float rotationSpeed = 150.0f; // how fast it rotates
     private BlueRanger blueRanger;
     private Rigidbody2D rBody2D;
     #endregion
@@ -53,13 +53,13 @@ public class IceBlast : MonoBehaviour {
             Debug.Log(thing.name + "hit with ice blast for " + damage);
 
             //start frozen Corroutine
-            StartCoroutine(blueRanger.WorldControl.Frozen(enemyRanger.PlayerNum, freezeTime, gameObject));
-            //turn off sprite render and make rigidbody position frozen until frozen corroutine destroys ice blast shard.
+            StartCoroutine(blueRanger.WorldControl.Frozen(enemyRanger.PlayerNum, freezeTime, frozenDamage, gameObject));
+            
+            //turn off sprite render and Collider2D, then it makes rigidbody position frozen until frozen corroutine destroys ice blast shard.
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<Collider2D>().enabled = false;
             rBody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
 
-           // Destroy(gameObject); //destroys the ice blast
         }
         else if (thing.name == "Blue_BetaRanger")
         {

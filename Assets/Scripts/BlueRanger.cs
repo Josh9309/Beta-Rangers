@@ -71,7 +71,7 @@ public class BlueRanger : Player {
     //ICE FREEZE ATTACK
     protected override void SuperAttack()
     {
-        if(input.attack3)
+        if(input.attack3 && SuperCurrent >= SuperCost)
         {
             GameObject iceBlast;
 
@@ -84,6 +84,8 @@ public class BlueRanger : Player {
             {
                 iceBlast = Instantiate(IceBlastPrefab, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
             }
+
+            SuperCurrent -= SuperCost;
         }
     }
 }

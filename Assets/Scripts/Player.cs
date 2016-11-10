@@ -89,6 +89,8 @@ public abstract class Player : MonoBehaviour {
     [SerializeField] protected float jumpPower;
     [SerializeField] protected int superCost;
     [SerializeField] protected int superMax;
+    [SerializeField] protected int attack1SuperValue;
+
 
     //basic player stats attributes
     [SerializeField] protected RangerType ranger; //this will hold what type of ranger this player is
@@ -108,7 +110,7 @@ public abstract class Player : MonoBehaviour {
     [SerializeField] protected bool grounded;
     [SerializeField] protected Transform groundCheck;
     protected Rigidbody2D rBody;
-    private bool airControl;
+    private bool airControl; //controls whether player is allow to be moved while in the air.
     [SerializeField] private LayerMask ground;
 
     //other attributes
@@ -419,7 +421,8 @@ public abstract class Player : MonoBehaviour {
                 {
                     Player ranger = thing.GetComponent<Player>();
 
-                    ranger.ModHealth(-attack1Power);
+                    ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+                    SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
 
                     Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
                 }
@@ -461,6 +464,7 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void OnCollisionEnter2D(Collision2D coll)
     {
+        //if player hits an object while in the air then air control is turned off so that players cant hang on to obstacle.
         if (!grounded)
         {
             airControl = false;
