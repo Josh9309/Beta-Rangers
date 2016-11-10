@@ -24,7 +24,7 @@ public class WorldController : MonoBehaviour {
     private GameObject goalP2;
     private GameObject goalP3;
     private GameObject goalP4;
-    [SerializeField] private int keyMaxTime;
+    [SerializeField] private float keyMaxTime;
 
     ///properties
     public cMenu CurrentMenu{
@@ -57,7 +57,7 @@ public class WorldController : MonoBehaviour {
         set { player4 = value; }
     }
 
-    public int KeyMaxTime
+    public float KeyMaxTime
     {
         get { return keyMaxTime; }
     }
@@ -80,7 +80,7 @@ public class WorldController : MonoBehaviour {
 	
 	}
 
-    void win(Player playerWhoWon)
+    public void win(Player playerWhoWon)
     {
 
     }

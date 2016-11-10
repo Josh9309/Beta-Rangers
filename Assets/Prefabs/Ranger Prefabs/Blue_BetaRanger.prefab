@@ -110,6 +110,8 @@ MonoBehaviour:
   ranger: 0
   playerNum: 1
   playerColor: {r: 0, g: 0, b: 0, a: 0}
+  keyDamageMax: 50
+  keyPickup: 1
   facingLeft: 1
   grounded: 0
   groundCheck: {fileID: 472484}
@@ -190,8 +192,13 @@ Prefab:
       propertyPath: IceBlastPrefab
       value: 
       objectReference: {fileID: 191896, guid: 32346837141add14fadcec3bc605ca68, type: 2}
-      propertyPath: m_SortingOrder
-      value: 4
+    - target: {fileID: 0}
+      propertyPath: keyDamageMax
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: keyPickup
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

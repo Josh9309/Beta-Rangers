@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11457388}
   m_Layer: 0
   m_Name: World_Controller
-  m_TagString: Untagged
+  m_TagString: Game Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,21 +41,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMenu: 0
   currentLevel: 0
-  prefabRangerRed: {fileID: 0}
-  prefabRangerBlue: {fileID: 0}
-  prefabRangerYellow: {fileID: 0}
-  prefabRangerGreen: {fileID: 0}
-  prefabRangerBlack: {fileID: 0}
-  prefabRangerPink: {fileID: 0}
-  prefabGoal: {fileID: 0}
-  keyMaxTime: 0
+  prefabRangerRed: {fileID: 196544, guid: d64530e89f06c8a449c0285e9b2631df, type: 2}
+  prefabRangerBlue: {fileID: 155624, guid: 49606ad964cd9fe4a97e2993de935dac, type: 2}
+  prefabRangerYellow: {fileID: 138852, guid: ab4b6fbc51dd48f468742c4df5436d8d, type: 2}
+  prefabRangerGreen: {fileID: 196448, guid: 56db18af7b148024cb096617259f6a1b, type: 2}
+  prefabRangerBlack: {fileID: 103898, guid: 8820164d0bd359241861a1d315af5418, type: 2}
+  prefabRangerPink: {fileID: 146646, guid: e7b35b318a8de764f8d268010789e713, type: 2}
+  prefabGoal: {fileID: 143154, guid: 77cf987eb9355474ca4234305870fff2, type: 2}
+  keyMaxTime: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: keyMaxTime
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181060}

@@ -96,6 +96,10 @@ public abstract class Player : MonoBehaviour {
     protected int superCurrent;
     [SerializeField] protected Color playerColor;
     private Key key;
+    private int keyDamage; //current amount of damage taken while holding key
+    [SerializeField] private int keyDamageMax; //the max amount of damage player can take before lossing key
+    [SerializeField] private bool keyPickup;
+    private float keyCurrentTime = 0;
 
     //basic ranger physic attributes
     [SerializeField] protected bool facingLeft;
@@ -154,6 +158,12 @@ public abstract class Player : MonoBehaviour {
     public RangerType Ranger
     {
         get { return ranger; }
+    }
+
+    public bool KeyPickup
+    {
+        get { return keyPickup; }
+        set { keyPickup = value; }
     }
 
     public int SuperCurrent
@@ -217,6 +227,7 @@ public abstract class Player : MonoBehaviour {
     protected virtual void FixedUpdate()
     {
         CheckIsAlive(); //Checks to make sure the player is in fact alive
+
         GetInput();//gets all the input from the player
         IsGrounded(); //checks if the ranger is grounded
         if (!frozen)
@@ -320,6 +331,15 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
+    protected void CheckHasWon()
+    {
+        if(keyCurrentTime >= worldControl.KeyMaxTime)
+        {
+            worldControl.win(this);
+            Debug.Log("Player " + gameObject + " has won");
+        }
+    }
+
     #region GameMechanic/Movement Methods
     protected void Move() //this method controls how the ranger moves
     {
@@ -411,6 +431,10 @@ public abstract class Player : MonoBehaviour {
 
     public virtual void DestroyRanger()
     {
+        if(key != null)
+        {
+            key.GetComponent<Key>().drop();
+        }
         Destroy(gameObject);
         Debug.Log("Ranger has been destroyed");
 
@@ -419,6 +443,15 @@ public abstract class Player : MonoBehaviour {
     public void ModHealth(int mod) //adds/subtracts from health
     {
         Health += mod;
+        if (key != null)
+        {
+            keyDamage -= mod;
+            if(keyDamage >= keyDamageMax)
+            {
+                key.GetComponent<Key>().drop();
+                keyDamage = 0;
+            }
+        }
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D coll)
@@ -431,18 +464,26 @@ public abstract class Player : MonoBehaviour {
         //key pick up
         if(coll.gameObject.tag == "Key")//colliding with the key
         {
-            if(coll.gameObject.GetComponent<Key>().Holder == null)//no one is holding the 
+            if(coll.gameObject.GetComponent<Key>().Holder == null && keyPickup)//no one is holding the key & ranger can pick it up
             {
                 coll.gameObject.GetComponent<Key>().Holder = gameObject;
                 key = coll.gameObject.GetComponent<Key>();
+                keyPickup = false;
+                keyDamage = 0;
                 key.pickedUp();
+                Debug.Log("Key Picked up");
             }
         }
-        if(coll.gameObject.tag == "Goal")//colliding with their goal
-        {
-            if(key != null && playerColor == coll.gameObject.GetComponent<Goal>().RangerColor)//has the key and same color
-            {
+    }
 
+    protected virtual void OnCollisionStay2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Goal")//colliding with their goal
+        {
+            if (key != null && playerColor == coll.gameObject.GetComponent<Goal>().RangerColor)//has the key and same color
+            {
+                keyCurrentTime += Time.deltaTime;
+                Debug.Log(keyCurrentTime);
             }
         }
     }
