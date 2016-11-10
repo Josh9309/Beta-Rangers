@@ -183,7 +183,6 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-<<<<<<< HEAD
       propertyPath: IceShurikenPrefab
       value: 
       objectReference: {fileID: 193604, guid: c6f952cfb7b29934f8d6806e013189ea, type: 2}
@@ -191,11 +190,9 @@ Prefab:
       propertyPath: IceBlastPrefab
       value: 
       objectReference: {fileID: 191896, guid: 32346837141add14fadcec3bc605ca68, type: 2}
-=======
       propertyPath: m_SortingOrder
       value: 4
       objectReference: {fileID: 0}
->>>>>>> origin/Test
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155624}
