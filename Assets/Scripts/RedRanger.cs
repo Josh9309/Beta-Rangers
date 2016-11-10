@@ -7,6 +7,7 @@ public class RedRanger : Player {
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
+        playerColor = Color.red;
 	}
 	
 	// Update is called once per frame

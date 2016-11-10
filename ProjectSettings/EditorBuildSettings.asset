@@ -6,10 +6,4 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-  - enabled: 1
-    path: Assets/Scenes/Josh's Test Scene.unity
-  - enabled: 1
-    path: Assets/Scenes/unityTestScene.unity
-  - enabled: 1
-    path: Assets/Scenes/Options.unity
+    path: Assets/Scenes/danielles test scene.unity
