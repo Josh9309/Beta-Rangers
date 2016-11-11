@@ -234,11 +234,11 @@ public abstract class Player : MonoBehaviour {
         CheckIsAlive(); //Checks to make sure the player is in fact alive
         GetInput();//gets all the input from the player
 
+
         if (!frozen)
         {
             Move(); // moves the ranger based on player input
             Dodge();
-            Attack1();
         }
 
 		//this fixes the problem of sometimes not jumping while moving left/right
@@ -367,7 +367,7 @@ public abstract class Player : MonoBehaviour {
 
     protected void Jump() //used to make the player jump
     {
-        if(grounded) // if jump button is pressed and player is grounded
+        if(grounded && !frozen) // if jump button is pressed and player is grounded
         {
 			if(playerNum ==1){Debug.Log("jump");}
             rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
@@ -376,7 +376,7 @@ public abstract class Player : MonoBehaviour {
 
     protected void Dodge()
     {
-        if (input.dodge && grounded) //a dodge button has been pressed
+        if (input.dodge && grounded && !frozen) //a dodge button has been pressed
         {
             if(input.dodgeInput > 0)
             {
@@ -394,45 +394,62 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
-    protected virtual void Attack1()
-    {
-        if (input.attack1)
-        {
+	//left this in here but not used anywhere and have updated version
+	/*protected virtual void Attack1()
+	{
+		if (input.attack1)
+		{
 			if(playerNum ==1){Debug.Log("att1");}
+			
+			int attack1Range = 2; //the range of the melee attack for the ranger
+			Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
+			
+			if (facingLeft)
+			{
+				cols = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attack1Range, transform.position.y + 1));  // gets all colliders within attack range
+				Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attack1Range, transform.position.y), playerColor, 2, false); //draws the debug line for attack
+			}
+			else
+			{
+				cols = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + attack1Range, transform.position.y + 1));  // gets all colliders within attack range
+				Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + attack1Range, transform.position.y), playerColor, 2, false); //draws the debug line for attack
+			}
+			
+			foreach (Collider2D thing in cols)
+			{
+				if (thing.tag == "Player" && thing != gameObject.GetComponent<Collider2D>()) //checks to make sure the thing is another ranger and not yourself
+				{
+					Player ranger = thing.GetComponent<Player>();
+					
+					ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+					SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
+					
+					Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
+				}
+			}
+		}
+	}*/
 
-            int attack1Range = 2; //the range of the melee attack for the ranger
-            Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
+	//a single attack method that when called can determine which attack to use
+    protected virtual void Attack(GameObject other)
+    {
+		if (Input.GetButtonDown(input.ATTACK1_AXIS) && !frozen) {
+			if (playerNum == 1) { Debug.Log ("att1"); }
 
-            if (facingLeft)
-            {
-                cols = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attack1Range, transform.position.y + 1));  // gets all colliders within attack range
-                Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - attack1Range, transform.position.y), playerColor, 2, false); //draws the debug line for attack
-            }
-            else
-            {
-                cols = Physics2D.OverlapAreaAll(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + attack1Range, transform.position.y + 1));  // gets all colliders within attack range
-                Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + attack1Range, transform.position.y), playerColor, 2, false); //draws the debug line for attack
-            }
+			Player ranger = other.GetComponent<Player> ();
 
-            foreach (Collider2D thing in cols)
-            {
-                if (thing.tag == "Player" && thing != gameObject.GetComponent<Collider2D>()) //checks to make sure the thing is another ranger and not yourself
-                {
-                    Player ranger = thing.GetComponent<Player>();
+			other.GetComponent<Player>().ModHealth (-attack1Power); //decrease enemy ranger health by attack1Power damage
+			SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
 
-                    ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
-                    SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
-
-                    Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
-                }
-            }
-        }
-		if (input.attack2) {if(playerNum ==1){Debug.Log("att2");}}
-		if (input.attack3) {if(playerNum ==1){Debug.Log("att3");}}
+			Debug.Log (gameObject.name + " has hit " + other.name + " for " + attack1Power + " damage");// debugs what ranger hit and for how much damage.
+			return; //to prevent multiple attacks at once
+		}
+        
+		if (Input.GetButtonDown(input.ATTACK2_AXIS) && !frozen) {if(playerNum ==1){Debug.Log("att2");}}
+		if (Input.GetButtonDown(input.ATTACK3_AXIS) && !frozen) {if(playerNum ==1){Debug.Log("att3");}}
     }
 
     abstract protected void Attack2();
-
 
     abstract protected void SuperAttack();
 
@@ -510,40 +527,48 @@ public abstract class Player : MonoBehaviour {
 	//set player grounded
 	void groundPlayer(){
 		if (grounded == false) {
-			if(playerNum ==1){Debug.Log("now grounded");}
+			//if(playerNum ==1){Debug.Log("now grounded");}
 			grounded = true;
 		}
 	}
 	//set player not grounded
 	void unGroundPlayer(){
 		if (grounded == true) {
-			if(playerNum ==1){Debug.Log("now not grounded");}
+			//if(playerNum ==1){Debug.Log("now not grounded");}
 			grounded = false;
 		}
 	}
 	//set air control true
 	void enableAirControl(){
 		if (airControl == false) {
-			if(playerNum ==1){Debug.Log("air-control enabled");}
+			//if(playerNum ==1){Debug.Log("air-control enabled");}
 			airControl = true;
 		}
 	}
 	//set air control false
 	void disableAirControl(){
 		if (airControl == true) {
-			if(playerNum ==1){Debug.Log("air-control disabled");}
+			//if(playerNum ==1){Debug.Log("air-control disabled");}
 			airControl = false;
 		}
 	}
-	
+
 	public void hitCollideEnter(GameObject other){
-		Debug.Log ("hitbox collision enter: "+other.name);
+		if (other.gameObject.CompareTag ("Player")) {
+			Debug.Log ("hitbox collision enter: "+other.name);
+			Attack(other);
+		}
 	}
 	public void hitCollideStay(GameObject other){
-		//Debug.Log ("hitbox collision enter"+other.name);
+		if (other.gameObject.CompareTag ("Player")) {
+			//Debug.Log ("hitbox collision enter"+other.name);
+			Attack (other);
+		}
 	}
 	public void hitCollideExit(GameObject other){
-		Debug.Log ("hitbox collision exit"+other.name);
+		if (other.gameObject.CompareTag ("Player")) {
+			Debug.Log ("hitbox collision exit" + other.name);
+		}
 	}
 	public void groundCollideEnter(GameObject other){
 		//Debug.Log ("child ground check collidion ENTER");

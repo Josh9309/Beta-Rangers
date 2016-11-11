@@ -28,7 +28,7 @@ public class HitboxCheckScript : MonoBehaviour {
 					parent.SendMessage ("groundCollideEnter", other.gameObject);
 				}
 			}
-			if (name == "TEST_HitRange") {
+			if (name == "Attack_1_HitRange") {
 				//Debug.Log (gameObject.name+"collision enter: " + other.gameObject.name);
 				parent.SendMessage ("hitCollideEnter", other.gameObject);
 			}
@@ -41,7 +41,7 @@ public class HitboxCheckScript : MonoBehaviour {
 				//Debug.Log (gameObject.name+"collision stay:  " + other.gameObject.name);
 				parent.SendMessage ("groundCollideStay", other.gameObject);
 			}
-			if (name == "TEST_HitRange") {
+			if (name == "Attack_1_HitRange") {
 				//Debug.Log (gameObject.name+"collision stay: " + other.gameObject.name);
 				parent.SendMessage ("hitCollideStay", other.gameObject);
 			}
@@ -55,7 +55,7 @@ public class HitboxCheckScript : MonoBehaviour {
 				//Debug.Log (gameObject.name+"collision exit: " + other.gameObject.name);
 				parent.SendMessage ("groundCollideExit", other.gameObject);
 			}
-			if (name == "TEST_HitRange") {
+			if (name == "Attack_1_HitRange") {
 				//Debug.Log (gameObject.name+"collision exit: " + other.gameObject.name);
 				parent.SendMessage ("hitCollideExit", other.gameObject);
 			}
