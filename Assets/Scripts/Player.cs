@@ -116,6 +116,8 @@ public abstract class Player : MonoBehaviour {
     protected InputSettings input = new InputSettings();
     protected WorldController worldControl;
 
+	protected bool altAtt = false;
+
     //Status effects attributes
     public bool frozen = false;
     #endregion
@@ -389,7 +391,7 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void Attack1()
     {
-        if (input.attack1)
+        if (input.attack1 && !altAtt)
         {
 			Debug.Log("att1");
 
@@ -424,7 +426,11 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void Attack1(GameObject other)
     {
+<<<<<<< HEAD
         if (input.attack1 && !frozen)
+=======
+        if (Input.GetButtonDown(input.ATTACK1_AXIS) && !frozen && altAtt)
+>>>>>>> origin/Test
         {
             Debug.Log("att1");
 
@@ -494,7 +500,14 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void OnCollisionStay2D(Collision2D coll)
     {
-        
+		if (coll.gameObject.tag == "Goal")//colliding with their goal
+		{
+			if (key != null && playerColor == coll.gameObject.GetComponent<Goal>().RangerColor)//has the key and same color
+			{
+				keyCurrentTime += Time.deltaTime;
+				Debug.Log(keyCurrentTime);
+			}
+		}
     }
 
 	//enable air control
@@ -536,7 +549,10 @@ public abstract class Player : MonoBehaviour {
 	}
 	
 	public void hitCollideEnter(GameObject other){
-		Debug.Log ("hitbox collision enter: "+other.name);
+		if (other.gameObject.CompareTag ("Player")) {
+			Debug.Log ("hitbox collision enter: "+other.name);
+			Attack1(other);
+		}
 	}
 
 	public void hitCollideStay(GameObject other){
@@ -548,24 +564,36 @@ public abstract class Player : MonoBehaviour {
                 keyCurrentTime += Time.deltaTime;
             }
         }
+		if (other.gameObject.CompareTag ("Player")) {
+			//Debug.Log ("hitbox collision stay: "+other.name);
+			Attack1(other);
+		}
     }
 	public void hitCollideExit(GameObject other){
-		Debug.Log ("hitbox collision exit"+other.name);
+		if (other.gameObject.CompareTag ("Player")) {
+			Debug.Log ("hitbox collision exit" + other.name);
+		}
 	}
 
 	public void groundCollideEnter(GameObject other){
 		//Debug.Log ("child ground check collidion ENTER");
-		groundPlayer ();
+		if (other.gameObject.CompareTag ("Platform")) {
+			groundPlayer ();
+		}
 	}
 
 	public void groundCollideStay(GameObject other){
 		//Debug.Log ("child ground check collidion ENTER");
-		groundPlayer ();
+		if (other.gameObject.CompareTag ("Platform")) {
+			groundPlayer ();
+		}
 	}
 
 	public void groundCollideExit(GameObject other){
 		//Debug.Log ("child ground check collidion EXIT");
-		unGroundPlayer ();
+		if (other.gameObject.CompareTag ("Platform")) {
+			unGroundPlayer ();
+		}
 	}
 
     protected virtual void OnDrawGizmos() //used to draw gizmos for debugging
