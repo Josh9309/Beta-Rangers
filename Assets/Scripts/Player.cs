@@ -426,11 +426,7 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void Attack1(GameObject other)
     {
-<<<<<<< HEAD
         if (input.attack1 && !frozen)
-=======
-        if (Input.GetButtonDown(input.ATTACK1_AXIS) && !frozen && altAtt)
->>>>>>> origin/Test
         {
             Debug.Log("att1");
 
