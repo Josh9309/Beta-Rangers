@@ -24,8 +24,18 @@ public class RedRanger : Player {
 
     protected override void Attack2()
     {
-		if(playerNum ==1){Debug.Log("att2");}
-	}
+        if (input.attack2)
+        {
+            //Debug.Log("att1");
+
+            //Player ranger = other.GetComponent<Player>();
+
+            //ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+            //SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
+
+            //Debug.Log(gameObject.name + " has hit " + other.name + " for " + attack1Power + " damage");// debugs what ranger hit and for how much damage.
+        }
+    }
 
     protected override void SuperAttack()
     {
