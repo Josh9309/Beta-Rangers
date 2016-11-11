@@ -89,6 +89,8 @@ public abstract class Player : MonoBehaviour {
     [SerializeField] protected float jumpPower;
     [SerializeField] protected int superCost;
     [SerializeField] protected int superMax;
+    [SerializeField] protected int attack1SuperValue;
+
 
     //basic player stats attributes
     [SerializeField] protected RangerType ranger; //this will hold what type of ranger this player is
@@ -106,14 +108,15 @@ public abstract class Player : MonoBehaviour {
     protected Vector3 postition;
     protected Vector2 velocity;
     [SerializeField] protected bool grounded;
-    [SerializeField] protected Transform groundCheck;
     protected Rigidbody2D rBody;
-    private bool airControl;
+    private bool airControl; //controls whether player is allow to be moved while in the air.
     [SerializeField] private LayerMask ground;
 
     //other attributes
     protected InputSettings input = new InputSettings();
     protected WorldController worldControl;
+
+	protected bool altAtt = false;
 
     //Status effects attributes
     public bool frozen = false;
@@ -210,6 +213,12 @@ public abstract class Player : MonoBehaviour {
     {
         get { return worldControl; }
     }
+
+    public bool Grounded
+    {
+        get { return grounded; }
+        set { grounded = value; }
+    }
     #endregion
 
     #region Methods
@@ -223,7 +232,6 @@ public abstract class Player : MonoBehaviour {
         input.ConfigureInput(PlayerNum);
 
         //get physic stuff for ranger
-        groundCheck = transform.FindChild("GroundCheck");
         postition = transform.position;
         rBody = GetComponent<Rigidbody2D>();
         rBody.mass = 1.0f;
@@ -232,26 +240,30 @@ public abstract class Player : MonoBehaviour {
     protected virtual void FixedUpdate()
     {
         CheckIsAlive(); //Checks to make sure the player is in fact alive
+        CheckHasWon();
+        GetInput(); //gets all the input from the player
 
-        GetInput();//gets all the input from the player
-        IsGrounded(); //checks if the ranger is grounded
         if (!frozen)
         {
             Move(); // moves the ranger based on player input
-            Jump(); // makes the ranger jump based on player input
+            Jump();
             Dodge();
             Attack1();
         }
+
         //stop ranger velocity if there is no input and ranger is grounded
-        if (input.fwdInput == 0 && input.jumpInput == 0 && grounded) //if there is no input and the character is on the ground
+        if (input.fwdInput == 0 && grounded) //if there is no input and the character is on the ground
         {
-            rBody.velocity = Vector2.zero; // stops character 
+			if(rBody.velocity!=Vector2.zero){
+				if(playerNum ==1){Debug.Log("stop slide(grounded)");}
+            	rBody.velocity = Vector2.zero; // stops character 
+			}
         }
 
         if (grounded) //if ranger is grounded it turns air control back on
         {
             airControl = true;
-        }
+		}
 
         ///Remove Later After First Build
         if (input.pause)
@@ -303,22 +315,6 @@ public abstract class Player : MonoBehaviour {
         if (!input.pause)
         {
             input.pause = Input.GetButtonDown(input.PAUSE_AXIS);
-        }
-
-    }
-
-    protected void IsGrounded() //used to see whether or not the ranger is grounded
-    {
-        //start off by assuming ranger is not grounded
-        grounded = false;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.3f, ground); //gets all colliders the are within the radius of the ground check
-        for (int i = 0; i < colliders.Length; i++) 
-        {
-            if (colliders[i].gameObject != gameObject) //checks each collider to make sure it is not the player's own collider
-            {
-                grounded = true; //sets grounded to true if it detects a collider that is not the player's colliders.
-            }
         }
     }
 
@@ -375,7 +371,6 @@ public abstract class Player : MonoBehaviour {
     {
         if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
-            grounded = false;
             rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
         }
     }
@@ -386,19 +381,26 @@ public abstract class Player : MonoBehaviour {
         {
             if(input.dodgeInput > 0)
             {
+		        Debug.Log("dodgeA");
                 rBody.AddForce(new Vector2(5000f, 0f));
+                rBody.MovePosition(rBody.position + new Vector2(5, 0));
             }
             else
             {
+		        Debug.Log("dodgeB");
                 rBody.AddForce(new Vector2(-5000f, 0f));
+		        rBody.MovePosition(rBody.position + new Vector2(-5, 0));
+                //rBody.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x - 10, transform.position.y), 20 * Time.deltaTime);
             }
         }
     }
 
     protected virtual void Attack1()
     {
-        if (input.attack1)
+        if (input.attack1 && !altAtt)
         {
+			Debug.Log("att1");
+
             int attack1Range = 2; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
 
@@ -419,7 +421,8 @@ public abstract class Player : MonoBehaviour {
                 {
                     Player ranger = thing.GetComponent<Player>();
 
-                    ranger.ModHealth(-attack1Power);
+                    ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+                    SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
 
                     Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
                 }
@@ -459,12 +462,13 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D coll)
+    protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
+        //if player hits an object while in the air then air control is turned off so that players cant hang on to obstacle.
         if (!grounded)
         {
             airControl = false;
-        }
+		}
         
         //key pick up
         if(coll.gameObject.tag == "Key")//colliding with the key
@@ -481,27 +485,20 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
-    protected virtual void OnCollisionStay2D(Collision2D coll)
+    protected virtual void OnTriggerStay2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Goal")//colliding with their goal
-        {
-            if (key != null && playerColor == coll.gameObject.GetComponent<Goal>().RangerColor)//has the key and same color
-            {
-                keyCurrentTime += Time.deltaTime;
-                Debug.Log(keyCurrentTime);
-            }
-        }
-    }
-
-    protected virtual void OnCollisionExit2D(Collision2D coll)
-    {
-        airControl = true;
+		if (coll.gameObject.tag == "Goal")//colliding with their goal
+		{
+			if (key != null && playerNum == coll.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+			{
+				keyCurrentTime += Time.deltaTime;
+			}
+		}
     }
 
     protected virtual void OnDrawGizmos() //used to draw gizmos for debugging
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(groundCheck.position, 0.3f);
-    }
+	}
     #endregion
 }

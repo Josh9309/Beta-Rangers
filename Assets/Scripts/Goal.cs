@@ -5,6 +5,7 @@ public class Goal : MonoBehaviour {
 
     ///attributes
     [SerializeField] private Color rangerColor;
+    [SerializeField] private int playerNum;
     private Rigidbody2D rBody;
 
     ///Properties
@@ -12,6 +13,12 @@ public class Goal : MonoBehaviour {
     {
         get { return rangerColor; }
         set { rangerColor = value; }
+    }
+
+    public int PlayerNum
+    {
+        get { return playerNum; }
+        set { playerNum = value; }
     }
 
 	// Use this for initialization

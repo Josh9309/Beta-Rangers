@@ -41,8 +41,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMenu: 0
   currentLevel: 0
-  prefabRangerRed: {fileID: 196544, guid: d64530e89f06c8a449c0285e9b2631df, type: 2}
-  prefabRangerBlue: {fileID: 155624, guid: 49606ad964cd9fe4a97e2993de935dac, type: 2}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  player3: {fileID: 0}
+  player4: {fileID: 0}
+  prefabRangerRed: {fileID: 0}
+  prefabRangerBlue: {fileID: 0}
   prefabRangerYellow: {fileID: 138852, guid: ab4b6fbc51dd48f468742c4df5436d8d, type: 2}
   prefabRangerGreen: {fileID: 196448, guid: 56db18af7b148024cb096617259f6a1b, type: 2}
   prefabRangerBlack: {fileID: 103898, guid: 8820164d0bd359241861a1d315af5418, type: 2}
@@ -59,6 +63,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: keyMaxTime
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: prefabRangerBlue
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
