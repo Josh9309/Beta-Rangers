@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Key
   - Game Manager
+  - Platform
   layers:
   - Default
   - TransparentFX
