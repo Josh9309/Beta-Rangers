@@ -241,14 +241,14 @@ public abstract class Player : MonoBehaviour {
     {
         CheckIsAlive(); //Checks to make sure the player is in fact alive
         CheckHasWon();
-        GetInput();//gets all the input from the player
+        GetInput(); //gets all the input from the player
 
         if (!frozen)
         {
             Move(); // moves the ranger based on player input
             Jump();
             Dodge();
-            //Attack1();
+            Attack1();
         }
 
         //stop ranger velocity if there is no input and ranger is grounded
@@ -430,21 +430,6 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
-    public virtual void Attack1(GameObject other)
-    {
-        if (input.attack1)
-        {
-            Debug.Log("att1");
-
-            Player ranger = other.GetComponent<Player>();
-
-            ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
-            SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
-
-            Debug.Log(gameObject.name + " has hit " + other.name + " for " + attack1Power + " damage");// debugs what ranger hit and for how much damage.
-        }
-    }
-
     abstract protected void Attack2();
 
 
@@ -477,7 +462,7 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D coll)
+    protected virtual void OnTriggerEnter2D(Collider2D coll)
     {
         //if player hits an object while in the air then air control is turned off so that players cant hang on to obstacle.
         if (!grounded)
@@ -500,44 +485,16 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
-    protected virtual void OnCollisionStay2D(Collision2D coll)
+    protected virtual void OnTriggerStay2D(Collision2D coll)
     {
 		if (coll.gameObject.tag == "Goal")//colliding with their goal
 		{
-			if (key != null && playerColor == coll.gameObject.GetComponent<Goal>().RangerColor)//has the key and same color
+			if (key != null && playerNum == coll.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
 			{
 				keyCurrentTime += Time.deltaTime;
-				Debug.Log(keyCurrentTime);
 			}
 		}
     }
-	
-	public void hitCollideEnter(GameObject other){
-		if (other.gameObject.CompareTag ("Player")) {
-			Debug.Log ("hitbox collision enter: "+other.name);
-			Attack1(other);
-		}
-	}
-
-	public void hitCollideStay(GameObject other){
-        //Debug.Log ("hitbox collision enter"+other.name);
-        if (other.tag == "Goal")//colliding with their goal
-        {
-            if (key != null && playerNum == other.GetComponent<Goal>().PlayerNum)//has the key and same color
-            {
-                keyCurrentTime += Time.deltaTime;
-            }
-        }
-		if (other.gameObject.CompareTag ("Player")) {
-			//Debug.Log ("hitbox collision stay: "+other.name);
-			Attack1(other);
-		}
-    }
-	public void hitCollideExit(GameObject other){
-		if (other.gameObject.CompareTag ("Player")) {
-			Debug.Log ("hitbox collision exit" + other.name);
-		}
-	}
 
     protected virtual void OnDrawGizmos() //used to draw gizmos for debugging
     {
