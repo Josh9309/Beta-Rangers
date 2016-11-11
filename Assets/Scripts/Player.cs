@@ -428,8 +428,24 @@ public abstract class Player : MonoBehaviour {
                 }
             }
         }
-		if (input.attack2) {if(playerNum ==1){Debug.Log("att2");}}
-		if (input.attack3) {if(playerNum ==1){Debug.Log("att3");}}
+		//if (input.attack2) {if(playerNum ==1){Debug.Log("att2");}}
+		//if (input.attack3) {if(playerNum ==1){Debug.Log("att3");}}
+    }
+
+    protected virtual void Attack1(GameObject other)
+    {
+        if (Input.GetButtonDown(input.ATTACK1_AXIS) && !frozen)
+        {
+            if (playerNum == 1) { Debug.Log("att1"); }
+
+            Player ranger = other.GetComponent<Player>();
+
+            other.GetComponent<Player>().ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+            SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
+
+            Debug.Log(gameObject.name + " has hit " + other.name + " for " + attack1Power + " damage");// debugs what ranger hit and for how much damage.
+            return; //to prevent multiple attacks at once
+        }
     }
 
     abstract protected void Attack2();
