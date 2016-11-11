@@ -194,9 +194,9 @@ MonoBehaviour:
   attack1SuperValue: 0
   ranger: 1
   playerNum: 1
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  playerColor: {r: 1, g: 0, b: 0, a: 0}
   keyDamageMax: 0
-  keyPickup: 0
+  keyPickup: 1
   facingLeft: 1
   grounded: 0
   ground:
@@ -256,7 +256,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 0d9386f782b11294fadefac22169f19f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21250996
@@ -293,7 +293,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: keyPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerColor.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 118354}

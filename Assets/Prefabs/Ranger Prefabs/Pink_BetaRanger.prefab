@@ -194,7 +194,7 @@ MonoBehaviour:
   attack1SuperValue: 0
   ranger: 5
   playerNum: 1
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  playerColor: {r: 1, g: 0, b: .678431392, a: 0}
   keyDamageMax: 50
   keyPickup: 1
   facingLeft: 1
@@ -293,7 +293,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: playerColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerColor.b
+      value: .678431392
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 177226}

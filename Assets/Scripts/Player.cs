@@ -232,6 +232,7 @@ public abstract class Player : MonoBehaviour {
     protected virtual void FixedUpdate()
     {
         CheckIsAlive(); //Checks to make sure the player is in fact alive
+        CheckHasWon();
         GetInput();//gets all the input from the player
 
         if (!frozen)
@@ -488,14 +489,7 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void OnCollisionStay2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Goal")//colliding with their goal
-        {
-            if (key != null && playerColor == coll.gameObject.GetComponent<Goal>().RangerColor)//has the key and same color
-            {
-                keyCurrentTime += Time.deltaTime;
-                Debug.Log(keyCurrentTime);
-            }
-        }
+        
     }
 
 	//enable air control
@@ -540,8 +534,15 @@ public abstract class Player : MonoBehaviour {
 		Debug.Log ("hitbox collision enter: "+other.name);
 	}
 	public void hitCollideStay(GameObject other){
-		//Debug.Log ("hitbox collision enter"+other.name);
-	}
+        //Debug.Log ("hitbox collision enter"+other.name);
+        if (other.tag == "Goal")//colliding with their goal
+        {
+            if (key != null && playerNum == other.GetComponent<Goal>().PlayerNum)//has the key and same color
+            {
+                keyCurrentTime += Time.deltaTime;
+            }
+        }
+    }
 	public void hitCollideExit(GameObject other){
 		Debug.Log ("hitbox collision exit"+other.name);
 	}
