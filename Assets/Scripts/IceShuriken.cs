@@ -59,7 +59,7 @@ public class IceShuriken : MonoBehaviour {
             blueRanger.ShurikenCount--;
             
         }
-        else if(thing.name == "Blue_BetaRanger")
+        else if(thing.name == "Blue_BetaRanger" || thing.tag == "Hitbox")
         {
             //do nothing
         }

@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11432840}
   m_Layer: 0
   m_Name: Attack_1_HitRange
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,6 +301,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Name
       value: Attack_1_HitRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Hitbox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

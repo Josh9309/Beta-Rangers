@@ -8,6 +8,7 @@ TagManager:
   - Game Manager
   - Platform
   - Goal
+  - Hitbox
   layers:
   - Default
   - TransparentFX
