@@ -8,6 +8,9 @@ public class RedRanger : Player {
 	protected override void Start () {
         base.Start();
         playerColor = Color.red;
+
+		//use the alternate attack using the hitboxes
+		altAtt = true;
 	}
 	
 	// Update is called once per frame
