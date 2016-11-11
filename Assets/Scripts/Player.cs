@@ -213,6 +213,12 @@ public abstract class Player : MonoBehaviour {
     {
         get { return worldControl; }
     }
+
+    public bool Grounded
+    {
+        get { return grounded; }
+        set { grounded = value; }
+    }
     #endregion
 
     #region Methods
@@ -242,7 +248,7 @@ public abstract class Player : MonoBehaviour {
             Move(); // moves the ranger based on player input
             Jump();
             Dodge();
-            Attack1();
+            //Attack1();
         }
 
         //stop ranger velocity if there is no input and ranger is grounded
@@ -256,7 +262,7 @@ public abstract class Player : MonoBehaviour {
 
         if (grounded) //if ranger is grounded it turns air control back on
         {
-			enableAirControl();
+            airControl = true;
 		}
 
         ///Remove Later After First Build
@@ -424,15 +430,15 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
-    protected virtual void Attack1(GameObject other)
+    public virtual void Attack1(GameObject other)
     {
-        if (input.attack1 && !frozen)
+        if (input.attack1)
         {
             Debug.Log("att1");
 
             Player ranger = other.GetComponent<Player>();
 
-            other.GetComponent<Player>().ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+            ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
             SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
 
             Debug.Log(gameObject.name + " has hit " + other.name + " for " + attack1Power + " damage");// debugs what ranger hit and for how much damage.
@@ -476,7 +482,7 @@ public abstract class Player : MonoBehaviour {
         //if player hits an object while in the air then air control is turned off so that players cant hang on to obstacle.
         if (!grounded)
         {
-			disableAirControl();
+            airControl = false;
 		}
         
         //key pick up
@@ -505,44 +511,6 @@ public abstract class Player : MonoBehaviour {
 			}
 		}
     }
-
-	//enable air control
-	protected virtual void OnCollisionExit2D(Collision2D coll)
-	{
-		if (!grounded)
-		{
-			enableAirControl();
-		}
-	}
-	
-	//set player grounded
-	void groundPlayer(){
-		if (grounded == false) {
-			if(playerNum ==1){Debug.Log("now grounded");}
-			grounded = true;
-		}
-	}
-	//set player not grounded
-	void unGroundPlayer(){
-		if (grounded == true) {
-			if(playerNum ==1){Debug.Log("now not grounded");}
-			grounded = false;
-		}
-	}
-	//set air control true
-	void enableAirControl(){
-		if (airControl == false) {
-			if(playerNum ==1){Debug.Log("air-control enabled");}
-			airControl = true;
-		}
-	}
-	//set air control false
-	void disableAirControl(){
-		if (airControl == true) {
-			if(playerNum ==1){Debug.Log("air-control disabled");}
-			airControl = false;
-		}
-	}
 	
 	public void hitCollideEnter(GameObject other){
 		if (other.gameObject.CompareTag ("Player")) {
@@ -568,27 +536,6 @@ public abstract class Player : MonoBehaviour {
 	public void hitCollideExit(GameObject other){
 		if (other.gameObject.CompareTag ("Player")) {
 			Debug.Log ("hitbox collision exit" + other.name);
-		}
-	}
-
-	public void groundCollideEnter(GameObject other){
-		//Debug.Log ("child ground check collidion ENTER");
-		if (other.gameObject.CompareTag ("Platform")) {
-			groundPlayer ();
-		}
-	}
-
-	public void groundCollideStay(GameObject other){
-		//Debug.Log ("child ground check collidion ENTER");
-		if (other.gameObject.CompareTag ("Platform")) {
-			groundPlayer ();
-		}
-	}
-
-	public void groundCollideExit(GameObject other){
-		//Debug.Log ("child ground check collidion EXIT");
-		if (other.gameObject.CompareTag ("Platform")) {
-			unGroundPlayer ();
 		}
 	}
 

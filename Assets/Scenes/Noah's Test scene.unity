@@ -320,7 +320,7 @@ GameObject:
   - 4: {fileID: 143475778}
   m_Layer: 0
   m_Name: platforms
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1169,7 +1169,7 @@ GameObject:
   - 61: {fileID: 817713720}
   m_Layer: 0
   m_Name: betaPlatformS2
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1707,7 +1707,7 @@ GameObject:
   - 61: {fileID: 1507665262}
   m_Layer: 0
   m_Name: betaPlatformS
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1886,7 +1886,7 @@ GameObject:
   - 61: {fileID: 1685871607}
   m_Layer: 0
   m_Name: betaPlatformL
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2134,7 +2134,7 @@ GameObject:
   - 61: {fileID: 2044382544}
   m_Layer: 0
   m_Name: betaPlatformM
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
