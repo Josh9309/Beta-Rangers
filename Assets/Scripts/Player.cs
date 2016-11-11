@@ -308,7 +308,6 @@ public abstract class Player : MonoBehaviour {
         {
             input.pause = Input.GetButtonDown(input.PAUSE_AXIS);
         }
-		if (input.pause) {if(playerNum ==1){Debug.Log("pause");}}
     }
 
     protected void Flip() //used to flip the ranger asset
@@ -364,7 +363,6 @@ public abstract class Player : MonoBehaviour {
     {
         if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
-			//if(playerNum ==1){Debug.Log("jump");}
             rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
         }
     }
@@ -375,15 +373,15 @@ public abstract class Player : MonoBehaviour {
         {
             if(input.dodgeInput > 0)
             {
-		if(playerNum ==1){Debug.Log("dodgeA");}
+		        Debug.Log("dodgeA");
                 rBody.AddForce(new Vector2(5000f, 0f));
                 rBody.MovePosition(rBody.position + new Vector2(5, 0));
             }
             else
             {
-		if(playerNum ==1){Debug.Log("dodgeB");}
+		        Debug.Log("dodgeB");
                 rBody.AddForce(new Vector2(-5000f, 0f));
-		rBody.MovePosition(rBody.position + new Vector2(-5, 0));
+		        rBody.MovePosition(rBody.position + new Vector2(-5, 0));
                 //rBody.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x - 10, transform.position.y), 20 * Time.deltaTime);
             }
         }
@@ -393,7 +391,7 @@ public abstract class Player : MonoBehaviour {
     {
         if (input.attack1)
         {
-			if(playerNum ==1){Debug.Log("att1");}
+			Debug.Log("att1");
 
             int attack1Range = 2; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
@@ -422,15 +420,13 @@ public abstract class Player : MonoBehaviour {
                 }
             }
         }
-		//if (input.attack2) {if(playerNum ==1){Debug.Log("att2");}}
-		//if (input.attack3) {if(playerNum ==1){Debug.Log("att3");}}
     }
 
     protected virtual void Attack1(GameObject other)
     {
-        if (Input.GetButtonDown(input.ATTACK1_AXIS) && !frozen)
+        if (input.attack1 && !frozen)
         {
-            if (playerNum == 1) { Debug.Log("att1"); }
+            Debug.Log("att1");
 
             Player ranger = other.GetComponent<Player>();
 
@@ -438,7 +434,6 @@ public abstract class Player : MonoBehaviour {
             SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
 
             Debug.Log(gameObject.name + " has hit " + other.name + " for " + attack1Power + " damage");// debugs what ranger hit and for how much damage.
-            return; //to prevent multiple attacks at once
         }
     }
 
@@ -543,6 +538,7 @@ public abstract class Player : MonoBehaviour {
 	public void hitCollideEnter(GameObject other){
 		Debug.Log ("hitbox collision enter: "+other.name);
 	}
+
 	public void hitCollideStay(GameObject other){
         //Debug.Log ("hitbox collision enter"+other.name);
         if (other.tag == "Goal")//colliding with their goal
@@ -556,14 +552,17 @@ public abstract class Player : MonoBehaviour {
 	public void hitCollideExit(GameObject other){
 		Debug.Log ("hitbox collision exit"+other.name);
 	}
+
 	public void groundCollideEnter(GameObject other){
 		//Debug.Log ("child ground check collidion ENTER");
 		groundPlayer ();
 	}
+
 	public void groundCollideStay(GameObject other){
 		//Debug.Log ("child ground check collidion ENTER");
 		groundPlayer ();
 	}
+
 	public void groundCollideExit(GameObject other){
 		//Debug.Log ("child ground check collidion EXIT");
 		unGroundPlayer ();

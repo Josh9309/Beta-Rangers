@@ -5,12 +5,13 @@ public class HitboxCheckScript : MonoBehaviour {
 
 	bool colliding=false;
 	public GameObject parent;
-	
+    private Player player;
 	public bool IsCollliding{get{return colliding;}}
 	
 	// Use this for initialization
 	void Start () {
 		parent= transform.parent.gameObject;
+        player = parent.GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
