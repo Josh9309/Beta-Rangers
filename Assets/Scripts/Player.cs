@@ -238,16 +238,10 @@ public abstract class Player : MonoBehaviour {
         if (!frozen)
         {
             Move(); // moves the ranger based on player input
+            Jump();
             Dodge();
             Attack1();
         }
-
-		//this fixes the problem of sometimes not jumping while moving left/right
-		if (Input.GetAxis(input.JUMP_AXIS) != 0) {
-			if(playerNum ==1){
-				Jump();
-			}
-		}
 
         //stop ranger velocity if there is no input and ranger is grounded
         if (input.fwdInput == 0 && grounded) //if there is no input and the character is on the ground
@@ -368,9 +362,9 @@ public abstract class Player : MonoBehaviour {
 
     protected void Jump() //used to make the player jump
     {
-        if(grounded) // if jump button is pressed and player is grounded
+        if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
-			if(playerNum ==1){Debug.Log("jump");}
+			//if(playerNum ==1){Debug.Log("jump");}
             rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
         }
     }
