@@ -388,11 +388,12 @@ public abstract class Player : MonoBehaviour {
         {
             if(input.dodgeInput > 0)
             {
-                rBody.AddForce(new Vector2(5000f, 0f));
+                rBody.MovePosition(rBody.position + new Vector2(5, 0));
             }
             else
             {
-                rBody.AddForce(new Vector2(-5000f, 0f));
+                rBody.MovePosition(rBody.position + new Vector2(-5, 0));
+                //rBody.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x - 10, transform.position.y), 20 * Time.deltaTime);
             }
         }
     }
