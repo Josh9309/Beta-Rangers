@@ -235,6 +235,7 @@ public abstract class Player : MonoBehaviour {
         postition = transform.position;
         rBody = GetComponent<Rigidbody2D>();
         rBody.mass = 1.0f;
+        keyDamage = 0;
 	}
 	
     protected virtual void FixedUpdate()
@@ -480,16 +481,16 @@ public abstract class Player : MonoBehaviour {
                 keyPickup = false;
                 keyDamage = 0;
                 key.pickedUp();
-                Debug.Log("Key Picked up");
+                
             }
         }
     }
 
-    protected virtual void OnTriggerStay2D(Collision2D coll)
+    protected virtual void OnTriggerStay2D(Collider2D coll)
     {
-		if (coll.gameObject.tag == "Goal")//colliding with their goal
+        if (coll.gameObject.tag == "Goal")//colliding with their goal
 		{
-			if (key != null && playerNum == coll.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            if (key != null && playerNum == coll.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
 			{
 				keyCurrentTime += Time.deltaTime;
 			}

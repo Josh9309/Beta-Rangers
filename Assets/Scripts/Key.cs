@@ -42,17 +42,19 @@ public class Key : MonoBehaviour {
     //when the key is just picked up
     public void pickedUp()
     {
-        GetComponent<Rigidbody2D>().Sleep();
+        rBody.Sleep();
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().sortingOrder = 2;
         transform.rotation = Quaternion.Euler(0,0,-90);
+        Debug.Log("Key Picked up");
 
     }
 
     public void drop()
     {
-        GetComponent<Rigidbody2D>().WakeUp();
+        rBody.WakeUp();
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<SpriteRenderer>().sortingOrder = 0;
+        Debug.Log("Key Dropped");
     }
 }
