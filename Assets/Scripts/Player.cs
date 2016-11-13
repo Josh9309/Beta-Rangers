@@ -100,8 +100,10 @@ public abstract class Player : MonoBehaviour {
     private Key key;
     private int keyDamage; //current amount of damage taken while holding key
     [SerializeField] private int keyDamageMax; //the max amount of damage player can take before lossing key
-    [SerializeField] private bool keyPickup;
-    private float keyCurrentTime = 0;
+    [SerializeField] private bool keyPickup;//if player can pick up key
+    private float keyPickupTime = 0; //after drop, how long before can pick up again
+    [SerializeField] private float keyPickupTimeMax; //amount of time before player can pick key up again
+    private float keyCurrentTime = 0; //amount of time player has before winning
 
     //basic ranger physic attributes
     [SerializeField] protected bool facingLeft;
@@ -265,6 +267,17 @@ public abstract class Player : MonoBehaviour {
         {
             airControl = true;
 		}
+
+        if (!keyPickup)//keypickup is false
+        {
+            if(keyPickupTime >= keyPickupTimeMax)
+            {
+                keyPickup = true;
+                keyPickupTime = 0;
+                Debug.Log(name + " can pickup key again");
+            }
+            keyPickupTime += Time.deltaTime;
+        }
 
         ///Remove Later After First Build
         if (input.pause)
@@ -458,7 +471,8 @@ public abstract class Player : MonoBehaviour {
             if(keyDamage >= keyDamageMax)
             {
                 key.GetComponent<Key>().drop();
-                keyDamage = 0;
+                key = null;
+                //keyDamage = 0;
             }
         }
     }
@@ -478,7 +492,6 @@ public abstract class Player : MonoBehaviour {
             {
                 coll.gameObject.GetComponent<Key>().Holder = gameObject;
                 key = coll.gameObject.GetComponent<Key>();
-                keyPickup = false;
                 keyDamage = 0;
                 key.pickedUp();
                 

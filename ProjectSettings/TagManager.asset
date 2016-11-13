@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Goal
   - Hitbox
+  - Key Spawn Point
   layers:
   - Default
   - TransparentFX

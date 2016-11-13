@@ -52,9 +52,30 @@ public class Key : MonoBehaviour {
 
     public void drop()
     {
+        
         rBody.WakeUp();
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<SpriteRenderer>().sortingOrder = 0;
+        if (holder.GetComponent<Player>().FacingLeft) {
+            rBody.velocity += new Vector2(5f, 10f);
+            rBody.angularVelocity += 10f;
+        }
+        else
+        {
+            rBody.velocity += new Vector2(-5f, 10f);
+            rBody.angularVelocity -= 10f;
+        }
+        holder.GetComponent<Player>().KeyPickup = false;
+        holder = null;
+        Debug.Log("Key Dropped");
+    }
+
+    public void droppedOffStage()
+    {
+        rBody.WakeUp();
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<SpriteRenderer>().sortingOrder = 0;
+        holder = null;
         Debug.Log("Key Dropped");
     }
 }
