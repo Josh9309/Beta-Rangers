@@ -90,6 +90,9 @@ public abstract class Player : MonoBehaviour {
     [SerializeField] protected int superCost;
     [SerializeField] protected int superMax;
     [SerializeField] protected int attack1SuperValue;
+    [SerializeField]
+    protected float attack1CooldownTime = 1, attack2CooldownTime = 2;
+    protected bool attack1Available = true, attack2Available = true;
 
 
     //basic player stats attributes
@@ -413,7 +416,7 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void Attack1()
     {
-        if (input.attack1)
+        if (input.attack1 && attack1Available)
         {
 			Debug.Log("att1");
 
@@ -445,6 +448,8 @@ public abstract class Player : MonoBehaviour {
 					}
 				}
             }
+
+            StartCoroutine(Attack1Cooldown()); //starts the attack 1 cooldown coroutine
         }
     }
 
@@ -452,6 +457,27 @@ public abstract class Player : MonoBehaviour {
 
     abstract protected void SuperAttack();
 
+    #endregion
+
+    #region Cooldown Methods
+    //Attack 1 Cooldown
+    protected virtual IEnumerator Attack1Cooldown()
+    {
+        attack1Available = false; //set attack 1 to unavailable
+
+        yield return new WaitForSeconds(attack1CooldownTime); //wait for cooldown time
+
+        attack1Available = true; //makes attack 1 available again
+    }
+    //Attack 2 Cooldown
+    protected virtual IEnumerator Attack2Cooldown()
+    {
+        attack2Available = false; //set attack 1 to unavailable
+
+        yield return new WaitForSeconds(attack2CooldownTime); //wait for cooldown time
+
+        attack2Available = true; //makes attack 1 available again
+    }
     #endregion
 
     public virtual void DestroyRanger()
