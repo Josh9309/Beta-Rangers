@@ -128,8 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 180
   attack1Power: 10
-  attack2Power: 50
-  attack3Power: 90
+  attack2Power: 0
+  attack3Power: 0
   speed: 15
   jumpPower: 1200
   superCost: 15
@@ -151,11 +151,12 @@ MonoBehaviour:
   canMove: 1
   canBeHit: 1
   frozen: 0
+  WarpPrefab: {fileID: 0}
   BlackHolePrefab: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
   BlackHoleStrength: 5
   BlackHolePullRange: 2
   BlackHoleSpeed: 2
-  BlackHoleRange: 5
+  BlackHoleMoveTime: 5
 --- !u!212 &21262646
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -270,6 +271,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BlackHoleSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2Power
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack3Power
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BlackHoleMoveTime
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

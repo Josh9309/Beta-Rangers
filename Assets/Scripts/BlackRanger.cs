@@ -9,7 +9,8 @@ public class BlackRanger : Player {
     [SerializeField] private float BlackHoleStrength; //how strong the pull of the black hole is
     [SerializeField] private float BlackHolePullRange; //how far the black hole will pull other players
     [SerializeField] private float BlackHoleSpeed; //How fast the black hole moves to point
-    [SerializeField] private float BlackHoleRange; //the range the black hole will move
+    [SerializeField] private float BlackHoleMoveTime; //the amount of time the black hole moves for
+    [SerializeField] private float BlackHoleStillTime; //the amount of time the black hole stays still for
 
     // Use this for initialization
     protected override void Start()
@@ -43,7 +44,14 @@ public class BlackRanger : Player {
         {
             Debug.Log("BLACK HOLE!");
             GameObject b = GameObject.Instantiate(BlackHolePrefab) as GameObject;
-            b.GetComponent<BlackHoleScript>().startUp(playerNum, facingLeft, BlackHoleStrength, BlackHolePullRange, BlackHoleSpeed, BlackHoleRange);
+            if (facingLeft) {
+                b.transform.position = new Vector3(transform.position.x - 1.5f, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                b.transform.position = new Vector3(transform.position.x + 1.5f, transform.position.y, transform.position.z);
+            }
+            b.GetComponent<BlackHoleScript>().startUp(playerNum, facingLeft, BlackHoleStrength, BlackHolePullRange, BlackHoleSpeed, BlackHoleMoveTime, BlackHoleStillTime);
             SuperCurrent -= SuperCost;
         }
     }
