@@ -34,11 +34,13 @@ public class RedRanger : Player {
 
     protected override void Attack2()
     {
-        if (input.attack2) {
+        if (input.attack2 && attack2Available)
+        {
 			if(playerNum ==1){Debug.Log("att2");}
 
 			punch.SetActive(true);
 			punch.GetComponent<Animator>().Play("punch");
+            StartCoroutine(Attack2Cooldown()); //starts attack 2 cooldown timer
 		}
     }
 
