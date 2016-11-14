@@ -10,6 +10,8 @@ TagManager:
   - Goal
   - Hitbox
   - Key Spawn Point
+  - Environment
+  - Attack
   layers:
   - Default
   - TransparentFX

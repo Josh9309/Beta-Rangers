@@ -24,7 +24,8 @@ public class GroundCheckScript : MonoBehaviour {
     //calls the parents child collider method
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Platform" || other.tag == "Player")
+		if (player.PlayerNum == 1) {Debug.Log("groundcheck enter " + other.gameObject.name);}
+		if ((other.tag == "Platform" || other.tag == "Player" && other.tag != "Attack") && other.gameObject.name != parent.name)
         {
             player.Grounded = true;
         }
@@ -32,17 +33,18 @@ public class GroundCheckScript : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.tag == "Platform" || other.tag == "Player")
-        {
+		if ((other.tag == "Platform" || other.tag == "Player" && other.tag != "Attack") && other.gameObject.name != parent.name)
+		{
             player.Grounded = true;
         }
     }
 
     //calls the parents child collider method
     void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "Platform")
-        {
+	{		
+		if (player.PlayerNum == 1) {Debug.Log("groundcheck exit " + other.gameObject.name);}
+		if ((other.tag == "Platform" || other.tag == "Player" && other.tag != "Attack") && other.gameObject.name != parent.name)
+		{
             player.Grounded = false;
         }
     }
