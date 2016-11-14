@@ -100,8 +100,10 @@ public abstract class Player : MonoBehaviour {
     private Key key;
     private int keyDamage; //current amount of damage taken while holding key
     [SerializeField] private int keyDamageMax; //the max amount of damage player can take before lossing key
-    [SerializeField] private bool keyPickup;
-    private float keyCurrentTime = 0;
+    [SerializeField] private bool keyPickup;//if player can pick up key
+    private float keyPickupTime = 0; //after drop, how long before can pick up again
+    [SerializeField] private float keyPickupTimeMax; //amount of time before player can pick key up again
+    private float keyCurrentTime = 0; //amount of time player has before winning
 
     //basic ranger physic attributes
     [SerializeField] protected bool facingLeft;
@@ -116,7 +118,8 @@ public abstract class Player : MonoBehaviour {
     protected InputSettings input = new InputSettings();
     protected WorldController worldControl;
 
-	protected bool altAtt = false;
+	public bool canMove = true;
+	public bool canBeHit=true;
 
     //Status effects attributes
     public bool frozen = false;
@@ -235,6 +238,7 @@ public abstract class Player : MonoBehaviour {
         postition = transform.position;
         rBody = GetComponent<Rigidbody2D>();
         rBody.mass = 1.0f;
+        keyDamage = 0;
 	}
 	
     protected virtual void FixedUpdate()
@@ -243,7 +247,7 @@ public abstract class Player : MonoBehaviour {
         CheckHasWon();
         GetInput(); //gets all the input from the player
 
-        if (!frozen)
+        if (!frozen && canMove)
         {
             Move(); // moves the ranger based on player input
             Jump();
@@ -256,7 +260,7 @@ public abstract class Player : MonoBehaviour {
         {
 			if(rBody.velocity!=Vector2.zero){
 				if(playerNum ==1){Debug.Log("stop slide(grounded)");}
-            	rBody.velocity = Vector2.zero; // stops character 
+            	rBody.velocity = rBody.velocity.x * Vector2.zero; // stops character 
 			}
         }
 
@@ -264,6 +268,17 @@ public abstract class Player : MonoBehaviour {
         {
             airControl = true;
 		}
+
+        if (!keyPickup)//keypickup is false
+        {
+            if(keyPickupTime >= keyPickupTimeMax)
+            {
+                keyPickup = true;
+                keyPickupTime = 0;
+                Debug.Log(name + " can pickup key again");
+            }
+            keyPickupTime += Time.deltaTime;
+        }
 
         ///Remove Later After First Build
         if (input.pause)
@@ -369,8 +384,9 @@ public abstract class Player : MonoBehaviour {
 
     protected void Jump() //used to make the player jump
     {
-        if(input.jump && grounded) // if jump button is pressed and player is grounded
+		if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
+			if(playerNum ==1){Debug.Log("jump");}
             rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
         }
     }
@@ -397,11 +413,11 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void Attack1()
     {
-        if (input.attack1 && !altAtt)
+        if (input.attack1)
         {
 			Debug.Log("att1");
 
-            int attack1Range = 2; //the range of the melee attack for the ranger
+            int attack1Range = 3; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
 
             if (facingLeft)
@@ -421,17 +437,18 @@ public abstract class Player : MonoBehaviour {
                 {
                     Player ranger = thing.GetComponent<Player>();
 
+					if(canBeHit){
                     ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
                     SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
-
-                    Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
-                }
+                    
+					Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
+					}
+				}
             }
         }
     }
 
     abstract protected void Attack2();
-
 
     abstract protected void SuperAttack();
 
@@ -450,51 +467,73 @@ public abstract class Player : MonoBehaviour {
 
     public void ModHealth(int mod) //adds/subtracts from health
     {
-        Health += mod;
-        if (key != null)
-        {
-            keyDamage -= mod;
-            if(keyDamage >= keyDamageMax)
-            {
-                key.GetComponent<Key>().drop();
-                keyDamage = 0;
-            }
-        }
+		if (canBeHit) {
+			Health += mod;
+			if (key != null) {
+				keyDamage -= mod;
+				if (keyDamage >= keyDamageMax) {
+					key.GetComponent<Key> ().drop ();
+					key = null;
+					//keyDamage = 0;
+				}
+			}
+		}
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D coll)
-    {
-        //if player hits an object while in the air then air control is turned off so that players cant hang on to obstacle.
-        if (!grounded)
-        {
-            airControl = false;
+	protected virtual void OnCollisionEnter2D(Collision2D other){
+		//if player hits an object while in the air then air control is turned off so that players cant hang on to obstacle.
+		if (!grounded)
+		{
+			airControl = false;
 		}
-        
+		//key pick up
+		if(other.gameObject.tag == "Key")//colliding with the key
+		{
+			if(other.gameObject.GetComponent<Key>().Holder == null && keyPickup)//no one is holding the key & ranger can pick it up
+			{
+				other.gameObject.GetComponent<Key>().Holder = gameObject;
+				key = other.gameObject.GetComponent<Key>();
+				keyDamage = 0;
+				key.pickedUp();
+				
+			}
+		}
+	}
+
+    protected virtual void OnTriggerEnter2D(Collider2D other)
+    {   
         //key pick up
-        if(coll.gameObject.tag == "Key")//colliding with the key
+        if(other.gameObject.tag == "Key")//colliding with the key
         {
-            if(coll.gameObject.GetComponent<Key>().Holder == null && keyPickup)//no one is holding the key & ranger can pick it up
+            if(other.gameObject.GetComponent<Key>().Holder == null && keyPickup)//no one is holding the key & ranger can pick it up
             {
-                coll.gameObject.GetComponent<Key>().Holder = gameObject;
-                key = coll.gameObject.GetComponent<Key>();
-                keyPickup = false;
+                other.gameObject.GetComponent<Key>().Holder = gameObject;
+                key = other.gameObject.GetComponent<Key>();
                 keyDamage = 0;
                 key.pickedUp();
-                Debug.Log("Key Picked up");
             }
         }
     }
 
-    protected virtual void OnTriggerStay2D(Collision2D coll)
+    protected virtual void OnTriggerStay2D(Collider2D other)
     {
-		if (coll.gameObject.tag == "Goal")//colliding with their goal
+        if (other.gameObject.tag == "Goal")//colliding with their goal
 		{
-			if (key != null && playerNum == coll.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
 			{
 				keyCurrentTime += Time.deltaTime;
 			}
 		}
     }
+
+	//enable air control
+	protected virtual void OnCollisionExit2D(Collision2D coll)
+	{
+		if (!grounded)
+		{
+			airControl= true;
+		}
+	}
 
     protected virtual void OnDrawGizmos() //used to draw gizmos for debugging
     {

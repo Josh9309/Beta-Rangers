@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 465014}
   - 212: {fileID: 21237092}
   - 61: {fileID: 6171076}
+  - 251: {fileID: 25126410}
   m_Layer: 0
   m_Name: betaPlatformS
   m_TagString: Platform
@@ -60,6 +61,7 @@ GameObject:
   - 4: {fileID: 440452}
   - 212: {fileID: 21207412}
   - 61: {fileID: 6196436}
+  - 251: {fileID: 25147300}
   m_Layer: 0
   m_Name: betaPlatformL
   m_TagString: Platform
@@ -222,6 +224,7 @@ GameObject:
   - 4: {fileID: 419596}
   - 212: {fileID: 21233298}
   - 61: {fileID: 6135084}
+  - 251: {fileID: 25125448}
   m_Layer: 0
   m_Name: betaPlatformM
   m_TagString: Platform
@@ -319,6 +322,7 @@ GameObject:
   - 4: {fileID: 420236}
   - 212: {fileID: 21209336}
   - 61: {fileID: 6171444}
+  - 251: {fileID: 25162396}
   m_Layer: 0
   m_Name: betaPlatformS2
   m_TagString: Platform
@@ -703,7 +707,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.987256646, y: -1.43739891, z: 0}
   m_LocalScale: {x: 2.25519681, y: 2.25519633, z: 2.25519633}
   m_Children:
   - {fileID: 455228}
@@ -867,7 +871,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: .0105823139, y: .148144037}
   serializedVersion: 2
   m_Size: {x: 5.19254923, y: .449500799}
@@ -893,7 +897,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: -.0105810668, y: .23279874}
   serializedVersion: 2
   m_Size: {x: 2.8832407, y: .296480566}
@@ -906,7 +910,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: .0317487083, y: .190471172}
   serializedVersion: 2
   m_Size: {x: 2.77022147, y: .298805743}
@@ -932,7 +936,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: .0952356979, y: .211635068}
   serializedVersion: 2
   m_Size: {x: 14.533247, y: .499249816}
@@ -1540,6 +1544,74 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 68ce69f974bdfc04e968236a2ee2b1d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!251 &25125448
+PlatformEffector2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139100}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!251 &25126410
+PlatformEffector2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103072}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!251 &25147300
+PlatformEffector2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107990}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
+--- !u!251 &25162396
+PlatformEffector2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150596}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

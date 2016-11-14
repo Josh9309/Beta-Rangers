@@ -140,6 +140,7 @@ MonoBehaviour:
   playerColor: {r: 0, g: 0, b: 1, a: 0}
   keyDamageMax: 50
   keyPickup: 1
+  keyPickupTimeMax: 5
   facingLeft: 1
   grounded: 0
   ground:
@@ -238,6 +239,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: jumpPower
       value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: keyPickupTimeMax
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
