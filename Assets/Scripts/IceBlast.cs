@@ -61,7 +61,7 @@ public class IceBlast : MonoBehaviour {
             rBody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
 
         }
-        else if (thing.name == "Blue_BetaRanger" || thing.tag == "Hitbox")
+        else if (thing.name == "Blue_BetaRanger" || thing.tag == "Hitbox"|| thing.tag == "Goal")
         {
             //do nothing
         }
