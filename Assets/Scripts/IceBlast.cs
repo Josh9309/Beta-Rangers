@@ -47,6 +47,7 @@ public class IceBlast : MonoBehaviour {
 
         if (thing.tag == "Player" && thing.name != "Blue_BetaRanger") //if collision is with another ranger
         {
+            Start();
             enemyRanger = thing.gameObject.GetComponent<Player>();
             enemyRanger.ModHealth(-damage); //gets the base player script and inflicts the damage on the player
 
