@@ -450,38 +450,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 425380, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.95556331
-      objectReference: {fileID: 0}
-    - target: {fileID: 425380, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.95556331
-      objectReference: {fileID: 0}
-    - target: {fileID: 425380, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.95556331
-      objectReference: {fileID: 0}
-    - target: {fileID: 11457202, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-      propertyPath: playerNum
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 162610, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11491932, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-      propertyPath: ranger
-      value: 
-      objectReference: {fileID: 2073375798}
-    - target: {fileID: 11408620, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-      propertyPath: itemType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11408620, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-      propertyPath: ranger
-      value: 
-      objectReference: {fileID: 2073375798}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
   m_IsPrefabParent: 0
@@ -2242,10 +2210,6 @@ BoxCollider2D:
   m_Offset: {x: .0105823139, y: .148144037}
   serializedVersion: 2
   m_Size: {x: 5.19254923, y: .449500799}
---- !u!1 &2073375798 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 118354, guid: fb5fd4dd8457c4643920868173a137aa, type: 2}
-  m_PrefabInternal: {fileID: 274774790}
 --- !u!1 &2111917187
 GameObject:
   m_ObjectHideFlags: 0
