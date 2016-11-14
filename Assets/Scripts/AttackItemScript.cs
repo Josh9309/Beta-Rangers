@@ -2,19 +2,23 @@
 using System.Collections;
 
 public class AttackItemScript : MonoBehaviour {
+    private enum AttackItem { FLAMESWORD, FLAMEPUNCH};
+	private bool colliding = false;
 
-	bool colliding = false;
-
-	public GameObject ranger;
+	[SerializeField] private GameObject ranger;
 	private Player player;
 	private GameObject root;
+    [SerializeField] private AttackItem itemType;
 
-	public bool IsCollliding{get{return colliding;}}
+	
 	private Animator animator;
 
-	// Use this for initialization
-	void Start () {
-		ranger = transform.parent.parent.gameObject;
+    public bool Collliding {
+        get { return colliding; }
+    }
+
+    // Use this for initialization
+    void Start () {
 		player = ranger.GetComponent<Player> ();
 		animator = transform.parent.GetComponent<Animator> ();
 		root = transform.parent.gameObject;
@@ -23,22 +27,30 @@ public class AttackItemScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (name == "Blade") {
-			if (animator.GetCurrentAnimatorStateInfo (0).IsName ("swordExit")) {
-				if (animator.GetCurrentAnimatorStateInfo (0).normalizedTime > 1 && !animator.IsInTransition (0)) {
-					player.canMove=true;
-					player.canBeHit=true;
-					root.SetActive(false);
-				}
-			}
-		}
-		if (name == "Punch") {
-			if (animator.GetCurrentAnimatorStateInfo (0).IsName ("punch")) {
-				if (animator.GetCurrentAnimatorStateInfo (0).normalizedTime > 1 && !animator.IsInTransition (0)) {
-					root.SetActive(false);
-				}
-			}
-		}
+        switch (itemType)
+        {
+            case AttackItem.FLAMESWORD: //flame sword update code
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("swordExit"))
+                {
+                    if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+                    {
+                        player.canMove = true;
+                        player.canBeHit = true;
+                        root.SetActive(false);
+                    }
+                }
+                break;
+
+            case AttackItem.FLAMEPUNCH: //flame punch update code
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("punch"))
+                {
+                    if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+                    {
+                        root.SetActive(false);
+                    }
+                }
+                break;
+        }
 	}
 	
 	//calls the parents child collider method
@@ -46,20 +58,24 @@ public class AttackItemScript : MonoBehaviour {
 		if (other.gameObject.name != ranger.name) {
 
 			if (other.tag == "Player") {
-				if (name == "Blade") {
-					if (player.PlayerNum == 1) {
-						//Debug.Log ("sword enter " + other.gameObject.name);
-						Player otherRanger = other.GetComponent<Player> ();
-						otherRanger.ModHealth (-player.Attack3Power); //decrease enemy ranger health by attack1Power damage
-						Debug.Log (gameObject.name + " has hit " + other.name + " for " + player.Attack3Power + " damage");// debugs what ranger hit and for how much damage.
-					}
-				}
-				if (name == "Punch") {
-					//Debug.Log ("punch enter " + other.gameObject.name);
-					Player otherRanger = other.GetComponent<Player> ();
-					otherRanger.ModHealth (-player.Attack2Power); //decrease enemy ranger health by attack1Power damage
-					Debug.Log (gameObject.name + " has hit " + other.name + " for " + player.Attack2Power + " damage");// debugs what ranger hit and for how much damage.
-				}
+                Player otherRanger;
+                switch (itemType)
+                {
+                    case AttackItem.FLAMESWORD: //flame sword update code  
+                        //Debug.Log ("sword enter " + other.gameObject.name);
+                        otherRanger = other.GetComponent<Player>();
+                        otherRanger.ModHealth(-player.Attack3Power); //decrease enemy ranger health by attack1Power damage
+                        Debug.Log(gameObject.name + " has hit " + other.name + " for " + player.Attack3Power + " damage");// debugs what ranger hit and for how much damage.
+
+                        break;
+
+                    case AttackItem.FLAMEPUNCH: //flame punch update code
+                        //Debug.Log ("punch enter " + other.gameObject.name);
+                        otherRanger = other.GetComponent<Player>();
+                        otherRanger.ModHealth(-player.Attack2Power); //decrease enemy ranger health by attack1Power damage
+                        Debug.Log(gameObject.name + " has hit " + other.name + " for " + player.Attack2Power + " damage");// debugs what ranger hit and for how much damage.
+                        break;
+                }
 			}
 		}
 	}
@@ -75,7 +91,7 @@ public class AttackItemScript : MonoBehaviour {
 		if (other.gameObject.name != ranger.name) {
 
 			if (other.tag == "Player") {
-				if (player.PlayerNum == 1) {Debug.Log (name+" exit " + other.gameObject.name);}
+				//if (player.PlayerNum == 1) {Debug.Log (name+" exit " + other.gameObject.name);}
 			}
 		}
 	}
