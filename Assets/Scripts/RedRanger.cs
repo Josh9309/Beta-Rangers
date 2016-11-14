@@ -32,7 +32,7 @@ public class RedRanger : Player {
         input.ResetBtns();
     }
 
-    protected override void Attack2()
+    protected override void Attack2()//Super Punch
     {
         if (input.attack2 && attack2Available)
         {
@@ -44,7 +44,7 @@ public class RedRanger : Player {
 		}
     }
 
-    protected override void SuperAttack()
+    protected override void SuperAttack()//blazing sword
     {
 		if (input.attack3 && SuperCurrent >= SuperCost) {
 
