@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.26999998, y: -3.86999989, z: 0}
+  m_LocalPosition: {x: -10.5821209, y: 6.87461329, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 479260}
@@ -326,7 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69caf00f05f7e7f439802bc21db3fc05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ranger: {fileID: 0}
+  ranger: {fileID: 118354}
+  itemType: 1
+  superValue: 10
 --- !u!114 &11428610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -350,9 +352,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 175
-  attack1Power: 25
-  attack2Power: 50
-  attack3Power: 75
+  attack1Power: 20
+  attack2Power: 35
+  attack3Power: 50
   speed: 15
   jumpPower: 1200
   superCost: 15
@@ -383,7 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69caf00f05f7e7f439802bc21db3fc05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ranger: {fileID: 0}
+  ranger: {fileID: 118354}
+  itemType: 0
+  superValue: 0
 --- !u!212 &21210530
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -634,6 +638,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: keyPickupTimeMax
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack1Power
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2Power
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack3Power
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -12,6 +12,7 @@ public class AttackItemScript : MonoBehaviour {
 
 	
 	private Animator animator;
+    [SerializeField] private int superValue;
 
     public bool Collliding {
         get { return colliding; }
@@ -58,6 +59,7 @@ public class AttackItemScript : MonoBehaviour {
 		if (other.gameObject.name != ranger.name) {
 
 			if (other.tag == "Player") {
+                Start();
                 Player otherRanger;
                 switch (itemType)
                 {
@@ -73,6 +75,7 @@ public class AttackItemScript : MonoBehaviour {
                         //Debug.Log ("punch enter " + other.gameObject.name);
                         otherRanger = other.GetComponent<Player>();
                         otherRanger.ModHealth(-player.Attack2Power); //decrease enemy ranger health by attack1Power damage
+                        player.SuperCurrent += superValue;
                         Debug.Log(gameObject.name + " has hit " + other.name + " for " + player.Attack2Power + " damage");// debugs what ranger hit and for how much damage.
                         break;
                 }
