@@ -299,11 +299,6 @@ public abstract class Player : MonoBehaviour {
     {
         //gets all value based input checks
         input.fwdInput = Input.GetAxis(input.HORIZONTAL_AXIS);
-        input.jumpInput = Input.GetAxis(input.JUMP_AXIS);
-        input.dodgeInput = Input.GetAxis(input.DODGE_AXIS);
-        input.attack1Input = Input.GetAxis(input.ATTACK1_AXIS);
-        input.attack2Input = Input.GetAxis(input.ATTACK2_AXIS);
-        input.attack3Input = Input.GetAxis(input.ATTACK3_AXIS);
 
         //button input checks
         if (!input.jump)
@@ -418,7 +413,7 @@ public abstract class Player : MonoBehaviour {
     {
         if (input.attack1 && attack1Available)
         {
-			Debug.Log("att1");
+			//Debug.Log("att1");
 
             int attack1Range = 3; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
@@ -434,17 +429,17 @@ public abstract class Player : MonoBehaviour {
                 Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + attack1Range, transform.position.y), playerColor, 2, false); //draws the debug line for attack
             }
 
-            foreach (Collider2D thing in cols)
+            for(int i = 0; i< cols.Length; i++)
             {
-                if (thing.tag == "Player" && thing != gameObject.GetComponent<Collider2D>()) //checks to make sure the thing is another ranger and not yourself
+                if (cols[i].tag == "Player" && cols[i] != gameObject.GetComponent<Collider2D>()) //checks to make sure the thing is another ranger and not yourself
                 {
-                    Player ranger = thing.GetComponent<Player>();
+                    Player ranger = cols[i].GetComponent<Player>();
 
 					if(canBeHit){
                     ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
                     SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
                     
-					Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
+					//Debug.Log(gameObject.name + " has hit " + cols[i].name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
 					}
 				}
             }

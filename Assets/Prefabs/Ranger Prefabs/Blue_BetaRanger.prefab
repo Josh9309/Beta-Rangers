@@ -135,6 +135,8 @@ MonoBehaviour:
   superCost: 15
   superMax: 200
   attack1SuperValue: 5
+  attack1CooldownTime: 1
+  attack2CooldownTime: .5
   ranger: 0
   playerNum: 1
   playerColor: {r: 0, g: 0, b: 1, a: 0}
@@ -146,6 +148,8 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 4294967295
+  canMove: 1
+  canBeHit: 1
   frozen: 0
   IceShurikenPrefab: {fileID: 193604, guid: c6f952cfb7b29934f8d6806e013189ea, type: 2}
   IceBlastPrefab: {fileID: 191896, guid: 32346837141add14fadcec3bc605ca68, type: 2}
@@ -247,6 +251,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: keyPickupTimeMax
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2CooldownTime
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
