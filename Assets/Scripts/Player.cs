@@ -169,6 +169,11 @@ public abstract class Player : MonoBehaviour {
         get { return ranger; }
     }
 
+    public Rigidbody2D RBody
+    {
+        get { return rBody; }
+    }
+
     public bool KeyPickup
     {
         get { return keyPickup; }
