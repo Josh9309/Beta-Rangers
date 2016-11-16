@@ -19,10 +19,14 @@ public class Killzone : MonoBehaviour {
         {
             thing.GetComponent<Player>().DestroyRanger();
         }
-        if(thing.tag == "Key")
+        else if (thing.tag == "Key")
         {
             thing.GetComponent<Key>().droppedOffStage();
             thing.transform.position = GameObject.FindGameObjectWithTag("Key Spawn Point").transform.position;
+        }
+        else if (thing.tag == "Black Hole")
+        {
+            DestroyObject(thing.gameObject);
         }
     }
 }

@@ -90,6 +90,9 @@ public abstract class Player : MonoBehaviour {
     [SerializeField] protected int superCost;
     [SerializeField] protected int superMax;
     [SerializeField] protected int attack1SuperValue;
+    [SerializeField]
+    protected float attack1CooldownTime = 1, attack2CooldownTime = 2;
+    protected bool attack1Available = true, attack2Available = true;
 
 
     //basic player stats attributes
@@ -118,7 +121,8 @@ public abstract class Player : MonoBehaviour {
     protected InputSettings input = new InputSettings();
     protected WorldController worldControl;
 
-	protected bool altAtt = false;
+	public bool canMove = true;
+	public bool canBeHit=true;
 
     //Status effects attributes
     public bool frozen = false;
@@ -163,6 +167,11 @@ public abstract class Player : MonoBehaviour {
     public RangerType Ranger
     {
         get { return ranger; }
+    }
+
+    public Rigidbody2D RBody
+    {
+        get { return rBody; }
     }
 
     public bool KeyPickup
@@ -246,7 +255,7 @@ public abstract class Player : MonoBehaviour {
         CheckHasWon();
         GetInput(); //gets all the input from the player
 
-        if (!frozen)
+        if (!frozen && canMove)
         {
             Move(); // moves the ranger based on player input
             Jump();
@@ -257,9 +266,14 @@ public abstract class Player : MonoBehaviour {
         //stop ranger velocity if there is no input and ranger is grounded
         if (input.fwdInput == 0 && grounded) //if there is no input and the character is on the ground
         {
-			if(rBody.velocity!=Vector2.zero){
+            if (GameObject.FindGameObjectWithTag("Black Hole") != null)//black hole
+            {
+                //nothing happens
+                //do not change this, is blank piece is on purpose
+            }
+			else if(rBody.velocity!=Vector2.zero){
 				if(playerNum ==1){Debug.Log("stop slide(grounded)");}
-            	rBody.velocity = Vector2.zero; // stops character 
+            	rBody.velocity = rBody.velocity.x * Vector2.zero; // stops character 
 			}
         }
 
@@ -295,11 +309,6 @@ public abstract class Player : MonoBehaviour {
     {
         //gets all value based input checks
         input.fwdInput = Input.GetAxis(input.HORIZONTAL_AXIS);
-        input.jumpInput = Input.GetAxis(input.JUMP_AXIS);
-        input.dodgeInput = Input.GetAxis(input.DODGE_AXIS);
-        input.attack1Input = Input.GetAxis(input.ATTACK1_AXIS);
-        input.attack2Input = Input.GetAxis(input.ATTACK2_AXIS);
-        input.attack3Input = Input.GetAxis(input.ATTACK3_AXIS);
 
         //button input checks
         if (!input.jump)
@@ -383,8 +392,9 @@ public abstract class Player : MonoBehaviour {
 
     protected void Jump() //used to make the player jump
     {
-        if(input.jump && grounded) // if jump button is pressed and player is grounded
+		if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
+			if(playerNum ==1){Debug.Log("jump");}
             rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
         }
     }
@@ -411,11 +421,11 @@ public abstract class Player : MonoBehaviour {
 
     protected virtual void Attack1()
     {
-        if (input.attack1 && !altAtt)
+        if (input.attack1 && attack1Available)
         {
-			Debug.Log("att1");
+			//Debug.Log("att1");
 
-            int attack1Range = 2; //the range of the melee attack for the ranger
+            int attack1Range = 3; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
 
             if (facingLeft)
@@ -429,26 +439,50 @@ public abstract class Player : MonoBehaviour {
                 Debug.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + attack1Range, transform.position.y), playerColor, 2, false); //draws the debug line for attack
             }
 
-            foreach (Collider2D thing in cols)
+            for(int i = 0; i< cols.Length; i++)
             {
-                if (thing.tag == "Player" && thing != gameObject.GetComponent<Collider2D>()) //checks to make sure the thing is another ranger and not yourself
+                if (cols[i].tag == "Player" && cols[i] != gameObject.GetComponent<Collider2D>()) //checks to make sure the thing is another ranger and not yourself
                 {
-                    Player ranger = thing.GetComponent<Player>();
+                    Player ranger = cols[i].GetComponent<Player>();
 
+					if(canBeHit){
                     ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
                     SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
-
-                    Debug.Log(gameObject.name + " has hit " + thing.name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
-                }
+                    
+					//Debug.Log(gameObject.name + " has hit " + cols[i].name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
+					}
+				}
             }
+
+            StartCoroutine(Attack1Cooldown()); //starts the attack 1 cooldown coroutine
         }
     }
 
     abstract protected void Attack2();
 
-
     abstract protected void SuperAttack();
 
+    #endregion
+
+    #region Cooldown Methods
+    //Attack 1 Cooldown
+    protected virtual IEnumerator Attack1Cooldown()
+    {
+        attack1Available = false; //set attack 1 to unavailable
+
+        yield return new WaitForSeconds(attack1CooldownTime); //wait for cooldown time
+
+        attack1Available = true; //makes attack 1 available again
+    }
+    //Attack 2 Cooldown
+    protected virtual IEnumerator Attack2Cooldown()
+    {
+        attack2Available = false; //set attack 1 to unavailable
+
+        yield return new WaitForSeconds(attack2CooldownTime); //wait for cooldown time
+
+        attack2Available = true; //makes attack 1 available again
+    }
     #endregion
 
     public virtual void DestroyRanger()
@@ -464,51 +498,73 @@ public abstract class Player : MonoBehaviour {
 
     public void ModHealth(int mod) //adds/subtracts from health
     {
-        Health += mod;
-        if (key != null)
-        {
-            keyDamage -= mod;
-            if(keyDamage >= keyDamageMax)
-            {
-                key.GetComponent<Key>().drop();
-                key = null;
-                //keyDamage = 0;
-            }
-        }
+		if (canBeHit) {
+			Health += mod;
+			if (key != null) {
+				keyDamage -= mod;
+				if (keyDamage >= keyDamageMax) {
+					key.GetComponent<Key> ().drop ();
+					key = null;
+					//keyDamage = 0;
+				}
+			}
+		}
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D coll)
-    {
-        //if player hits an object while in the air then air control is turned off so that players cant hang on to obstacle.
-        if (!grounded)
-        {
-            airControl = false;
+	protected virtual void OnCollisionEnter2D(Collision2D other){
+		//if player hits an object while in the air then air control is turned off so that players cant hang on to obstacle.
+		if (!grounded)
+		{
+			airControl = false;
 		}
-        
+		//key pick up
+		if(other.gameObject.tag == "Key")//colliding with the key
+		{
+			if(other.gameObject.GetComponent<Key>().Holder == null && keyPickup)//no one is holding the key & ranger can pick it up
+			{
+				other.gameObject.GetComponent<Key>().Holder = gameObject;
+				key = other.gameObject.GetComponent<Key>();
+				keyDamage = 0;
+				key.pickedUp();
+				
+			}
+		}
+	}
+
+    protected virtual void OnTriggerEnter2D(Collider2D other)
+    {   
         //key pick up
-        if(coll.gameObject.tag == "Key")//colliding with the key
+        if(other.gameObject.tag == "Key")//colliding with the key
         {
-            if(coll.gameObject.GetComponent<Key>().Holder == null && keyPickup)//no one is holding the key & ranger can pick it up
+            if(other.gameObject.GetComponent<Key>().Holder == null && keyPickup)//no one is holding the key & ranger can pick it up
             {
-                coll.gameObject.GetComponent<Key>().Holder = gameObject;
-                key = coll.gameObject.GetComponent<Key>();
+                other.gameObject.GetComponent<Key>().Holder = gameObject;
+                key = other.gameObject.GetComponent<Key>();
                 keyDamage = 0;
                 key.pickedUp();
-                
             }
         }
     }
 
-    protected virtual void OnTriggerStay2D(Collider2D coll)
+    protected virtual void OnTriggerStay2D(Collider2D other)
     {
-        if (coll.gameObject.tag == "Goal")//colliding with their goal
+        if (other.gameObject.tag == "Goal")//colliding with their goal
 		{
-            if (key != null && playerNum == coll.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
 			{
 				keyCurrentTime += Time.deltaTime;
 			}
 		}
     }
+
+	//enable air control
+	protected virtual void OnCollisionExit2D(Collision2D coll)
+	{
+		if (!grounded)
+		{
+			airControl= true;
+		}
+	}
 
     protected virtual void OnDrawGizmos() //used to draw gizmos for debugging
     {

@@ -4,41 +4,57 @@ using System;
 
 public class RedRanger : Player {
 
+	GameObject sword;
+	GameObject punch;
+
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
         playerColor = Color.red;
 
 		//use the alternate attack using the hitboxes
-		altAtt = true;
+		sword = gameObject.transform.FindChild("Sword").gameObject;
+		sword.SetActive (false);
+		punch = gameObject.transform.FindChild ("Fist").gameObject;
+		punch.SetActive (false);
 	}
 	
 	// Update is called once per frame
 	protected override void FixedUpdate () {
         base.FixedUpdate();
 
+		if (canMove) {
+			Attack2 ();
+			SuperAttack ();
+		}
 
         //reset btn inputs
         input.ResetBtns();
     }
 
-    protected override void Attack2()
+    protected override void Attack2()//Super Punch
     {
-        if (input.attack2)
+        if (input.attack2 && attack2Available)
         {
-            //Debug.Log("att1");
+			if(playerNum ==1){Debug.Log("att2");}
 
-            //Player ranger = other.GetComponent<Player>();
-
-            //ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
-            //SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
-
-            //Debug.Log(gameObject.name + " has hit " + other.name + " for " + attack1Power + " damage");// debugs what ranger hit and for how much damage.
-        }
+			punch.SetActive(true);
+			punch.GetComponent<Animator>().Play("punch");
+            StartCoroutine(Attack2Cooldown()); //starts attack 2 cooldown timer
+		}
     }
 
-    protected override void SuperAttack()
+    protected override void SuperAttack()//blazing sword
     {
-		if(playerNum ==1){Debug.Log("att3");}
+		if (input.attack3 && SuperCurrent >= SuperCost) {
+
+			if (playerNum == 1) {Debug.Log ("att3");}
+
+			canMove=false;
+			canBeHit=false;
+			sword.SetActive(true);
+			sword.GetComponent<Animator>().Play("swordEnter");
+			SuperCurrent -= SuperCost;
+		}
 	}
 }

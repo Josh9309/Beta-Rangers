@@ -50,7 +50,7 @@ public class BlueRanger : Player {
     //ICE SHURIKEN ATTACK
     protected override void Attack2()
     {
-        if(input.attack2 && shurikenCount < shurikenMax) //checks to make sure button has been pressed and that we have not hit max shurikens on the screen
+        if(input.attack2 && shurikenCount < shurikenMax && attack2Available) //checks to make sure button has been pressed and that we have not hit max shurikens on the screen
         {
             GameObject iceShuriken;
 
@@ -65,6 +65,8 @@ public class BlueRanger : Player {
                 iceShuriken = Instantiate(IceShurikenPrefab, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
                 shurikenCount++;
             }
+
+            StartCoroutine(Attack2Cooldown());
         }
     }
 

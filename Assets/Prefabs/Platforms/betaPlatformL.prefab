@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &111940
+--- !u!1 &194810
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 424346}
-  - 212: {fileID: 21288416}
-  - 61: {fileID: 6152374}
+  - 4: {fileID: 496124}
+  - 212: {fileID: 21264170}
+  - 61: {fileID: 6175056}
   m_Layer: 0
   m_Name: betaPlatformL
   m_TagString: Platform
@@ -17,24 +17,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &424346
+--- !u!4 &496124
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111940}
+  m_GameObject: {fileID: 194810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.6100006, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.8499999, y: -3.11999989, z: 0}
+  m_LocalScale: {x: 1.12057543, y: 1.12057543, z: 1.12057543}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6152374
+--- !u!61 &6175056
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111940}
+  m_GameObject: {fileID: 194810}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -42,12 +42,12 @@ BoxCollider2D:
   m_Offset: {x: .0831985474, y: -.149759293}
   serializedVersion: 2
   m_Size: {x: 14.6539307, y: 1.51768732}
---- !u!212 &21288416
+--- !u!212 &21264170
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 111940}
+  m_GameObject: {fileID: 194810}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,12 +76,8 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 111940}
+  m_RootGameObject: {fileID: 194810}
   m_IsPrefabParent: 1

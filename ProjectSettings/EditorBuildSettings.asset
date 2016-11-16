@@ -6,6 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
+<<<<<<< HEAD
     path: Assets/Scenes/danielles test scene.unity
   - enabled: 1
     path: Assets/Scenes/Controls.unity
@@ -20,6 +21,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Noah's Test scene.unity
   - enabled: 1
+=======
+    path: Assets/Scenes/MainScene.unity
+  - enabled: 0
+    path: Assets/Scenes/danielles test scene.unity
+  - enabled: 0
+>>>>>>> origin/Test
     path: Assets/Scenes/Options.unity
   - enabled: 1
     path: Assets/Scenes/unityTestScene.unity
