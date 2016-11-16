@@ -266,7 +266,12 @@ public abstract class Player : MonoBehaviour {
         //stop ranger velocity if there is no input and ranger is grounded
         if (input.fwdInput == 0 && grounded) //if there is no input and the character is on the ground
         {
-			if(rBody.velocity!=Vector2.zero){
+            if (GameObject.FindGameObjectWithTag("Black Hole") != null)//black hole
+            {
+                //nothing happens
+                //do not change this, is blank piece is on purpose
+            }
+			else if(rBody.velocity!=Vector2.zero){
 				if(playerNum ==1){Debug.Log("stop slide(grounded)");}
             	rBody.velocity = rBody.velocity.x * Vector2.zero; // stops character 
 			}
