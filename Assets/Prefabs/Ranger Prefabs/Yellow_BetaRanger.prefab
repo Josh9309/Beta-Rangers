@@ -128,13 +128,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 110
   attack1Power: 15
-  attack2Power: 30
+  attack2Power: 40
   attack3Power: 60
   speed: 15
   jumpPower: 1200
   superCost: 15
   superMax: 155
   attack1SuperValue: 5
+  attack1CooldownTime: 1
+  attack2CooldownTime: 1
   ranger: 3
   playerNum: 1
   playerColor: {r: 1, g: 1, b: 0, a: 0}
@@ -146,7 +148,10 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 4294967295
+  canMove: 1
+  canBeHit: 1
   frozen: 0
+  electricBallPrefab: {fileID: 177642, guid: 617bb418bb9cc054497759c5e47c1cfa, type: 2}
 --- !u!212 &21259460
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -253,6 +258,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: keyPickupTimeMax
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: electricBallPrefab
+      value: 
+      objectReference: {fileID: 177642, guid: 617bb418bb9cc054497759c5e47c1cfa, type: 2}
+    - target: {fileID: 0}
+      propertyPath: attack2CooldownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2Power
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

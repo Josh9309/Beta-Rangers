@@ -309,6 +309,7 @@ public abstract class Player : MonoBehaviour {
     {
         //gets all value based input checks
         input.fwdInput = Input.GetAxis(input.HORIZONTAL_AXIS);
+        input.dodgeInput = Input.GetAxis(input.DODGE_AXIS);
 
         //button input checks
         if (!input.jump)
