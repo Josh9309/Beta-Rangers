@@ -159,11 +159,11 @@ MonoBehaviour:
   attack1Power: 10
   attack2Power: 0
   attack3Power: 0
-  speed: 15
+  speed: 11
   jumpPower: 1200
-  superCost: 15
-  superMax: 600
-  attack1SuperValue: 5
+  superCost: 50
+  superMax: 100
+  attack1SuperValue: 10
   attack1CooldownTime: 1
   attack2CooldownTime: 2
   ranger: 4
@@ -171,7 +171,7 @@ MonoBehaviour:
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   keyDamageMax: 50
   keyPickup: 1
-  keyPickupTimeMax: 5
+  keyPickupTimeMax: 3.5
   facingLeft: 1
   grounded: 0
   ground:
@@ -300,7 +300,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack1SuperValue
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -308,7 +308,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: keyPickupTimeMax
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: BlackHolePrefab
@@ -357,6 +357,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

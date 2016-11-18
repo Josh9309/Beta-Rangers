@@ -351,21 +351,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfde6d8537059249adde73ac2e917b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 175
-  attack1Power: 20
-  attack2Power: 35
+  health: 140
+  attack1Power: 10
+  attack2Power: 25
   attack3Power: 50
   speed: 15
   jumpPower: 1200
-  superCost: 15
+  superCost: 70
   superMax: 100
-  attack1SuperValue: 5
+  attack1SuperValue: 10
   attack1CooldownTime: 1
   attack2CooldownTime: 2
   ranger: 1
   playerNum: 1
   playerColor: {r: 1, g: 0, b: 0, a: 0}
-  keyDamageMax: 50
+  keyDamageMax: 55
   keyPickup: 1
   keyPickupTimeMax: 5
   facingLeft: 1
@@ -623,7 +623,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack1SuperValue
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: jumpPower
@@ -635,7 +635,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: keyDamageMax
-      value: 50
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: keyPickupTimeMax
@@ -643,11 +643,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack1Power
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack2Power
-      value: 35
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack3Power
@@ -656,6 +656,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 140
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superCost
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -126,23 +126,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e122e29ccdf21408afea33569a46c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
-  attack1Power: 20
-  attack2Power: 30
-  attack3Power: 50
-  speed: 15
+  health: 130
+  attack1Power: 10
+  attack2Power: 15
+  attack3Power: 5
+  speed: 19
   jumpPower: 1200
-  superCost: 15
-  superMax: 200
-  attack1SuperValue: 5
+  superCost: 30
+  superMax: 100
+  attack1SuperValue: 10
   attack1CooldownTime: 1
-  attack2CooldownTime: .5
+  attack2CooldownTime: 2
   ranger: 0
   playerNum: 1
   playerColor: {r: 0, g: 0, b: 1, a: 0}
-  keyDamageMax: 50
+  keyDamageMax: 40
   keyPickup: 1
-  keyPickupTimeMax: 5
+  keyPickupTimeMax: 4
   facingLeft: 1
   grounded: 0
   ground:
@@ -238,7 +238,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack1SuperValue
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: jumpPower
@@ -250,11 +250,43 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: keyPickupTimeMax
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack2CooldownTime
-      value: .5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2Power
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack1Power
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superCost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack3Power
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: keyDamageMax
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
