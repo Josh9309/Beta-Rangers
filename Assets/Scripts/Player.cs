@@ -268,8 +268,17 @@ public abstract class Player : MonoBehaviour {
         {
             if (GameObject.FindGameObjectWithTag("Black Hole") != null)//black hole
             {
-                //nothing happens
-                //do not change this, is blank piece is on purpose
+                GameObject hole = GameObject.FindGameObjectWithTag("Black Hole");
+                //player is within range of black hole and not caster of black hole
+                if (Mathf.Abs((transform.position - hole.transform.position).magnitude) <= hole.GetComponent<BlackHoleScript>().PullRange || playerNum != hole.GetComponent<BlackHoleScript>().PlayerNum) {
+                    //nothing happens
+                    //do not change this, is blank piece is on purpose
+                }
+                else if (rBody.velocity != Vector2.zero)
+                {
+                    if (playerNum == 1) { Debug.Log("stop slide(grounded)"); }
+                    rBody.velocity = rBody.velocity.x * Vector2.zero; // stops character 
+                }
             }
 			else if(rBody.velocity!=Vector2.zero){
 				if(playerNum ==1){Debug.Log("stop slide(grounded)");}
@@ -366,7 +375,7 @@ public abstract class Player : MonoBehaviour {
     }
 
     #region GameMechanic/Movement Methods
-    protected void Move() //this method controls how the ranger moves
+    protected virtual void Move() //this method controls how the ranger moves
     {
         if(Mathf.Abs(input.fwdInput)> input.delay) //make sure the input is greater than the input.delay
         {

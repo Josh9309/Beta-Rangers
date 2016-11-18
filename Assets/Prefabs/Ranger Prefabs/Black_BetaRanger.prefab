@@ -9,8 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 480476}
   - 212: {fileID: 21294034}
+  - 50: {fileID: 5051088}
   m_Layer: 0
-  m_Name: Warp Ball Prefab
+  m_Name: Warp Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,6 +108,22 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!50 &5051088
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127656}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &6102320
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -180,13 +197,16 @@ MonoBehaviour:
   canMove: 1
   canBeHit: 1
   frozen: 0
-  WarpPrefab: {fileID: 0}
+  WarpBall: {fileID: 127656}
   BlackHolePrefab: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
   BlackHoleStrength: 25
   BlackHolePullRange: 10
   BlackHoleSpeed: 2
   BlackHoleMoveTime: 5
   BlackHoleStillTime: 5
+  warpTimeMax: 2
+  verInput: 0
+  VERTICAL_AXIS: Warp_Vertical
 --- !u!212 &21262646
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -268,7 +288,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: f99829e8f8dae024d8b79a165dcb403d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
@@ -284,7 +304,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Name
-      value: Attack_1_HitRange
+      value: Warp Ball
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
@@ -373,6 +393,30 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: speed
       value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: warpTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: WarpBall
+      value: 
+      objectReference: {fileID: 127656}
+    - target: {fileID: 0}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: warpTimeMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

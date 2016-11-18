@@ -16,6 +16,16 @@ public class BlackHoleScript : MonoBehaviour {
     private Animator anim;
     protected WorldController worldControl;
 
+    public float PullRange
+    {
+        get { return pullRange; }
+    }
+
+    public float PlayerNum
+    {
+        get { return playerNum; }
+    }
+
     // Use this for initialization
     void Start () {
         worldControl = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>();
