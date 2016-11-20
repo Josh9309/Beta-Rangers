@@ -152,6 +152,8 @@ MonoBehaviour:
   canBeHit: 1
   frozen: 0
   electricBallPrefab: {fileID: 177642, guid: 617bb418bb9cc054497759c5e47c1cfa, type: 2}
+  chainLightingPrefab: {fileID: 147046, guid: 2f997e11ca1dab84099e841fcc7ce4cf, type: 2}
+  chainedLightningDamage: 0
 --- !u!212 &21259460
 SpriteRenderer:
   m_ObjectHideFlags: 1

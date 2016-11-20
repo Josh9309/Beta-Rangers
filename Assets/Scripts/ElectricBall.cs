@@ -17,11 +17,20 @@ public class ElectricBall : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        yellowRanger = GameObject.Find("Yellow_BetaRanger").GetComponent<YellowRanger>();
+        yellowRanger = GameObject.Find("Yellow_BetaRanger").GetComponent<YellowRanger>(); //gets the yellow ranger
+
+        //assigns the values for move left,and damage based off of the yellow rangers data.
         moveLeft = yellowRanger.FacingLeft;
         damage = yellowRanger.Attack2Power;
-        rBody2D = gameObject.GetComponent<Rigidbody2D>();
-        StartCoroutine(ElectricBallDuration());
+
+        if (!moveLeft) //if not moving left then
+        {
+            Flip(); //flip asset
+        }
+
+
+        rBody2D = gameObject.GetComponent<Rigidbody2D>(); //get the electric ball rigidbody2D
+        StartCoroutine(ElectricBallDuration()); //starts electric ball duration countdown
     }
 	
 	// Update is called once per frame
@@ -37,7 +46,7 @@ public class ElectricBall : MonoBehaviour {
             //Electric Ball is asset is flip to the correct direction and Electric Ball is moved right and rotates clockwise
             rBody2D.velocity = new Vector2(speed, 0);
             transform.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
-            Flip();
+            
         }
 	}
 
