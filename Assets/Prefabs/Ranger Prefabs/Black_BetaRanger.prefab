@@ -200,7 +200,7 @@ MonoBehaviour:
   superMax: 100
   attack1SuperValue: 10
   attack1CooldownTime: 1
-  attack2CooldownTime: 2
+  attack2CooldownTime: 3
   ranger: 4
   playerNum: 3
   playerColor: {r: 0, g: 0, b: 0, a: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
   frozen: 0
   rangerAnimator: {fileID: 9537942}
   WarpBall: {fileID: 127656}
-  BlackHolePrefab: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
+  BlackHolePrefab: {fileID: 140820, guid: 0f2164217c2af394896ba0d4a7d1ed34, type: 2}
   BlackHoleStrength: 25
   BlackHolePullRange: 10
   BlackHoleSpeed: 2
@@ -352,7 +352,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BlackHolePrefab
       value: 
-      objectReference: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
+      objectReference: {fileID: 140820, guid: 0f2164217c2af394896ba0d4a7d1ed34, type: 2}
     - target: {fileID: 0}
       propertyPath: BlackHoleStrength
       value: 25
@@ -436,6 +436,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_SortingOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2CooldownTime
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
