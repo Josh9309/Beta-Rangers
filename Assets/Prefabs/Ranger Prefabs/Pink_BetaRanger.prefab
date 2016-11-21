@@ -30,6 +30,7 @@ GameObject:
   - 61: {fileID: 6105148}
   - 50: {fileID: 5043146}
   - 114: {fileID: 11462932}
+  - 95: {fileID: 9557738}
   m_Layer: 0
   m_Name: Pink_BetaRanger
   m_TagString: Player
@@ -104,6 +105,23 @@ BoxCollider2D:
   m_Offset: {x: .280582339, y: .0467658043}
   serializedVersion: 2
   m_Size: {x: 1.23381913, y: .251779914}
+--- !u!95 &9557738
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177226}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe0675f51b2903c439f2c888c2f8e07b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11462028
 MonoBehaviour:
   m_ObjectHideFlags: 1

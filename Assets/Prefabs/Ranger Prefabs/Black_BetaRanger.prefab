@@ -47,6 +47,7 @@ GameObject:
   - 61: {fileID: 6150898}
   - 50: {fileID: 5048638}
   - 114: {fileID: 11484194}
+  - 95: {fileID: 9537942}
   m_Layer: 0
   m_Name: Black_BetaRanger
   m_TagString: Player
@@ -150,6 +151,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.99000001, y: 3.78999996}
+--- !u!95 &9537942
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185092}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11406732
 MonoBehaviour:
   m_ObjectHideFlags: 1

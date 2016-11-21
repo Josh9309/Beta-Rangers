@@ -4,8 +4,8 @@ using System.Collections;
 public class WorldController : MonoBehaviour {
     
     ///attributes
-    public enum cMenu { MAINMENU, OPTIONS, PAUSE, BATTLE};
-    public enum cLevel { NULL };
+    public enum cMenu { MAINMENU, OPTIONS, PAUSE, BATTLE, LOADING};
+    public enum cLevel { STAGE1 };
 
     [SerializeField] private cMenu currentMenu;
     [SerializeField] private cLevel currentLevel;
@@ -77,7 +77,7 @@ public class WorldController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 
     public void win(Player playerWhoWon)
