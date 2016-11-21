@@ -18,9 +18,18 @@ public class IceBlast : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        blueRanger = GameObject.Find("Blue_BetaRanger").GetComponent<BlueRanger>();
+        blueRanger = GameObject.Find("Blue_BetaRanger").GetComponent<BlueRanger>();// gets blue ranger
+
+        //assigns the values for move left,and damage based off of the Blue ranger's data.
         moveLeft = blueRanger.FacingLeft;
         damage = blueRanger.Attack3Power;
+
+        if (!moveLeft) //if not moving left then
+        {
+            Flip(); //flip asset
+        }
+
+        
         rBody2D = gameObject.GetComponent<Rigidbody2D>();
     }
 	
@@ -37,7 +46,6 @@ public class IceBlast : MonoBehaviour {
             //ice blast asset is flip to the correct direction and shuriken is moved right and rotates clockwise
             rBody2D.velocity = new Vector2(speed, 0);
             transform.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
-            Flip();
         }
     }
 

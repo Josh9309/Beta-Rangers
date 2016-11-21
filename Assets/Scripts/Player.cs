@@ -126,6 +126,10 @@ public abstract class Player : MonoBehaviour {
 
     //Status effects attributes
     public bool frozen = false;
+
+    //animation Attributes
+    [SerializeField]
+    private Animator rangerAnimator;
     #endregion
 
     #region Properties
@@ -169,6 +173,11 @@ public abstract class Player : MonoBehaviour {
         get { return ranger; }
     }
 
+    public Rigidbody2D RBody
+    {
+        get { return rBody; }
+    }
+
     public bool KeyPickup
     {
         get { return keyPickup; }
@@ -198,6 +207,11 @@ public abstract class Player : MonoBehaviour {
     public int SuperCost
     {
         get { return superCost; }
+    }
+
+    public int SuperMax
+    {
+        get { return superMax; }
     }
 
     public bool FacingLeft
@@ -261,7 +275,21 @@ public abstract class Player : MonoBehaviour {
         //stop ranger velocity if there is no input and ranger is grounded
         if (input.fwdInput == 0 && grounded) //if there is no input and the character is on the ground
         {
-			if(rBody.velocity!=Vector2.zero){
+            if (GameObject.FindGameObjectWithTag("Black Hole") != null)//black hole
+            {
+                GameObject hole = GameObject.FindGameObjectWithTag("Black Hole");
+                //player is within range of black hole and not caster of black hole
+                if (Mathf.Abs((transform.position - hole.transform.position).magnitude) <= hole.GetComponent<BlackHoleScript>().PullRange || playerNum != hole.GetComponent<BlackHoleScript>().PlayerNum) {
+                    //nothing happens
+                    //do not change this, is blank piece is on purpose
+                }
+                else if (rBody.velocity != Vector2.zero)
+                {
+                    if (playerNum == 1) { Debug.Log("stop slide(grounded)"); }
+                    rBody.velocity = rBody.velocity.x * Vector2.zero; // stops character 
+                }
+            }
+			else if(rBody.velocity!=Vector2.zero){
 				if(playerNum ==1){Debug.Log("stop slide(grounded)");}
             	rBody.velocity = rBody.velocity.x * Vector2.zero; // stops character 
 			}
@@ -299,6 +327,7 @@ public abstract class Player : MonoBehaviour {
     {
         //gets all value based input checks
         input.fwdInput = Input.GetAxis(input.HORIZONTAL_AXIS);
+        input.dodgeInput = Input.GetAxis(input.DODGE_AXIS);
 
         //button input checks
         if (!input.jump)
@@ -355,10 +384,11 @@ public abstract class Player : MonoBehaviour {
     }
 
     #region GameMechanic/Movement Methods
-    protected void Move() //this method controls how the ranger moves
+    protected virtual void Move() //this method controls how the ranger moves
     {
         if(Mathf.Abs(input.fwdInput)> input.delay) //make sure the input is greater than the input.delay
         {
+            rangerAnimator.Play("Run");
             if(airControl || grounded) //if aircontrol or grounded is true
             {
                 rBody.velocity = new Vector2(input.fwdInput * speed, rBody.velocity.y); // moves player based on input
@@ -378,13 +408,17 @@ public abstract class Player : MonoBehaviour {
                 }
             }
         }
+        else
+        {
+            //rangerAnimator.Play("Idle");
+        }
     }
 
     protected void Jump() //used to make the player jump
     {
 		if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
-			if(playerNum ==1){Debug.Log("jump");}
+            rangerAnimator.Play("Jump");
             rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
         }
     }
@@ -393,6 +427,7 @@ public abstract class Player : MonoBehaviour {
     {
         if (input.dodge && grounded) //a dodge button has been pressed
         {
+            rangerAnimator.Play("Dodge");
             if(input.dodgeInput > 0)
             {
 		        Debug.Log("dodgeA");
@@ -413,7 +448,8 @@ public abstract class Player : MonoBehaviour {
     {
         if (input.attack1 && attack1Available)
         {
-			//Debug.Log("att1");
+            //Debug.Log("att1");
+            rangerAnimator.Play("Melee");
 
             int attack1Range = 3; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
@@ -445,6 +481,7 @@ public abstract class Player : MonoBehaviour {
             }
 
             StartCoroutine(Attack1Cooldown()); //starts the attack 1 cooldown coroutine
+           // rangerAnimator.SetInteger("State", 0);
         }
     }
 
@@ -481,6 +518,7 @@ public abstract class Player : MonoBehaviour {
         {
             key.GetComponent<Key>().drop();
         }
+        rangerAnimator.Play("Dead");
         Destroy(gameObject);
         Debug.Log("Ranger has been destroyed");
 

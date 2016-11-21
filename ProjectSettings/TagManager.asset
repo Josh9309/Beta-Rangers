@@ -12,6 +12,7 @@ TagManager:
   - Key Spawn Point
   - Environment
   - Attack
+  - Black Hole
   layers:
   - Default
   - TransparentFX

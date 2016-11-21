@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &127656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 480476}
+  - 212: {fileID: 21294034}
+  - 50: {fileID: 5051088}
+  m_Layer: 0
+  m_Name: Warp Ball
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &148898
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +47,7 @@ GameObject:
   - 61: {fileID: 6150898}
   - 50: {fileID: 5048638}
   - 114: {fileID: 11484194}
+  - 95: {fileID: 9537942}
   m_Layer: 0
   m_Name: Black_BetaRanger
   m_TagString: Player
@@ -56,12 +74,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.82999992, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 32.2000008, y: -4, z: 0}
+  m_LocalScale: {x: 1.95556331, y: 1.95556331, z: 1.95556331}
   m_Children:
   - {fileID: 401038}
+  - {fileID: 480476}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &480476
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 450998}
+  m_RootOrder: 1
 --- !u!50 &5048638
 Rigidbody2D:
   serializedVersion: 2
@@ -78,6 +109,22 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!50 &5051088
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127656}
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &6102320
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -104,6 +151,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.99000001, y: 3.78999996}
+--- !u!95 &9537942
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185092}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe0675f51b2903c439f2c888c2f8e07b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11406732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,25 +192,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 180
   attack1Power: 10
-  attack2Power: 50
-  attack3Power: 90
-  speed: 15
+  attack2Power: 0
+  attack3Power: 0
+  speed: 11
   jumpPower: 1200
-  superCost: 15
-  superMax: 600
-  attack1SuperValue: 5
+  superCost: 50
+  superMax: 100
+  attack1SuperValue: 10
+  attack1CooldownTime: 1
+  attack2CooldownTime: 2
   ranger: 4
-  playerNum: 1
+  playerNum: 3
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   keyDamageMax: 50
   keyPickup: 1
-  keyPickupTimeMax: 5
+  keyPickupTimeMax: 3.5
   facingLeft: 1
   grounded: 0
   ground:
     serializedVersion: 2
     m_Bits: 4294967295
+  canMove: 1
+  canBeHit: 1
   frozen: 0
+  rangerAnimator: {fileID: 9537942}
+  WarpBall: {fileID: 127656}
+  BlackHolePrefab: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
+  BlackHoleStrength: 25
+  BlackHolePullRange: 10
+  BlackHoleSpeed: 2
+  BlackHoleMoveTime: 5
+  BlackHoleStillTime: 5
+  warpTimeMax: 2
+  verInput: 0
+  VERTICAL_AXIS: Warp_Vertical
 --- !u!212 &21262646
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -203,6 +282,34 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!212 &21294034
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127656}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: f99829e8f8dae024d8b79a165dcb403d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -216,7 +323,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Name
-      value: Attack_1_HitRange
+      value: Warp Ball
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
@@ -232,7 +339,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack1SuperValue
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
@@ -240,6 +347,94 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: keyPickupTimeMax
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BlackHolePrefab
+      value: 
+      objectReference: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
+    - target: {fileID: 0}
+      propertyPath: BlackHoleStrength
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BlackHoleRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BlackHolePullRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BlackHoleSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack2Power
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack3Power
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BlackHoleMoveTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BlackHoleStillTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: warpTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: WarpBall
+      value: 
+      objectReference: {fileID: 127656}
+    - target: {fileID: 0}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: warpTimeMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []

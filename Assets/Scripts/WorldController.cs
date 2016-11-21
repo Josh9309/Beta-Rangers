@@ -4,8 +4,8 @@ using System.Collections;
 public class WorldController : MonoBehaviour {
     
     ///attributes
-    public enum cMenu { MAINMENU, OPTIONS, PAUSE, BATTLE};
-    public enum cLevel { NULL };
+    public enum cMenu { MAINMENU, OPTIONS, PAUSE, BATTLE, LOADING};
+    public enum cLevel { STAGE1 };
 
     [SerializeField] private cMenu currentMenu;
     [SerializeField] private cLevel currentLevel;
@@ -25,6 +25,7 @@ public class WorldController : MonoBehaviour {
     private GameObject goalP3;
     private GameObject goalP4;
     [SerializeField] private float keyMaxTime;
+    private bool battleSetup = false;
 
     ///properties
     public cMenu CurrentMenu{
@@ -72,13 +73,50 @@ public class WorldController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if(currentMenu == cMenu.BATTLE)
+        {
+            if(battleSetup = false)
+            {
+                AssignPlayers();
+                battleSetup = true;
+            }
+            
+        }
 	}
+
+    public void AssignPlayers()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        for(int i =0; i < players.Length; i++)
+        {
+            Player ranger = players[i].GetComponent<Player>();
+
+            switch (ranger.PlayerNum)
+            {
+                case 1:
+                    player1 = ranger;
+                    break;
+
+                case 2:
+                    Player2 = ranger;
+                    break;
+
+                case 3:
+                    player3 = ranger;
+                    break;
+
+                case 4:
+                    player4 = ranger;
+                    break;
+            }
+        }
+    }
 
     public void win(Player playerWhoWon)
     {
