@@ -205,6 +205,11 @@ public abstract class Player : MonoBehaviour {
         get { return superCost; }
     }
 
+    public int SuperMax
+    {
+        get { return superMax; }
+    }
+
     public bool FacingLeft
     {
         get { return facingLeft; }
