@@ -924,6 +924,10 @@ Prefab:
       propertyPath: m_Name
       value: World_Controller_Temp
       objectReference: {fileID: 0}
+    - target: {fileID: 181060, guid: fbd369e9eadf90441981d46eece66bc5, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fbd369e9eadf90441981d46eece66bc5, type: 2}
   m_IsPrefabParent: 0

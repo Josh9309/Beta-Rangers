@@ -160,7 +160,7 @@ Animator:
   m_GameObject: {fileID: 185092}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe0675f51b2903c439f2c888c2f8e07b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   attack1CooldownTime: 1
   attack2CooldownTime: 2
   ranger: 4
-  playerNum: 1
+  playerNum: 3
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   keyDamageMax: 50
   keyPickup: 1
@@ -215,6 +215,7 @@ MonoBehaviour:
   canMove: 1
   canBeHit: 1
   frozen: 0
+  rangerAnimator: {fileID: 9537942}
   WarpBall: {fileID: 127656}
   BlackHolePrefab: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
   BlackHoleStrength: 25

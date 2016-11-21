@@ -86,6 +86,8 @@ public class GameUI : MonoBehaviour {
 
     private void SetupUI()
     {
+        worldControl.AssignPlayers();
+
         //setup the correct ranger profile for player 1
         switch (worldControl.Player1.Ranger)
         {

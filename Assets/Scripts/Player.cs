@@ -126,6 +126,10 @@ public abstract class Player : MonoBehaviour {
 
     //Status effects attributes
     public bool frozen = false;
+
+    //animation Attributes
+    [SerializeField]
+    private Animator rangerAnimator;
     #endregion
 
     #region Properties
@@ -384,6 +388,7 @@ public abstract class Player : MonoBehaviour {
     {
         if(Mathf.Abs(input.fwdInput)> input.delay) //make sure the input is greater than the input.delay
         {
+            rangerAnimator.Play("Run");
             if(airControl || grounded) //if aircontrol or grounded is true
             {
                 rBody.velocity = new Vector2(input.fwdInput * speed, rBody.velocity.y); // moves player based on input
@@ -403,13 +408,17 @@ public abstract class Player : MonoBehaviour {
                 }
             }
         }
+        else
+        {
+            //rangerAnimator.Play("Idle");
+        }
     }
 
     protected void Jump() //used to make the player jump
     {
 		if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
-			if(playerNum ==1){Debug.Log("jump");}
+            rangerAnimator.Play("Jump");
             rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
         }
     }
@@ -418,6 +427,7 @@ public abstract class Player : MonoBehaviour {
     {
         if (input.dodge && grounded) //a dodge button has been pressed
         {
+            rangerAnimator.Play("Dodge");
             if(input.dodgeInput > 0)
             {
 		        Debug.Log("dodgeA");
@@ -438,7 +448,8 @@ public abstract class Player : MonoBehaviour {
     {
         if (input.attack1 && attack1Available)
         {
-			//Debug.Log("att1");
+            //Debug.Log("att1");
+            rangerAnimator.Play("Melee");
 
             int attack1Range = 3; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
@@ -470,6 +481,7 @@ public abstract class Player : MonoBehaviour {
             }
 
             StartCoroutine(Attack1Cooldown()); //starts the attack 1 cooldown coroutine
+           // rangerAnimator.SetInteger("State", 0);
         }
     }
 
@@ -506,6 +518,7 @@ public abstract class Player : MonoBehaviour {
         {
             key.GetComponent<Key>().drop();
         }
+        rangerAnimator.Play("Dead");
         Destroy(gameObject);
         Debug.Log("Ranger has been destroyed");
 

@@ -684,8 +684,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.96000004, y: -4.76999998, z: 0}
+  m_LocalScale: {x: 1.95556295, y: 1.95556295, z: 1.95556295}
   m_Children:
   - {fileID: 426398}
   - {fileID: 479260}
@@ -1169,7 +1169,7 @@ Animator:
   m_GameObject: {fileID: 106702}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3c535180e6cde074babb7aa1b4169536, type: 2}
+  m_Controller: {fileID: 9100000, guid: fe0675f51b2903c439f2c888c2f8e07b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1225,7 +1225,7 @@ MonoBehaviour:
   attack1CooldownTime: 1
   attack2CooldownTime: 2
   ranger: 1
-  playerNum: 1
+  playerNum: 2
   playerColor: {r: 1, g: 0, b: 0, a: 0}
   keyDamageMax: 55
   keyPickup: 1
@@ -1238,6 +1238,7 @@ MonoBehaviour:
   canMove: 1
   canBeHit: 1
   frozen: 0
+  rangerAnimator: {fileID: 9599342}
 --- !u!114 &11491932
 MonoBehaviour:
   m_ObjectHideFlags: 1
