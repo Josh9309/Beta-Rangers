@@ -126,6 +126,9 @@ public abstract class Player : MonoBehaviour {
 
     //Status effects attributes
     public bool frozen = false;
+    private int dartEffect = 0;
+    private float dartCurrentTime;
+    private float dartMaxTime;
 
     //animation Attributes
     [SerializeField]

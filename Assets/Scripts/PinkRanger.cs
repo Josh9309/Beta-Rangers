@@ -4,6 +4,10 @@ using System;
 
 public class PinkRanger : Player {
 
+    [SerializeField] private GameObject StatDartPrefab;
+    [SerializeField] private GameObject PoisonPrefab;
+    [SerializeField] private float StatDartVelocity;
+
     // Use this for initialization
     protected override void Start()
     {
@@ -16,6 +20,8 @@ public class PinkRanger : Player {
     {
         base.FixedUpdate();
 
+        Attack2();
+        SuperAttack();
 
         //reset btn inputs
         input.ResetBtns();
@@ -23,11 +29,23 @@ public class PinkRanger : Player {
 
     protected override void Attack2()
     {
-        throw new NotImplementedException();
+        if (input.attack2 && attack2Available)
+        {
+            GameObject b = GameObject.Instantiate(StatDartPrefab) as GameObject;
+            if (facingLeft)
+            {
+                b.transform.position = new Vector3(transform.position.x - 3f, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                b.transform.position = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
+            }
+            b.GetComponent<statDartScript>().startUp(playerNum, facingLeft, StatDartVelocity);
+        }
     }
 
     protected override void SuperAttack()
     {
-        throw new NotImplementedException();
+        
     }
 }

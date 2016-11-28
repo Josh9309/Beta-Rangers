@@ -13,6 +13,7 @@ TagManager:
   - Environment
   - Attack
   - Black Hole
+  - Stat Dart
   layers:
   - Default
   - TransparentFX

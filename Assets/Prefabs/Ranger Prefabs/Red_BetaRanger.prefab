@@ -1924,6 +1924,11 @@ Prefab:
       propertyPath: attack2CooldownTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 54b4d6e6788740a4598ab34d16de121c,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 118354}

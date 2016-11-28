@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 1f60308051bad4245a7180adac15a1c4
-timeCreated: 1480302745
+guid: e23fa2f9d6e3eff4984b2e407af49a10
+timeCreated: 1480306670
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0
-  icon: {fileID: -7310811918437815874, guid: 0000000000000000d000000000000000, type: 0}
+  icon: {fileID: 4142126959532110318, guid: 0000000000000000d000000000000000, type: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

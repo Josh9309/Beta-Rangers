@@ -691,8 +691,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0700000003, z: 0}
-  m_LocalScale: {x: 1.93315029, y: 1.9331485, z: 1.9331485}
+  m_LocalPosition: {x: 33.7586288, y: 10.2396078, z: 0}
+  m_LocalScale: {x: 1.95556331, y: 1.95556331, z: 1.95556331}
   m_Children:
   - {fileID: 440478}
   - {fileID: 451186}
@@ -1014,6 +1014,9 @@ MonoBehaviour:
   canBeHit: 1
   frozen: 0
   rangerAnimator: {fileID: 9559898}
+  StatDartPrefab: {fileID: 134080, guid: 5c769c7b4e82d3749afb00186e742214, type: 2}
+  PoisonPrefab: {fileID: 0}
+  StatDartVelocity: 20
 --- !u!212 &21200016
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1544,6 +1547,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: superMax
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: StatDartVelocity
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
