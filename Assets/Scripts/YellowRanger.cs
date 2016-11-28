@@ -93,6 +93,7 @@ public class YellowRanger : Player {
             {
                 electricBolt = Instantiate(chainLightingPrefab, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.identity) as GameObject;
             }
+            SuperCurrent -= SuperCost;
         }
     }
 }

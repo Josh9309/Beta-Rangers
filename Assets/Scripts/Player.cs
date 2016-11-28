@@ -6,6 +6,7 @@ using System.Collections;
 public abstract class Player : MonoBehaviour {
     //sets up a finite state to identify what type of ranger the player is.
     public enum RangerType {BlueRanger, RedRanger, GreenRanger, YellowRanger, BlackRanger, PinkRanger};
+    private enum StatusEffect { None, AttackPower, Speed, Jump};
 
     #region InputSettings
     //this will setup the public inputSetting class
@@ -126,7 +127,7 @@ public abstract class Player : MonoBehaviour {
 
     //Status effects attributes
     public bool frozen = false;
-    private int dartEffect = 0;
+    private StatusEffect dartEffect = StatusEffect.None;
     private float dartCurrentTime;
     private float dartMaxTime;
 
@@ -298,6 +299,17 @@ public abstract class Player : MonoBehaviour {
 			}
         }
 
+        //status effect
+        if(dartEffect != StatusEffect.None)
+        {
+            dartCurrentTime += Time.deltaTime;
+            if(dartCurrentTime >= dartMaxTime)
+            {
+                dartCurrentTime = 0;
+                dartEffect = StatusEffect.None;
+            }
+        }
+
         if (grounded) //if ranger is grounded it turns air control back on
         {
             airControl = true;
@@ -394,7 +406,14 @@ public abstract class Player : MonoBehaviour {
             rangerAnimator.Play("Run");
             if(airControl || grounded) //if aircontrol or grounded is true
             {
-                rBody.velocity = new Vector2(input.fwdInput * speed, rBody.velocity.y); // moves player based on input
+                if (dartEffect == StatusEffect.Speed)
+                {
+                    rBody.velocity = new Vector2(input.fwdInput * (speed/2), rBody.velocity.y); // moves player based on input
+                }
+                else
+                {
+                    rBody.velocity = new Vector2(input.fwdInput * speed, rBody.velocity.y); // moves player based on input
+                }
             }
             if(input.fwdInput < 0) //ranger moving left
             {
@@ -422,7 +441,14 @@ public abstract class Player : MonoBehaviour {
 		if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
             rangerAnimator.Play("Jump");
-            rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
+            if (dartEffect == StatusEffect.Jump)
+            {
+                rBody.AddForce(new Vector2(0f, jumpPower/2));//add a force to cause the player to jump
+            }
+            else
+            {
+                rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
+            }
         }
     }
 
@@ -475,7 +501,14 @@ public abstract class Player : MonoBehaviour {
                     Player ranger = cols[i].GetComponent<Player>();
 
 					if(canBeHit){
-                    ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+                        if (dartEffect == StatusEffect.AttackPower)
+                        {
+                            ranger.ModHealth(-(attack1Power / 2));
+                        }
+                        else
+                        {
+                            ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+                        }
                     SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
                     
 					//Debug.Log(gameObject.name + " has hit " + cols[i].name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
@@ -560,6 +593,28 @@ public abstract class Player : MonoBehaviour {
 				
 			}
 		}
+        else if(other.gameObject.tag == "Stat Dart")
+        {
+            if (other.gameObject.GetComponent<statDartScript>().PlayerNum != playerNum) {
+                switch (other.gameObject.GetComponent<statDartScript>().Effect) {
+                    case 1:
+                        dartEffect = StatusEffect.AttackPower;
+                        break;
+                    case 2:
+                        dartEffect = StatusEffect.Speed;
+                        break;
+                    case 3:
+                        dartEffect = StatusEffect.Jump;
+                        break;
+                    default:
+                        dartEffect = StatusEffect.None;
+                        break;
+                }
+                dartCurrentTime = 0;
+                dartMaxTime = other.gameObject.GetComponent<statDartScript>().StatusTimeMax;
+                Destroy(other.gameObject);
+            }
+        }
 	}
 
     protected virtual void OnTriggerEnter2D(Collider2D other)

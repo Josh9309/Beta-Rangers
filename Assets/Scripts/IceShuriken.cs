@@ -61,7 +61,6 @@ public class IceShuriken : MonoBehaviour {
         {
             Start();
             thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
-            blueRanger.SuperCurrent += superValue; //adds super value to current super meter value.
             Debug.Log(thing.name + "hit with ice shuriken for " + damage);
             Destroy(gameObject); //destroys the shuriken
             blueRanger.ShurikenCount--;

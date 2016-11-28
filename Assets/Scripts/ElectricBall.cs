@@ -56,7 +56,6 @@ public class ElectricBall : MonoBehaviour {
         {
             Start();
             thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
-            yellowRanger.SuperCurrent += superValue; //adds super value to current super meter value.
             Debug.Log(thing.name + "hit with Electric Ball for " + damage);
             Destroy(gameObject); //destroys the Electric Ball
             yellowRanger.ElectricBallCount--;

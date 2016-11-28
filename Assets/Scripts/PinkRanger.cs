@@ -7,6 +7,7 @@ public class PinkRanger : Player {
     [SerializeField] private GameObject StatDartPrefab;
     [SerializeField] private GameObject PoisonPrefab;
     [SerializeField] private float StatDartVelocity;
+    [SerializeField] private float statTimeMax;
 
     // Use this for initialization
     protected override void Start()
@@ -40,7 +41,7 @@ public class PinkRanger : Player {
             {
                 b.transform.position = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
             }
-            b.GetComponent<statDartScript>().startUp(playerNum, facingLeft, StatDartVelocity);
+            b.GetComponent<statDartScript>().startUp(playerNum, facingLeft, StatDartVelocity, statTimeMax);
         }
     }
 
