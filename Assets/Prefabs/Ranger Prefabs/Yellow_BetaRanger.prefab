@@ -988,23 +988,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8831e8831e13e54cb56132fe3572572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 110
+  health: 150
   attack1Power: 15
-  attack2Power: 40
-  attack3Power: 60
-  speed: 15
+  attack2Power: 20
+  attack3Power: 30
+  speed: 17
   jumpPower: 1200
-  superCost: 15
-  superMax: 155
-  attack1SuperValue: 5
+  superCost: 80
+  superMax: 100
+  attack1SuperValue: 10
   attack1CooldownTime: 1
-  attack2CooldownTime: 1
+  attack2CooldownTime: 2
   ranger: 3
   playerNum: 4
   playerColor: {r: 1, g: 1, b: 0, a: 0}
-  keyDamageMax: 50
+  keyDamageMax: 45
   keyPickup: 1
-  keyPickupTimeMax: 5
+  keyPickupTimeMax: 4.5
   facingLeft: 1
   grounded: 0
   ground:
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   rangerAnimator: {fileID: 9571986}
   electricBallPrefab: {fileID: 177642, guid: 617bb418bb9cc054497759c5e47c1cfa, type: 2}
   chainLightingPrefab: {fileID: 147046, guid: 2f997e11ca1dab84099e841fcc7ce4cf, type: 2}
-  chainedLightningDamage: 0
+  chainedLightningDamage: 15
 --- !u!212 &21208186
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1502,7 +1502,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack1SuperValue
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: jumpPower
@@ -1514,7 +1514,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: keyPickupTimeMax
-      value: 5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: electricBallPrefab
@@ -1522,11 +1522,39 @@ Prefab:
       objectReference: {fileID: 177642, guid: 617bb418bb9cc054497759c5e47c1cfa, type: 2}
     - target: {fileID: 0}
       propertyPath: attack2CooldownTime
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack2Power
-      value: 40
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: health
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack3Power
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superCost
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: superMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: keyDamageMax
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: chainedLightningDamage
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

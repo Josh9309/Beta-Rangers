@@ -998,7 +998,7 @@ MonoBehaviour:
   superMax: 100
   attack1SuperValue: 10
   attack1CooldownTime: 1
-  attack2CooldownTime: .5
+  attack2CooldownTime: 1.5
   ranger: 0
   playerNum: 1
   playerColor: {r: 0, g: 0, b: 1, a: 0}
@@ -1509,7 +1509,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack2CooldownTime
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack2Power
