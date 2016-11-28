@@ -49,7 +49,7 @@ public class BlackHoleScript : MonoBehaviour {
                         displacement.Normalize();
                         displacement *= percentDis * pullStrength;
                         player.GetComponent<Player>().RBody.velocity += new Vector2(displacement.x, displacement.y);
-                        Debug.Log("Pulling " + player.name + ", (" + displacement.x + ", " + displacement.y + ")");
+                        //Debug.Log("Pulling " + player.name + ", (" + displacement.x + ", " + displacement.y + ")");
                     }
                 }
             }
