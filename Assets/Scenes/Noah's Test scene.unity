@@ -128,6 +128,10 @@ Prefab:
       propertyPath: m_Name
       value: Warp Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 11484194, guid: 8820164d0bd359241861a1d315af5418, type: 2}
+      propertyPath: playerNum
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8820164d0bd359241861a1d315af5418, type: 2}
   m_IsPrefabParent: 0
@@ -181,6 +185,10 @@ Prefab:
     - target: {fileID: 442022, guid: e7b35b318a8de764f8d268010789e713, type: 2}
       propertyPath: m_LocalScale.z
       value: 1.95556331
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462932, guid: e7b35b318a8de764f8d268010789e713, type: 2}
+      propertyPath: playerNum
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7b35b318a8de764f8d268010789e713, type: 2}

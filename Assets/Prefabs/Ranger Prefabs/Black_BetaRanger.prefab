@@ -1061,7 +1061,7 @@ MonoBehaviour:
   frozen: 0
   rangerAnimator: {fileID: 9525106}
   WarpBall: {fileID: 127656}
-  BlackHolePrefab: {fileID: 140820, guid: 0f2164217c2af394896ba0d4a7d1ed34, type: 2}
+  BlackHolePrefab: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
   BlackHoleStrength: 25
   BlackHolePullRange: 10
   BlackHoleSpeed: 2
@@ -1588,7 +1588,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: BlackHolePrefab
       value: 
-      objectReference: {fileID: 140820, guid: 0f2164217c2af394896ba0d4a7d1ed34, type: 2}
+      objectReference: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
     - target: {fileID: 0}
       propertyPath: BlackHoleStrength
       value: 25

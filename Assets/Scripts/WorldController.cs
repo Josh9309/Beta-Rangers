@@ -131,7 +131,7 @@ public class WorldController : MonoBehaviour {
     public IEnumerator Frozen(int playNum, float freezeTime, int frozenDamage, GameObject iceBlastShard)
     {
         Player enemyRanger;
-        SpriteRenderer rangerRender;
+        SpriteRenderer[] rangerRenders;
 
         //determines which player is being frozen
         switch (playNum)
@@ -139,47 +139,59 @@ public class WorldController : MonoBehaviour {
             case 1:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player1;
-                rangerRender = enemyRanger.gameObject.GetComponent<SpriteRenderer>();
+                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
 
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
-                rangerRender.color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
+                for (int i = 0; i < rangerRenders.Length; i++)
+                {
+                    rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
+                }
                 break;
 
             case 2:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player2;
-                rangerRender = enemyRanger.gameObject.GetComponent<SpriteRenderer>();
+                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
 
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
-                rangerRender.color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
+                for (int i = 0; i < rangerRenders.Length; i++)
+                {
+                    rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
+                }
                 break;
 
             case 3:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player3; 
-                rangerRender = enemyRanger.gameObject.GetComponent<SpriteRenderer>(); 
+                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>(); 
 
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
-                rangerRender.color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
+                for (int i = 0; i < rangerRenders.Length; i++)
+                {
+                    rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
+                }
                 break;
 
             case 4:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player4;
-                rangerRender = enemyRanger.gameObject.GetComponent<SpriteRenderer>();
+                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
 
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
-                rangerRender.color = Color.cyan;//adds a cyan tint to ranger to show that the ranger is frozen
+                for (int i = 0; i < rangerRenders.Length; i++)
+                {
+                    rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
+                }
                 break;
 
             default:
                 Debug.LogError("Player number passed into frozen corroutine was invalid");
                 enemyRanger = null; //this should not trigger unless there is an error
-                rangerRender = null; 
+                rangerRenders = null; 
                 break;
         }
 
@@ -210,7 +222,10 @@ public class WorldController : MonoBehaviour {
             Debug.Log(enemyRanger.name + " is Unfrozen!");
             //Unfreezes the ranger and removes tint, it also destroys ice blast shard gameobject
             enemyRanger.frozen = false;
-            rangerRender.color = Color.white;
+            for (int i = 0; i < rangerRenders.Length; i++)
+            {
+                rangerRenders[i].color = Color.white;
+            }
         }
         Destroy(iceBlastShard);
     }
