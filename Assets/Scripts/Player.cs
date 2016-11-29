@@ -130,6 +130,10 @@ public abstract class Player : MonoBehaviour {
     private StatusEffect dartEffect = StatusEffect.None;
     private float dartCurrentTime;
     private float dartMaxTime;
+    private bool poisoned = false;
+    private int cloudDamage;
+    private float poisonedCurrentTime = 0;
+    private float poisonedMaxTime;
 
     //animation Attributes
     [SerializeField]
@@ -243,6 +247,11 @@ public abstract class Player : MonoBehaviour {
         get { return grounded; }
         set { grounded = value; }
     }
+
+    public bool Poisoned
+    {
+        set { poisoned = value; }
+    }
     #endregion
 
     #region Methods
@@ -309,6 +318,21 @@ public abstract class Player : MonoBehaviour {
                 dartEffect = StatusEffect.None;
             }
         }
+
+        //poisoned
+        //if (poisoned)//true
+        //{
+        //    poisonedCurrentTime += Time.deltaTime;
+        //    if(poisonedCurrentTime >= poisonedMaxTime)
+        //    {
+        //        poisonedCurrentTime = 0;
+        //        ModHealth(-cloudDamage);
+        //    }
+        //}
+        //else if(poisonedCurrentTime > 0)
+        //{
+        //    poisonedCurrentTime -= Time.deltaTime;
+        //}
 
         if (grounded) //if ranger is grounded it turns air control back on
         {
@@ -593,7 +617,7 @@ public abstract class Player : MonoBehaviour {
 				
 			}
 		}
-        else if(other.gameObject.tag == "Stat Dart")
+        if(other.gameObject.tag == "Stat Dart")
         {
             if (other.gameObject.GetComponent<statDartScript>().PlayerNum != playerNum) {
                 switch (other.gameObject.GetComponent<statDartScript>().Effect) {
@@ -630,6 +654,11 @@ public abstract class Player : MonoBehaviour {
                 key.pickedUp();
             }
         }
+        if (other.gameObject.tag == "Poison Cloud")
+        {
+            cloudDamage = other.gameObject.GetComponent<PoisonCloud>().CloudDamage;
+            poisonedMaxTime = other.gameObject.GetComponent<PoisonCloud>().PoisonTime;
+        }
     }
 
     protected virtual void OnTriggerStay2D(Collider2D other)
@@ -639,9 +668,24 @@ public abstract class Player : MonoBehaviour {
             if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
 			{
 				keyCurrentTime += Time.deltaTime;
-			}
+            }
 		}
+        //poisoned
+        if (other.gameObject.tag == "Poison Cloud")
+        {
+            if (playerNum != other.gameObject.GetComponent<PoisonCloud>().PlayerNum) {
+                poisonedCurrentTime += Time.deltaTime;
+                Debug.Log("Poisoned " + name + " : " + poisonedCurrentTime + " : " + poisonedMaxTime);
+                if (poisonedCurrentTime >= poisonedMaxTime)
+                {
+                    Debug.Log("Poisoned damage " + name);
+                    poisonedCurrentTime = 0;
+                    ModHealth(-cloudDamage);
+                }
+            }
+        }
     }
+
 
 	//enable air control
 	protected virtual void OnCollisionExit2D(Collision2D coll)

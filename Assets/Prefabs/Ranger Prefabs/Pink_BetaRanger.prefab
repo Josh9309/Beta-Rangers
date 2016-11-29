@@ -991,7 +991,7 @@ MonoBehaviour:
   health: 160
   attack1Power: 10
   attack2Power: 5
-  attack3Power: 15
+  attack3Power: 5
   speed: 21
   jumpPower: 1200
   superCost: 40
@@ -1015,8 +1015,13 @@ MonoBehaviour:
   frozen: 0
   rangerAnimator: {fileID: 9559898}
   StatDartPrefab: {fileID: 134080, guid: 5c769c7b4e82d3749afb00186e742214, type: 2}
-  PoisonPrefab: {fileID: 0}
+  PoisonPrefab: {fileID: 139732, guid: 94d6d0c7e728f064097f494aac4c9f10, type: 2}
   StatDartVelocity: 20
+  statTimeMax: 2
+  poisonCloudSpeed: 2
+  poisonCloudMoveTime: 2
+  poisonCloudStillTime: 5
+  poisonCloudDamgeTime: .333332986
 --- !u!212 &21200016
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1526,7 +1531,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack3Power
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack1Power
@@ -1551,6 +1556,30 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: StatDartVelocity
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: statTimeMax
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: poisonCloudSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: poisonCloudMoveTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: poisonCloudStillTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PoisonPrefab
+      value: 
+      objectReference: {fileID: 139732, guid: 94d6d0c7e728f064097f494aac4c9f10, type: 2}
+    - target: {fileID: 0}
+      propertyPath: poisonCloudDamgeTime
+      value: .333332986
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

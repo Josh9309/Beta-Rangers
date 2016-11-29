@@ -11,6 +11,7 @@ public class PinkRanger : Player {
     [SerializeField] private float poisonCloudSpeed; //How fast the black hole moves to point
     [SerializeField] private float poisonCloudMoveTime; //the amount of time the black hole moves for
     [SerializeField] private float poisonCloudStillTime; //the amount of time the black hole stays still for
+    [SerializeField] private float poisonCloudDamgeTime; //the amount of time the black hole stays still for
 
     // Use this for initialization
     protected override void Start()
@@ -52,12 +53,12 @@ public class PinkRanger : Player {
     {
         if (input.attack3 && SuperCurrent >= SuperCost)
         {
-            GameObject a = GameObject.Instantiate(StatDartPrefab) as GameObject;
-            GameObject b = GameObject.Instantiate(StatDartPrefab) as GameObject;
-            a.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            b.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            a.GetComponent<PoisonCloud>().startUp(playerNum, true, poisonCloudSpeed, poisonCloudMoveTime, poisonCloudStillTime);
-            b.GetComponent<PoisonCloud>().startUp(playerNum, false, poisonCloudSpeed, poisonCloudMoveTime, poisonCloudStillTime);
+            GameObject a = GameObject.Instantiate(PoisonPrefab) as GameObject;
+            GameObject b = GameObject.Instantiate(PoisonPrefab) as GameObject;
+            a.transform.position = new Vector3(transform.position.x - 1f, transform.position.y, transform.position.z);
+            b.transform.position = new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z);
+            a.GetComponent<PoisonCloud>().startUp(playerNum, true, attack3Power, poisonCloudSpeed, poisonCloudMoveTime, poisonCloudStillTime, poisonCloudDamgeTime);
+            b.GetComponent<PoisonCloud>().startUp(playerNum, false, attack3Power, poisonCloudSpeed, poisonCloudMoveTime, poisonCloudStillTime, poisonCloudDamgeTime);
             SuperCurrent -= SuperCost;
         }
     }

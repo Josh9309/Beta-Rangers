@@ -80,7 +80,7 @@ public class WorldController : MonoBehaviour {
 	void Update () {
         if(currentMenu == cMenu.BATTLE)
         {
-            if(battleSetup = false)
+            if(battleSetup == false)
             {
                 AssignPlayers();
                 battleSetup = true;
