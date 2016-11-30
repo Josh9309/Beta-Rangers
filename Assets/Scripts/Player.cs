@@ -15,7 +15,7 @@ public abstract class Player : MonoBehaviour {
     {
         public float delay = 0.3f; //delay for movement inputs
         public float fwdInput = 0, jumpInput = 0, attack1Input = 0, attack2Input = 0, attack3Input = 0, dodgeInput =0; //sets up variables to hold inputs
-        public string JUMP_AXIS, HORIZONTAL_AXIS, ATTACK1_AXIS, ATTACK2_AXIS, ATTACK3_AXIS, DODGE_AXIS; //sets up variable to hold input_axis
+        public string JUMP_AXIS, HORIZONTAL_AXIS, ATTACK1_AXIS, ATTACK2_AXIS, ATTACK3_AXIS, DODGE_AXIS, SUBMIT_AXIS, CANCEL_AXIS; //sets up variable to hold input_axis
         public string PAUSE_AXIS = "Pause"; //sets the pause input Axis
         
         //sets up booleans for btn_input and sets them to false
@@ -38,6 +38,8 @@ public abstract class Player : MonoBehaviour {
                     ATTACK2_AXIS = "P1_Attack2";
                     ATTACK3_AXIS = "P1_Attack3";
                     DODGE_AXIS = "P1_Dodge";
+                    SUBMIT_AXIS = "P1_Submit";
+                    CANCEL_AXIS = "P1_Cancel";
                     break;
 
                 case 2:
@@ -47,6 +49,8 @@ public abstract class Player : MonoBehaviour {
                     ATTACK2_AXIS = "P2_Attack2";
                     ATTACK3_AXIS = "P2_Attack3";
                     DODGE_AXIS = "P2_Dodge";
+                    SUBMIT_AXIS = "P2_Submit";
+                    CANCEL_AXIS = "P2_Cancel";
                     break;
 
                 case 3:
@@ -56,6 +60,8 @@ public abstract class Player : MonoBehaviour {
                     ATTACK2_AXIS = "P3_Attack2";
                     ATTACK3_AXIS = "P3_Attack3";
                     DODGE_AXIS = "P3_Dodge";
+                    SUBMIT_AXIS = "P3_Submit";
+                    CANCEL_AXIS = "P3_Cancel";
                     break;
 
                 case 4:
@@ -65,6 +71,8 @@ public abstract class Player : MonoBehaviour {
                     ATTACK2_AXIS = "P4_Attack2";
                     ATTACK3_AXIS = "P4_Attack3";
                     DODGE_AXIS = "P4_Dodge";
+                    SUBMIT_AXIS = "P4_Submit";
+                    CANCEL_AXIS = "P4_Cancel";
                     break;
             }
         }
