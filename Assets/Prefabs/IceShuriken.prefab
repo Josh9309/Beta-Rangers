@@ -9,9 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 423826}
   - 212: {fileID: 21202218}
-  - 61: {fileID: 6139368}
   - 50: {fileID: 5019548}
   - 114: {fileID: 11470546}
+  - 58: {fileID: 5859880}
   m_Layer: 0
   m_Name: IceShuriken
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.2399998, y: -1.49583089, z: 0}
+  m_LocalPosition: {x: -1.66391301, y: 10.2464123, z: 0}
   m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,8 +47,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 2
---- !u!61 &6139368
-BoxCollider2D:
+--- !u!58 &5859880
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -59,7 +59,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 3.73000002, y: 3.3900001}
+  m_Radius: 1.4360857
 --- !u!114 &11470546
 MonoBehaviour:
   m_ObjectHideFlags: 1

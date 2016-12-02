@@ -370,11 +370,8 @@ public abstract class Player : MonoBehaviour {
         ///Remove Later After First Build
         if (input.pause)
         {
-<<<<<<< HEAD
             worldControl.battleSetup = false; 
-=======
             Destroy(worldControl.gameObject);
->>>>>>> origin/Test
             Application.LoadLevel(0);
         }
         if(Input.GetButtonDown("Back"))
