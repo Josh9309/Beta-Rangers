@@ -37,7 +37,7 @@ public class WorldController : MonoBehaviour {
     private Player.RangerType p3RangerType;
     private Player.RangerType p4RangerType;
     [SerializeField] private float keyMaxTime;
-    private bool battleSetup = false;
+    public bool battleSetup = false;
     private GameUI gameUI;
 
     ///properties

@@ -19,6 +19,7 @@ public class MenuScript : MonoBehaviour {
         {
             case "Main Menu":
                 GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>().CurrentMenu = WorldController.cMenu.MAINMENU;
+                GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>().battleSetup = false;
                 break;
 
             case "Stage 1":
