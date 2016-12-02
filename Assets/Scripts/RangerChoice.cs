@@ -16,6 +16,11 @@ public class RangerChoice : MonoBehaviour {
         get { return available; }
     }
 
+    public Player.RangerType RangerType
+    {
+        get { return rangerType; }
+    }
+
     #endregion
 
     // Use this for initialization

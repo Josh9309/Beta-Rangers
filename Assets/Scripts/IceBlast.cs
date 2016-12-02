@@ -18,7 +18,7 @@ public class IceBlast : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        blueRanger = GameObject.Find("Blue_BetaRanger").GetComponent<BlueRanger>();// gets blue ranger
+        blueRanger = GameObject.Find("Blue_BetaRanger(Clone)").GetComponent<BlueRanger>();// gets blue ranger
 
         //assigns the values for move left,and damage based off of the Blue ranger's data.
         moveLeft = blueRanger.FacingLeft;

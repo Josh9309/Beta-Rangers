@@ -45,12 +45,12 @@ public class CharacterSelection : MonoBehaviour {
     private SpriteRenderer p3Ranger;
     private SpriteRenderer p4Ranger;
 
-    //keeps track of # of players that have confirmed
-    private int playersConfirmed = 0;
+    //General Character Selection Attributes
+    private int playersConfirmed = 0; //keeps track of # of players that have confirmed
     [SerializeField] private Sprite inactiveRanger;
     private bool canStart = false;
-    [SerializeField]
-    private GameObject start;
+    [SerializeField] private GameObject start;
+    private WorldController worldControl;
     #endregion
 
     #region Properties
@@ -78,22 +78,26 @@ public class CharacterSelection : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        //configures for player inputs
         p1Input.ConfigureInput(1);
         p2Input.ConfigureInput(2);
         p3Input.ConfigureInput(3);
         p4Input.ConfigureInput(4);
 
+        //finds each players ranger renders
         p1Ranger = GameObject.Find("P1_Betaranger").GetComponent<SpriteRenderer>();
         p2Ranger = GameObject.Find("P2_Betaranger").GetComponent<SpriteRenderer>();
         p3Ranger = GameObject.Find("P3_Betaranger").GetComponent<SpriteRenderer>();
         p4Ranger = GameObject.Find("P4_Betaranger").GetComponent<SpriteRenderer>();
+
+        //gets world Controller
+        worldControl = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         //check to see if players are allowed to start game
         CheckCanStart();
-        StartGame(); //will start game if it is allowed and button has been pressed.
 
         if (p1Active) //if the player is active
         {
@@ -778,24 +782,33 @@ public class CharacterSelection : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// This method will check for player input to start the game and if it can start the game it will transfer the correct data to the world controller 
+    /// and move to the locading screen.
+    /// </summary>
     private void StartGame()
     {
-        //check to see if game can be started
-        if (canStart)
-        {
             if (Input.GetButtonDown("Pause"))
             {
+                TransferPlayers();
                 Application.LoadLevel("Loading Splash Screen");
             }
-        }
     }
 
+    /// <summary>
+    /// Used to check whether or not the game is allowed to be start and updates the canStart bool accordingly.
+    /// It will also display the start game banner if game can be started.
+    /// </summary>
     private void CheckCanStart()
     {
+        //starts of by having the game be able to be started
         canStart = true;
+
+
+        //Checks each active player and makes sure that they have confirmed a ranger.
         if (p1Active && !p1Confirmed)
         {
-            canStart = false;
+            canStart = false; //if they have not confirmed a ranger then game is no longer able to be started
         }
 
         if (p2Active && !p2Confirmed)
@@ -813,19 +826,29 @@ public class CharacterSelection : MonoBehaviour {
             canStart = false;
         }
 
+        //checks to make sure that more than 1 player is in the game and has confirmed
         if(playersConfirmed < 2)
         {
+            //sets the game to no longer be able to start if there is not enough confirmed players.
             canStart = false;
         }
 
-        if (canStart)
+        if (canStart) //if game is allowed to start
         {
-            start.SetActive(true);
+            start.SetActive(true); //displays the start game banner
+            StartGame(); //launches the Start game method that will start the game when input is given.
         }
-        else
+        else //game cannot be started
         {
-            start.SetActive(false);
+            start.SetActive(false); //start game banner is not displayed
         }
+    }
+
+    private void TransferPlayers()
+    {
+        worldControl.SetPlayersActive(p1Active, p2Active, p3Active, p4Active);
+
+        worldControl.SetRangerTypes(p1RangerArray[p1Current].RangerType, p2RangerArray[p2Current].RangerType, p3RangerArray[p3Current].RangerType, p4RangerArray[p4Current].RangerType);
     }
     #endregion
 }

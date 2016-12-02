@@ -260,6 +260,11 @@ public abstract class Player : MonoBehaviour {
     {
         set { poisoned = value; }
     }
+
+    public Color RangerColor
+    {
+        get { return playerColor; }
+    }
     #endregion
 
     #region Methods

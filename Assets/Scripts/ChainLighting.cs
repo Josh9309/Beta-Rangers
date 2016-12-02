@@ -22,7 +22,7 @@ public class ChainLighting : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        yellowRanger = GameObject.Find("Yellow_BetaRanger").GetComponent<YellowRanger>();  //gets the yellow ranger
+        yellowRanger = GameObject.Find("Yellow_BetaRanger(Clone)").GetComponent<YellowRanger>();  //gets the yellow ranger
 
         //assigns the values for move left,and damages based off of the yellow rangers data.
         moveLeft = yellowRanger.FacingLeft;
@@ -56,7 +56,7 @@ public class ChainLighting : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D thing)
     {
-        if (thing.tag == "Player" && thing.name != "Yellow_BetaRanger") //if collision is with another ranger
+        if (thing.tag == "Player" && thing.name != "Yellow_BetaRanger(Clone)") //if collision is with another ranger
         {
             Start(); //makes sure the start has been run before this method
 
@@ -74,7 +74,7 @@ public class ChainLighting : MonoBehaviour {
             //check to see if a player was hit
             for(int i = 0; i < objectColliders.Length; i++)
             {
-                if (objectColliders[i].tag == "Player" && objectColliders[i].name != "Yellow_BetaRanger") //if a player that is not yellow ranger is in chain radius
+                if (objectColliders[i].tag == "Player" && objectColliders[i].name != "Yellow_BetaRanger(Clone)") //if a player that is not yellow ranger is in chain radius
                 {
                     lightningActive++;// increaments the # of chain lightning active
 
@@ -101,7 +101,7 @@ public class ChainLighting : MonoBehaviour {
 
             
         }
-        else if (thing.name == "Yellow_BetaRanger" || thing.tag == "Hitbox" || thing.tag == "Goal")
+        else if (thing.name == "Yellow_BetaRanger(Clone)" || thing.tag == "Hitbox" || thing.tag == "Goal")
         {
             //do nothing
         }

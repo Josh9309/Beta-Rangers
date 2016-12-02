@@ -20,12 +20,25 @@ public class WorldController : MonoBehaviour {
     [SerializeField] private GameObject prefabRangerBlack;
     [SerializeField] private GameObject prefabRangerPink;
     [SerializeField] private GameObject prefabGoal;
+    [SerializeField] private Vector3 p1Location;
+    [SerializeField] private Vector3 p2Location;
+    [SerializeField] private Vector3 p3Location;
+    [SerializeField] private Vector3 p4Location;
     private GameObject goalP1;
     private GameObject goalP2;
     private GameObject goalP3;
     private GameObject goalP4;
+    private bool p1Active = false;
+    private bool p2Active = false;
+    private bool p3Active = false;
+    private bool p4Active = false;
+    private Player.RangerType p1RangerType;
+    private Player.RangerType p2RangerType;
+    private Player.RangerType p3RangerType;
+    private Player.RangerType p4RangerType;
     [SerializeField] private float keyMaxTime;
     private bool battleSetup = false;
+    private GameUI gameUI;
 
     ///properties
     public cMenu CurrentMenu{
@@ -63,6 +76,26 @@ public class WorldController : MonoBehaviour {
         get { return keyMaxTime; }
     }
 
+    public bool P1Active
+    {
+        get { return p1Active; }
+    }
+
+    public bool P2Active
+    {
+        get { return p2Active; }
+    }
+
+    public bool P3Active
+    {
+        get { return p3Active; }
+    }
+
+    public bool P4Active
+    {
+        get { return p4Active; }
+    }
+
     ///Methods
 
     //called when the script instance is being loaded.
@@ -78,16 +111,269 @@ public class WorldController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(currentMenu == cMenu.BATTLE)
+        if(Application.loadedLevelName == "Stage 1")
         {
             if(battleSetup == false)
             {
+
+                SetupPlayers();
                 AssignPlayers();
+                SetupGoals();
+                gameUI = GameObject.Find("Game UI").GetComponent<GameUI>();
+                gameUI.SetupUI();
                 battleSetup = true;
             }
             
         }
 	}
+    
+    public void SetPlayersActive(bool p1, bool p2, bool p3, bool p4)
+    {
+        p1Active = p1;
+        p2Active = p2;
+        p3Active = p3;
+        p4Active = p4;
+    }
+
+    public void SetRangerTypes(Player.RangerType p1, Player.RangerType p2, Player.RangerType p3, Player.RangerType p4)
+    {
+        p1RangerType = p1;
+        p2RangerType = p2;
+        p3RangerType = p3;
+        p4RangerType = p4;
+    }
+
+    public void SetupPlayers()
+    {
+        if (p1Active)
+        {
+            GameObject player;
+
+            switch (p1RangerType)
+            {
+                case Player.RangerType.BlackRanger:
+                    player = Instantiate(prefabRangerBlack, p1Location, Quaternion.identity) as GameObject;
+                    player1 = player.GetComponent<Player>();
+                    player1.PlayerNum = 1;
+                    break;
+
+                case Player.RangerType.BlueRanger:
+                    player = Instantiate(prefabRangerBlue, p1Location, Quaternion.identity) as GameObject;
+                    player1 = player.GetComponent<Player>();
+                    player1.PlayerNum = 1;
+                    break;
+
+                case Player.RangerType.GreenRanger:
+                    player = Instantiate(prefabRangerGreen, p1Location, Quaternion.identity) as GameObject;
+                    player1 = player.GetComponent<Player>();
+                    player1.PlayerNum = 1;
+                    break;
+
+                case Player.RangerType.PinkRanger:
+                    player = Instantiate(prefabRangerPink, p1Location, Quaternion.identity) as GameObject;
+                    player1 = player.GetComponent<Player>();
+                    player1.PlayerNum = 1;
+                    break;
+
+                case Player.RangerType.RedRanger:
+                    player = Instantiate(prefabRangerRed, p1Location, Quaternion.identity) as GameObject;
+                    player1 = player.GetComponent<Player>();
+                    player1.PlayerNum = 1;
+                    break;
+
+                case Player.RangerType.YellowRanger:
+                    player = Instantiate(prefabRangerYellow, p1Location, Quaternion.identity) as GameObject;
+                    player1 = player.GetComponent<Player>();
+                    player1.PlayerNum = 1;
+                    break;
+            }
+            Player1.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+
+        if (p2Active)
+        {
+            GameObject player;
+
+            switch (p2RangerType)
+            {
+                case Player.RangerType.BlackRanger:
+                    player = Instantiate(prefabRangerBlack, p2Location, Quaternion.identity) as GameObject;
+                    player2 = player.GetComponent<Player>();
+                    player2.PlayerNum = 2;
+                    break;
+
+                case Player.RangerType.BlueRanger:
+                    player = Instantiate(prefabRangerBlue, p2Location, Quaternion.identity) as GameObject;
+                    player2 = player.GetComponent<Player>();
+                    player2.PlayerNum = 2;
+                    break;
+
+                case Player.RangerType.GreenRanger:
+                    player = Instantiate(prefabRangerGreen, p2Location, Quaternion.identity) as GameObject;
+                    player2 = player.GetComponent<Player>();
+                    player2.PlayerNum = 2;
+                    break;
+
+                case Player.RangerType.PinkRanger:
+                    player = Instantiate(prefabRangerPink, p2Location, Quaternion.identity) as GameObject;
+                    player2 = player.GetComponent<Player>();
+                    player2.PlayerNum = 2;
+                    break;
+
+                case Player.RangerType.RedRanger:
+                    player = Instantiate(prefabRangerRed, p2Location, Quaternion.identity) as GameObject;
+                    player2 = player.GetComponent<Player>();
+                    player2.PlayerNum = 2;
+                    break;
+
+                case Player.RangerType.YellowRanger:
+                    player = Instantiate(prefabRangerYellow, p2Location, Quaternion.identity) as GameObject;
+                    player2 = player.GetComponent<Player>();
+                    player2.PlayerNum = 2;
+                    break;
+            }
+            Player2.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+
+        if (p3Active)
+        {
+            GameObject player;
+
+            switch (p3RangerType)
+            {
+                case Player.RangerType.BlackRanger:
+                    player = Instantiate(prefabRangerBlack, p3Location, Quaternion.identity) as GameObject;
+                    player3 = player.GetComponent<Player>();
+                    player3.PlayerNum = 3;
+                    break;
+
+                case Player.RangerType.BlueRanger:
+                    player = Instantiate(prefabRangerBlue, p3Location, Quaternion.identity) as GameObject;
+                    player3 = player.GetComponent<Player>();
+                    player3.PlayerNum = 3;
+                    break;
+
+                case Player.RangerType.GreenRanger:
+                    player = Instantiate(prefabRangerGreen, p3Location, Quaternion.identity) as GameObject;
+                    player3 = player.GetComponent<Player>();
+                    player3.PlayerNum = 3;
+                    break;
+
+                case Player.RangerType.PinkRanger:
+                    player = Instantiate(prefabRangerPink, p3Location, Quaternion.identity) as GameObject;
+                    player3 = player.GetComponent<Player>();
+                    player3.PlayerNum = 3;
+                    break;
+
+                case Player.RangerType.RedRanger:
+                    player = Instantiate(prefabRangerRed, p3Location, Quaternion.identity) as GameObject;
+                    player3 = player.GetComponent<Player>();
+                    player3.PlayerNum = 3;
+                    break;
+
+                case Player.RangerType.YellowRanger:
+                    player = Instantiate(prefabRangerYellow, p3Location, Quaternion.identity) as GameObject;
+                    player3 = player.GetComponent<Player>();
+                    player3.PlayerNum = 3;
+                    break;
+            }
+            Player3.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+
+        if (p4Active)
+        {
+            GameObject player;
+
+            switch (p4RangerType)
+            {
+                case Player.RangerType.BlackRanger:
+                    player = Instantiate(prefabRangerBlack, p4Location, Quaternion.identity) as GameObject;
+                    player4 = player.GetComponent<Player>();
+                    player4.PlayerNum = 4;
+                    break;
+
+                case Player.RangerType.BlueRanger:
+                    player = Instantiate(prefabRangerBlue, p4Location, Quaternion.identity) as GameObject;
+                    player4 = player.GetComponent<Player>();
+                    player4.PlayerNum = 4;
+                    break;
+
+                case Player.RangerType.GreenRanger:
+                    player = Instantiate(prefabRangerGreen, p4Location, Quaternion.identity) as GameObject;
+                    player4 = player.GetComponent<Player>();
+                    player4.PlayerNum = 4;
+                    break;
+
+                case Player.RangerType.PinkRanger:
+                    player = Instantiate(prefabRangerPink, p4Location, Quaternion.identity) as GameObject;
+                    player4 = player.GetComponent<Player>();
+                    player4.PlayerNum = 4;
+                    break;
+
+                case Player.RangerType.RedRanger:
+                    player = Instantiate(prefabRangerRed, p4Location, Quaternion.identity) as GameObject;
+                    player4 = player.GetComponent<Player>();
+                    player4.PlayerNum = 4;
+                    break;
+
+                case Player.RangerType.YellowRanger:
+                    player = Instantiate(prefabRangerYellow, p4Location, Quaternion.identity) as GameObject;
+                    player4 = player.GetComponent<Player>();
+                    player4.PlayerNum = 4;
+                    break;
+            }
+            Player4.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+
+    }
+
+    private void SetupGoals()
+    {
+        goalP1 = GameObject.Find("P1_Goal");
+        goalP2 = GameObject.Find("P2_Goal");
+        goalP3 = GameObject.Find("P3_Goal");
+        goalP4 = GameObject.Find("P4_Goal");
+
+        if (p1Active)
+        {
+            goalP1.GetComponent<Goal>().PlayerNum = 1;
+            goalP1.GetComponent<Goal>().RangerColor = Player1.RangerColor;
+        }
+        else
+        {
+            goalP1.SetActive(false);
+        }
+
+        if (p2Active)
+        {
+            goalP2.GetComponent<Goal>().PlayerNum = 2;
+            goalP2.GetComponent<Goal>().RangerColor = Player2.RangerColor;
+        }
+        else
+        {
+            goalP2.SetActive(false);
+        }
+
+        if (p3Active)
+        {
+            goalP3.GetComponent<Goal>().PlayerNum = 3;
+            goalP3.GetComponent<Goal>().RangerColor = Player3.RangerColor;
+        }
+        else
+        {
+            goalP3.SetActive(false);
+        }
+
+        if (p4Active)
+        {
+            goalP4.GetComponent<Goal>().PlayerNum = 4;
+            goalP4.GetComponent<Goal>().RangerColor = Player4.RangerColor;
+        }
+        else
+        {
+            goalP4.SetActive(false);
+        }
+    }
 
     public void AssignPlayers()
     {
