@@ -24,7 +24,7 @@ public class Killzone : MonoBehaviour {
             thing.GetComponent<Key>().droppedOffStage();
             thing.transform.position = GameObject.FindGameObjectWithTag("Key Spawn Point").transform.position;
         }
-        else if (thing.tag == "Black Hole")
+        else if (thing.tag == "Black Hole" || thing.tag == "Stat Dart")
         {
             DestroyObject(thing.gameObject);
         }

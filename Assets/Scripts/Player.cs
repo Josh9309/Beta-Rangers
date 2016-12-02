@@ -366,6 +366,7 @@ public abstract class Player : MonoBehaviour {
         ///Remove Later After First Build
         if (input.pause)
         {
+            worldControl.battleSetup = false; 
             Application.LoadLevel(0);
         }
         if(Input.GetButtonDown("Back"))
