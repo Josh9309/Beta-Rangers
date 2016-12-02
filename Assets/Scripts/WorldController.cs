@@ -125,6 +125,10 @@ public class WorldController : MonoBehaviour {
             }
             
         }
+        else
+        {
+            battleSetup = false;
+        }
 	}
     
     public void SetPlayersActive(bool p1, bool p2, bool p3, bool p4)

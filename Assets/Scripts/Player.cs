@@ -40,6 +40,7 @@ public abstract class Player : MonoBehaviour {
                     DODGE_AXIS = "P1_Dodge";
                     SUBMIT_AXIS = "P1_Submit";
                     CANCEL_AXIS = "P1_Cancel";
+                    PAUSE_AXIS = "P1_Pause";
                     break;
 
                 case 2:
@@ -51,6 +52,7 @@ public abstract class Player : MonoBehaviour {
                     DODGE_AXIS = "P2_Dodge";
                     SUBMIT_AXIS = "P2_Submit";
                     CANCEL_AXIS = "P2_Cancel";
+                    PAUSE_AXIS = "P2_Pause";
                     break;
 
                 case 3:
@@ -62,6 +64,7 @@ public abstract class Player : MonoBehaviour {
                     DODGE_AXIS = "P3_Dodge";
                     SUBMIT_AXIS = "P3_Submit";
                     CANCEL_AXIS = "P3_Cancel";
+                    PAUSE_AXIS = "P3_Pause";
                     break;
 
                 case 4:
@@ -73,6 +76,7 @@ public abstract class Player : MonoBehaviour {
                     DODGE_AXIS = "P4_Dodge";
                     SUBMIT_AXIS = "P4_Submit";
                     CANCEL_AXIS = "P4_Cancel";
+                    PAUSE_AXIS = "P4_Pause";
                     break;
             }
         }
@@ -366,7 +370,11 @@ public abstract class Player : MonoBehaviour {
         ///Remove Later After First Build
         if (input.pause)
         {
+<<<<<<< HEAD
             worldControl.battleSetup = false; 
+=======
+            Destroy(worldControl.gameObject);
+>>>>>>> origin/Test
             Application.LoadLevel(0);
         }
         if(Input.GetButtonDown("Back"))
