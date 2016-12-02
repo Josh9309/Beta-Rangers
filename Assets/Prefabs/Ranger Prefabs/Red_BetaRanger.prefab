@@ -1225,7 +1225,7 @@ MonoBehaviour:
   attack1CooldownTime: 1
   attack2CooldownTime: 5
   ranger: 1
-  playerNum: 2
+  playerNum: 1
   playerColor: {r: 1, g: 0, b: 0, a: 0}
   keyDamageMax: 55
   keyPickup: 1
@@ -1929,6 +1929,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 54b4d6e6788740a4598ab34d16de121c,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: playerNum
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 118354}

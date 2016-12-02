@@ -1000,7 +1000,7 @@ MonoBehaviour:
   attack1CooldownTime: 1
   attack2CooldownTime: 2
   ranger: 3
-  playerNum: 4
+  playerNum: 1
   playerColor: {r: 1, g: 1, b: 0, a: 0}
   keyDamageMax: 45
   keyPickup: 1

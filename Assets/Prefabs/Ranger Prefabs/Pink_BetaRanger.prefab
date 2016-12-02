@@ -1021,7 +1021,7 @@ MonoBehaviour:
   poisonCloudSpeed: 2
   poisonCloudMoveTime: 2
   poisonCloudStillTime: 5
-  poisonCloudDamgeTime: .333332986
+  poisonCloudDamgeTime: .333330005
 --- !u!212 &21200016
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1579,7 +1579,7 @@ Prefab:
       objectReference: {fileID: 139732, guid: 94d6d0c7e728f064097f494aac4c9f10, type: 2}
     - target: {fileID: 0}
       propertyPath: poisonCloudDamgeTime
-      value: .333332986
+      value: .333330005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
