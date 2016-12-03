@@ -336,21 +336,6 @@ public abstract class Player : MonoBehaviour {
             }
         }
 
-        //poisoned
-        //if (poisoned)//true
-        //{
-        //    poisonedCurrentTime += Time.deltaTime;
-        //    if(poisonedCurrentTime >= poisonedMaxTime)
-        //    {
-        //        poisonedCurrentTime = 0;
-        //        ModHealth(-cloudDamage);
-        //    }
-        //}
-        //else if(poisonedCurrentTime > 0)
-        //{
-        //    poisonedCurrentTime -= Time.deltaTime;
-        //}
-
         if (grounded) //if ranger is grounded it turns air control back on
         {
             airControl = true;

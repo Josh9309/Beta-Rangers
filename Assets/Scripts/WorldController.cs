@@ -133,10 +133,10 @@ public class WorldController : MonoBehaviour {
         }
         if(Application.loadedLevelName == "Win Scene")
         {
-            if (winSetup)
+            if (!winSetup)
             {
                 setupWin();
-                winSetup = false;
+                winSetup = true;
             }
         }
         else
@@ -574,6 +574,7 @@ public class WorldController : MonoBehaviour {
             Debug.Log(enemyRanger.name + " is Unfrozen!");
             //Unfreezes the ranger and removes tint, it also destroys ice blast shard gameobject
             enemyRanger.frozen = false;
+            enemyRanger.gameObject.GetComponent<Animator>().enabled = true;
             for (int i = 0; i < rangerRenders.Length; i++)
             {
                 rangerRenders[i].color = Color.white;
