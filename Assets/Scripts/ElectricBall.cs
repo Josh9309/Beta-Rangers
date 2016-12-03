@@ -61,7 +61,7 @@ public class ElectricBall : MonoBehaviour {
             yellowRanger.ElectricBallCount--;
             
         }
-        else if(thing.name == "Yellow_BetaRanger(Clone)" || thing.tag == "Hitbox" || thing.tag == "Goal")
+        else if(thing.name == "Yellow_BetaRanger(Clone)" || thing.tag == "Hitbox" || thing.tag == "Goal" || thing.tag == "Key")
         {
             //do nothing
         }

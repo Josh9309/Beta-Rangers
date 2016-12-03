@@ -436,7 +436,7 @@ public abstract class Player : MonoBehaviour {
     {
         if(keyCurrentTime >= worldControl.KeyMaxTime)
         {
-            worldControl.win(this);
+            worldControl.win(ranger);
             Debug.Log("Player " + gameObject + " has won");
         }
     }
@@ -636,28 +636,6 @@ public abstract class Player : MonoBehaviour {
 				
 			}
 		}
-        if(other.gameObject.tag == "Stat Dart")
-        {
-            if (other.gameObject.GetComponent<statDartScript>().PlayerNum != playerNum) {
-                switch (other.gameObject.GetComponent<statDartScript>().Effect) {
-                    case 1:
-                        dartEffect = StatusEffect.AttackPower;
-                        break;
-                    case 2:
-                        dartEffect = StatusEffect.Speed;
-                        break;
-                    case 3:
-                        dartEffect = StatusEffect.Jump;
-                        break;
-                    default:
-                        dartEffect = StatusEffect.None;
-                        break;
-                }
-                dartCurrentTime = 0;
-                dartMaxTime = other.gameObject.GetComponent<statDartScript>().StatusTimeMax;
-                Destroy(other.gameObject);
-            }
-        }
 	}
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -677,6 +655,30 @@ public abstract class Player : MonoBehaviour {
         {
             cloudDamage = other.gameObject.GetComponent<PoisonCloud>().CloudDamage;
             poisonedMaxTime = other.gameObject.GetComponent<PoisonCloud>().PoisonTime;
+        }
+        if (other.gameObject.tag == "Stat Dart")
+        {
+            if (other.gameObject.GetComponent<statDartScript>().PlayerNum != playerNum)
+            {
+                switch (other.gameObject.GetComponent<statDartScript>().Effect)
+                {
+                    case 1:
+                        dartEffect = StatusEffect.AttackPower;
+                        break;
+                    case 2:
+                        dartEffect = StatusEffect.Speed;
+                        break;
+                    case 3:
+                        dartEffect = StatusEffect.Jump;
+                        break;
+                    default:
+                        dartEffect = StatusEffect.None;
+                        break;
+                }
+                dartCurrentTime = 0;
+                dartMaxTime = other.gameObject.GetComponent<statDartScript>().StatusTimeMax;
+                Destroy(other.gameObject);
+            }
         }
     }
 

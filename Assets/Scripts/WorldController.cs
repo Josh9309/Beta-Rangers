@@ -4,7 +4,7 @@ using System.Collections;
 public class WorldController : MonoBehaviour {
     
     ///attributes
-    public enum cMenu { MAINMENU, OPTIONS, PAUSE, BATTLE, LOADING};
+    public enum cMenu { MAINMENU, OPTIONS, PAUSE, BATTLE, LOADING, WIN};
     public enum cLevel { STAGE1 };
 
     [SerializeField] private cMenu currentMenu;
@@ -36,8 +36,10 @@ public class WorldController : MonoBehaviour {
     private Player.RangerType p2RangerType;
     private Player.RangerType p3RangerType;
     private Player.RangerType p4RangerType;
+    private Player.RangerType winnerType;
     [SerializeField] private float keyMaxTime;
     public bool battleSetup = false;
+    public bool winSetup = false;
     private GameUI gameUI;
 
     ///properties
@@ -128,6 +130,18 @@ public class WorldController : MonoBehaviour {
         else
         {
             battleSetup = false;
+        }
+        if(Application.loadedLevelName == "Win Scene")
+        {
+            if (winSetup)
+            {
+                setupWin();
+                winSetup = false;
+            }
+        }
+        else
+        {
+            winSetup = false;
         }
 	}
     
@@ -408,9 +422,57 @@ public class WorldController : MonoBehaviour {
         }
     }
 
-    public void win(Player playerWhoWon)
+    public void win(Player.RangerType playerWhoWon)
     {
+        Application.LoadLevel("Win Scene");
+        currentMenu = cMenu.WIN;
+        winnerType = playerWhoWon;
+    }
 
+    private void setupWin()
+    {
+        GameObject g;
+        switch (winnerType)
+        {
+            case Player.RangerType.BlackRanger:
+                g = Instantiate(prefabRangerBlack, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                g.GetComponent<BlackRanger>().enabled = false;
+                g.GetComponent<Collider2D>().enabled = false;
+                g.GetComponent<Rigidbody2D>().Sleep();
+                break;
+            case Player.RangerType.BlueRanger:
+                g = Instantiate(prefabRangerBlue, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                g.GetComponent<BlueRanger>().enabled = false;
+                g.GetComponent<Collider2D>().enabled = false;
+                g.GetComponent<Rigidbody2D>().Sleep();
+                break;
+            case Player.RangerType.GreenRanger:
+                g = Instantiate(prefabRangerGreen, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                g.GetComponent<GreenRanger>().enabled = false;
+                g.GetComponent<Collider2D>().enabled = false;
+                g.GetComponent<Rigidbody2D>().Sleep();
+                break;
+            case Player.RangerType.PinkRanger:
+                g = Instantiate(prefabRangerPink, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                g.GetComponent<PinkRanger>().enabled = false;
+                g.GetComponent<Collider2D>().enabled = false;
+                g.GetComponent<Rigidbody2D>().Sleep();
+                break;
+            case Player.RangerType.RedRanger:
+                g = Instantiate(prefabRangerRed, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                g.GetComponent<RedRanger>().enabled = false;
+                g.GetComponent<Collider2D>().enabled = false;
+                g.GetComponent<Rigidbody2D>().Sleep();
+                break;
+            case Player.RangerType.YellowRanger:
+                g = Instantiate(prefabRangerYellow, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                g.GetComponent<YellowRanger>().enabled = false;
+                g.GetComponent<Collider2D>().enabled = false;
+                g.GetComponent<Rigidbody2D>().Sleep();
+                break;
+            default:
+                break;
+        }
     }
 
     void levelSelect()
