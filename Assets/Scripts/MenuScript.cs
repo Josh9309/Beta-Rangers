@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MenuScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+    [SerializeField] private CanvasGroup optionGroup;
+    [SerializeField] private CanvasGroup creditsGroup;
+    [SerializeField] private CanvasGroup controlsGroup;
+
+    // Use this for initialization
+    void Start () {
+
 	}
 	
 	// Update is called once per frame
@@ -13,13 +19,60 @@ public class MenuScript : MonoBehaviour {
 	
 	}
 
+    public void SwitchOptions()
+    {
+        //turn off other canvas groups
+        creditsGroup.alpha = 0;
+        creditsGroup.interactable = false;
+        controlsGroup.alpha = 0;
+        controlsGroup.interactable = false;
+
+        //turn on options group
+        optionGroup.alpha = 1;
+        optionGroup.interactable = true;
+
+        //make controls btn the current selected 
+        EventSystem.current.SetSelectedGameObject(optionGroup.transform.FindChild("ControlsBtn").gameObject);
+    }
+
+    public void SwitchControls()
+    {
+        //turns off other canvas group
+        creditsGroup.alpha = 0;
+        creditsGroup.interactable = false;
+        optionGroup.alpha = 0;
+        optionGroup.interactable = false;
+
+        //turn on controls group
+        controlsGroup.alpha = 1;
+        controlsGroup.interactable = true;
+
+        //make controls back button the current selected
+        EventSystem.current.SetSelectedGameObject(controlsGroup.transform.FindChild("BackBtn").gameObject);
+    }
+
+    public void SwitchCredits()
+    {
+        //turns off other canvas group
+        controlsGroup.alpha = 0;
+        controlsGroup.interactable = false;
+        optionGroup.alpha = 0;
+        optionGroup.interactable = false;
+
+        //turn on controls group
+        creditsGroup.alpha = 1;
+        creditsGroup.interactable = true;
+
+        //make controls back button the current selected
+        EventSystem.current.SetSelectedGameObject(creditsGroup.transform.FindChild("BackBtn").gameObject);
+    }
+
     public void LoadScene(string scene)
     {
         switch (scene)
         {
-            case "Main Menu":
-                GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>().CurrentMenu = WorldController.cMenu.MAINMENU;
-                GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>().battleSetup = false;
+            case "MainScene":
+                Destroy(GameObject.FindGameObjectWithTag("Game Manager"));
                 break;
 
             case "Stage 1":
