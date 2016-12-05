@@ -6,6 +6,7 @@ using System.Collections;
 public abstract class Player : MonoBehaviour {
     //sets up a finite state to identify what type of ranger the player is.
     public enum RangerType {BlueRanger, RedRanger, GreenRanger, YellowRanger, BlackRanger, PinkRanger};
+    private enum StatusEffect { None, AttackPower, Speed, Jump};
 
     #region InputSettings
     //this will setup the public inputSetting class
@@ -14,7 +15,7 @@ public abstract class Player : MonoBehaviour {
     {
         public float delay = 0.3f; //delay for movement inputs
         public float fwdInput = 0, jumpInput = 0, attack1Input = 0, attack2Input = 0, attack3Input = 0, dodgeInput =0; //sets up variables to hold inputs
-        public string JUMP_AXIS, HORIZONTAL_AXIS, ATTACK1_AXIS, ATTACK2_AXIS, ATTACK3_AXIS, DODGE_AXIS; //sets up variable to hold input_axis
+        public string JUMP_AXIS, HORIZONTAL_AXIS, ATTACK1_AXIS, ATTACK2_AXIS, ATTACK3_AXIS, DODGE_AXIS, SUBMIT_AXIS, CANCEL_AXIS; //sets up variable to hold input_axis
         public string PAUSE_AXIS = "Pause"; //sets the pause input Axis
         
         //sets up booleans for btn_input and sets them to false
@@ -37,6 +38,9 @@ public abstract class Player : MonoBehaviour {
                     ATTACK2_AXIS = "P1_Attack2";
                     ATTACK3_AXIS = "P1_Attack3";
                     DODGE_AXIS = "P1_Dodge";
+                    SUBMIT_AXIS = "P1_Submit";
+                    CANCEL_AXIS = "P1_Cancel";
+                    PAUSE_AXIS = "P1_Pause";
                     break;
 
                 case 2:
@@ -46,6 +50,9 @@ public abstract class Player : MonoBehaviour {
                     ATTACK2_AXIS = "P2_Attack2";
                     ATTACK3_AXIS = "P2_Attack3";
                     DODGE_AXIS = "P2_Dodge";
+                    SUBMIT_AXIS = "P2_Submit";
+                    CANCEL_AXIS = "P2_Cancel";
+                    PAUSE_AXIS = "P2_Pause";
                     break;
 
                 case 3:
@@ -55,6 +62,9 @@ public abstract class Player : MonoBehaviour {
                     ATTACK2_AXIS = "P3_Attack2";
                     ATTACK3_AXIS = "P3_Attack3";
                     DODGE_AXIS = "P3_Dodge";
+                    SUBMIT_AXIS = "P3_Submit";
+                    CANCEL_AXIS = "P3_Cancel";
+                    PAUSE_AXIS = "P3_Pause";
                     break;
 
                 case 4:
@@ -64,6 +74,9 @@ public abstract class Player : MonoBehaviour {
                     ATTACK2_AXIS = "P4_Attack2";
                     ATTACK3_AXIS = "P4_Attack3";
                     DODGE_AXIS = "P4_Dodge";
+                    SUBMIT_AXIS = "P4_Submit";
+                    CANCEL_AXIS = "P4_Cancel";
+                    PAUSE_AXIS = "P4_Pause";
                     break;
             }
         }
@@ -126,6 +139,13 @@ public abstract class Player : MonoBehaviour {
 
     //Status effects attributes
     public bool frozen = false;
+    private StatusEffect dartEffect = StatusEffect.None;
+    private float dartCurrentTime;
+    private float dartMaxTime;
+    private bool poisoned = false;
+    private int cloudDamage;
+    private float poisonedCurrentTime = 0;
+    private float poisonedMaxTime;
 
     //animation Attributes
     [SerializeField]
@@ -239,6 +259,16 @@ public abstract class Player : MonoBehaviour {
         get { return grounded; }
         set { grounded = value; }
     }
+
+    public bool Poisoned
+    {
+        set { poisoned = value; }
+    }
+
+    public Color RangerColor
+    {
+        get { return playerColor; }
+    }
     #endregion
 
     #region Methods
@@ -295,6 +325,17 @@ public abstract class Player : MonoBehaviour {
 			}
         }
 
+        //status effect
+        if(dartEffect != StatusEffect.None)
+        {
+            dartCurrentTime += Time.deltaTime;
+            if(dartCurrentTime >= dartMaxTime)
+            {
+                dartCurrentTime = 0;
+                dartEffect = StatusEffect.None;
+            }
+        }
+
         if (grounded) //if ranger is grounded it turns air control back on
         {
             airControl = true;
@@ -314,6 +355,8 @@ public abstract class Player : MonoBehaviour {
         ///Remove Later After First Build
         if (input.pause)
         {
+            worldControl.battleSetup = false; 
+            Destroy(worldControl.gameObject);
             Application.LoadLevel(0);
         }
         if(Input.GetButtonDown("Back"))
@@ -378,7 +421,7 @@ public abstract class Player : MonoBehaviour {
     {
         if(keyCurrentTime >= worldControl.KeyMaxTime)
         {
-            worldControl.win(this);
+            worldControl.win(ranger);
             Debug.Log("Player " + gameObject + " has won");
         }
     }
@@ -391,7 +434,14 @@ public abstract class Player : MonoBehaviour {
             rangerAnimator.Play("Run");
             if(airControl || grounded) //if aircontrol or grounded is true
             {
-                rBody.velocity = new Vector2(input.fwdInput * speed, rBody.velocity.y); // moves player based on input
+                if (dartEffect == StatusEffect.Speed)
+                {
+                    rBody.velocity = new Vector2(input.fwdInput * (speed/2), rBody.velocity.y); // moves player based on input
+                }
+                else
+                {
+                    rBody.velocity = new Vector2(input.fwdInput * speed, rBody.velocity.y); // moves player based on input
+                }
             }
             if(input.fwdInput < 0) //ranger moving left
             {
@@ -419,7 +469,14 @@ public abstract class Player : MonoBehaviour {
 		if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
             rangerAnimator.Play("Jump");
-            rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
+            if (dartEffect == StatusEffect.Jump)
+            {
+                rBody.AddForce(new Vector2(0f, jumpPower/2));//add a force to cause the player to jump
+            }
+            else
+            {
+                rBody.AddForce(new Vector2(0f, jumpPower));//add a force to cause the player to jump
+            }
         }
     }
 
@@ -472,7 +529,14 @@ public abstract class Player : MonoBehaviour {
                     Player ranger = cols[i].GetComponent<Player>();
 
 					if(canBeHit){
-                    ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+                        if (dartEffect == StatusEffect.AttackPower)
+                        {
+                            ranger.ModHealth(-(attack1Power / 2));
+                        }
+                        else
+                        {
+                            ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
+                        }
                     SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
                     
 					//Debug.Log(gameObject.name + " has hit " + cols[i].name + "for " + attack1Power + "damage");// debugs what ranger hit and for how much damage.
@@ -572,6 +636,35 @@ public abstract class Player : MonoBehaviour {
                 key.pickedUp();
             }
         }
+        if (other.gameObject.tag == "Poison Cloud")
+        {
+            cloudDamage = other.gameObject.GetComponent<PoisonCloud>().CloudDamage;
+            poisonedMaxTime = other.gameObject.GetComponent<PoisonCloud>().PoisonTime;
+        }
+        if (other.gameObject.tag == "Stat Dart")
+        {
+            if (other.gameObject.GetComponent<statDartScript>().PlayerNum != playerNum)
+            {
+                switch (other.gameObject.GetComponent<statDartScript>().Effect)
+                {
+                    case 1:
+                        dartEffect = StatusEffect.AttackPower;
+                        break;
+                    case 2:
+                        dartEffect = StatusEffect.Speed;
+                        break;
+                    case 3:
+                        dartEffect = StatusEffect.Jump;
+                        break;
+                    default:
+                        dartEffect = StatusEffect.None;
+                        break;
+                }
+                dartCurrentTime = 0;
+                dartMaxTime = other.gameObject.GetComponent<statDartScript>().StatusTimeMax;
+                Destroy(other.gameObject);
+            }
+        }
     }
 
     protected virtual void OnTriggerStay2D(Collider2D other)
@@ -581,9 +674,24 @@ public abstract class Player : MonoBehaviour {
             if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
 			{
 				keyCurrentTime += Time.deltaTime;
-			}
+            }
 		}
+        //poisoned
+        if (other.gameObject.tag == "Poison Cloud")
+        {
+            if (playerNum != other.gameObject.GetComponent<PoisonCloud>().PlayerNum) {
+                poisonedCurrentTime += Time.deltaTime;
+                Debug.Log("Poisoned " + name + " : " + poisonedCurrentTime + " : " + poisonedMaxTime);
+                if (poisonedCurrentTime >= poisonedMaxTime)
+                {
+                    Debug.Log("Poisoned damage " + name);
+                    poisonedCurrentTime = 0;
+                    ModHealth(-cloudDamage);
+                }
+            }
+        }
     }
+
 
 	//enable air control
 	protected virtual void OnCollisionExit2D(Collision2D coll)

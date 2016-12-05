@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterSelection : MonoBehaviour {
+public class GreenAttack : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

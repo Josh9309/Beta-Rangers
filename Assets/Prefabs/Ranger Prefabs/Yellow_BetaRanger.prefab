@@ -994,13 +994,13 @@ MonoBehaviour:
   attack3Power: 30
   speed: 17
   jumpPower: 1200
-  superCost: 80
+  superCost: 60
   superMax: 100
   attack1SuperValue: 10
   attack1CooldownTime: 1
   attack2CooldownTime: 2
   ranger: 3
-  playerNum: 4
+  playerNum: 1
   playerColor: {r: 1, g: 1, b: 0, a: 0}
   keyDamageMax: 45
   keyPickup: 1
@@ -1542,7 +1542,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: superCost
-      value: 80
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: superMax
@@ -1555,6 +1555,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: chainedLightningDamage
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerNum
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

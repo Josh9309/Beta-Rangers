@@ -13,6 +13,8 @@ TagManager:
   - Environment
   - Attack
   - Black Hole
+  - Stat Dart
+  - Poison Cloud
   layers:
   - Default
   - TransparentFX

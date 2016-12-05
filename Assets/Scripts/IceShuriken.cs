@@ -16,7 +16,7 @@ public class IceShuriken : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        blueRanger = GameObject.Find("Blue_BetaRanger").GetComponent<BlueRanger>(); //gets blue ranger
+        blueRanger = GameObject.Find("Blue_BetaRanger(Clone)").GetComponent<BlueRanger>(); //gets blue ranger
 
         //assigns the values for move left,and damage based off of the Blue ranger's data.
         moveLeft = blueRanger.FacingLeft;
@@ -57,17 +57,16 @@ public class IceShuriken : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D thing)
     {
-        if(thing.tag == "Player" && thing.name != "Blue_BetaRanger") //if collision is with another ranger
+        if(thing.tag == "Player" && thing.name != "Blue_BetaRanger(Clone)") //if collision is with another ranger
         {
             Start();
             thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
-            blueRanger.SuperCurrent += superValue; //adds super value to current super meter value.
             Debug.Log(thing.name + "hit with ice shuriken for " + damage);
             Destroy(gameObject); //destroys the shuriken
             blueRanger.ShurikenCount--;
             
         }
-        else if(thing.name == "Blue_BetaRanger" || thing.tag == "Hitbox" || thing.tag == "Goal")
+        else if(thing.name == "Blue_BetaRanger(Clone)" || thing.tag == "Hitbox" || thing.tag == "Goal" || thing.tag == "Key")
         {
             //do nothing
         }

@@ -17,7 +17,7 @@ public class ElectricBall : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        yellowRanger = GameObject.Find("Yellow_BetaRanger").GetComponent<YellowRanger>(); //gets the yellow ranger
+        yellowRanger = GameObject.Find("Yellow_BetaRanger(Clone)").GetComponent<YellowRanger>(); //gets the yellow ranger
 
         //assigns the values for move left,and damage based off of the yellow rangers data.
         moveLeft = yellowRanger.FacingLeft;
@@ -52,17 +52,16 @@ public class ElectricBall : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D thing)
     {
-        if(thing.tag == "Player" && thing.name != "Yellow_BetaRanger") //if collision is with another ranger
+        if(thing.tag == "Player" && thing.name != "Yellow_BetaRanger(Clone)") //if collision is with another ranger
         {
             Start();
             thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
-            yellowRanger.SuperCurrent += superValue; //adds super value to current super meter value.
             Debug.Log(thing.name + "hit with Electric Ball for " + damage);
             Destroy(gameObject); //destroys the Electric Ball
             yellowRanger.ElectricBallCount--;
             
         }
-        else if(thing.name == "Yellow_BetaRanger" || thing.tag == "Hitbox" || thing.tag == "Goal")
+        else if(thing.name == "Yellow_BetaRanger(Clone)" || thing.tag == "Hitbox" || thing.tag == "Goal" || thing.tag == "Key")
         {
             //do nothing
         }

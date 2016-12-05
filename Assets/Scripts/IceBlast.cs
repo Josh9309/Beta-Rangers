@@ -18,7 +18,7 @@ public class IceBlast : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        blueRanger = GameObject.Find("Blue_BetaRanger").GetComponent<BlueRanger>();// gets blue ranger
+        blueRanger = GameObject.Find("Blue_BetaRanger(Clone)").GetComponent<BlueRanger>();// gets blue ranger
 
         //assigns the values for move left,and damage based off of the Blue ranger's data.
         moveLeft = blueRanger.FacingLeft;
@@ -63,14 +63,17 @@ public class IceBlast : MonoBehaviour {
 
             //start frozen Corroutine
             StartCoroutine(blueRanger.WorldControl.Frozen(enemyRanger.PlayerNum, freezeTime, frozenDamage, gameObject));
-            
+
+            //turn off animation
+            thing.GetComponent<Animator>().enabled = false;
+
             //turn off sprite render and Collider2D, then it makes rigidbody position frozen until frozen corroutine destroys ice blast shard.
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<Collider2D>().enabled = false;
             rBody2D.constraints = RigidbodyConstraints2D.FreezePositionX;
 
         }
-        else if (thing.name == "Blue_BetaRanger" || thing.tag == "Hitbox"|| thing.tag == "Goal")
+        else if (thing.name == "Blue_BetaRanger(Clone)" || thing.tag == "Hitbox"|| thing.tag == "Goal" || thing.tag == "Key")
         {
             //do nothing
         }
