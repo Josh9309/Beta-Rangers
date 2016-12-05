@@ -4,6 +4,7 @@ using System;
 
 public class GreenRanger : Player {
 
+
     // Use this for initialization
     protected override void Start()
     {
