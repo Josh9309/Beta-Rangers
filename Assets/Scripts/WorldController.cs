@@ -401,23 +401,29 @@ public class WorldController : MonoBehaviour {
         {
             Player ranger = players[i].GetComponent<Player>();
 
-            switch (ranger.PlayerNum)
+            if (ranger != null)
             {
-                case 1:
-                    player1 = ranger;
-                    break;
+                switch (ranger.PlayerNum)
+                {
+                    case 1:
+                        player1 = ranger;
+                        break;
 
-                case 2:
-                    Player2 = ranger;
-                    break;
+                    case 2:
+                        Player2 = ranger;
+                        break;
 
-                case 3:
-                    player3 = ranger;
-                    break;
+                    case 3:
+                        player3 = ranger;
+                        break;
 
-                case 4:
-                    player4 = ranger;
-                    break;
+                    case 4:
+                        player4 = ranger;
+                        break;
+                    default:
+                        Debug.LogError("Assign Player Error");
+                        break;
+                }
             }
         }
     }

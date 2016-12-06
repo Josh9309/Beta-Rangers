@@ -4,7 +4,7 @@ using System;
 
 public class BlackRanger : Player {
 
-    [SerializeField] private GameObject WarpBall;
+    [SerializeField] private GameObject WarpBallObj;
     [SerializeField] private GameObject BlackHolePrefab;
     [SerializeField] private float BlackHoleStrength; //how strong the pull of the black hole is
     [SerializeField] private float BlackHolePullRange; //how far the black hole will pull other players
@@ -12,6 +12,7 @@ public class BlackRanger : Player {
     [SerializeField] private float BlackHoleMoveTime; //the amount of time the black hole moves for
     [SerializeField] private float BlackHoleStillTime; //the amount of time the black hole stays still for
     [SerializeField] private float warpTimeMax; //amount of time the warp ball has to move
+    [SerializeField] private float warpSpeed; //how fast the warp ball can move
     private float warpTimeCurrent; //amount of time the warp ball has been active
 
     public float verInput = 0;
@@ -22,6 +23,7 @@ public class BlackRanger : Player {
     {
         base.Start();
         playerColor = Color.black;
+        //WarpBallObj.GetComponent<WarpBallScript>().Damage = Attack2Power;
     }
 
     // Update is called once per frame
@@ -29,17 +31,18 @@ public class BlackRanger : Player {
     {
         base.FixedUpdate();
         verInput = Input.GetAxis(VERTICAL_AXIS);
-        if (WarpBall.activeInHierarchy == true)
+        if (WarpBallObj.activeInHierarchy == true)
         {
             Move();
-
-            if (warpTimeCurrent >= warpTimeMax)
+            
+            if (warpTimeCurrent >= warpTimeMax || !Input.GetButton(input.ATTACK2_AXIS))
             {
-                transform.transform.position = WarpBall.transform.position;
-                WarpBall.SetActive(false);
+                StartCoroutine(Attack2Cooldown());
+                transform.transform.position = WarpBallObj.transform.position;
+                WarpBallObj.SetActive(false);
                 canMove = true;
                 warpTimeCurrent = 0;
-                WarpBall.transform.localPosition = new Vector3(0, 0);
+                WarpBallObj.transform.localPosition = new Vector3(0, 0);
             }
             else
             {
@@ -56,9 +59,9 @@ public class BlackRanger : Player {
 
     protected override void Move()
     {
-        if (WarpBall.activeInHierarchy)
+        if (WarpBallObj.activeInHierarchy)
         {
-            WarpBall.GetComponent<Rigidbody2D>().velocity = new Vector2(input.fwdInput * speed, -verInput * speed); // moves player based on input
+            WarpBallObj.GetComponent<Rigidbody2D>().velocity = new Vector2(input.fwdInput * warpSpeed, -verInput * warpSpeed); // moves player based on input
         }
         else
         {
@@ -72,9 +75,8 @@ public class BlackRanger : Player {
         if (input.attack2 && attack2Available)
         {
             Debug.Log("Warp");
-            WarpBall.SetActive(true);
+            WarpBallObj.SetActive(true);
             canMove = false;
-
         }
     }
 

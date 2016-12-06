@@ -641,6 +641,14 @@ public abstract class Player : MonoBehaviour {
             cloudDamage = other.gameObject.GetComponent<PoisonCloud>().CloudDamage;
             poisonedMaxTime = other.gameObject.GetComponent<PoisonCloud>().PoisonTime;
         }
+        if(other.gameObject.tag == "Warp")
+        {
+            if(ranger != RangerType.BlackRanger)
+            {
+                //ModHealth(other.gameObject.GetComponent<>().Damage);
+                ModHealth(-2);
+            }
+        }
         if (other.gameObject.tag == "Stat Dart")
         {
             if (other.gameObject.GetComponent<statDartScript>().PlayerNum != playerNum)
