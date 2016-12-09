@@ -53,7 +53,7 @@ public class IceBlast : MonoBehaviour {
     {
         Player enemyRanger;
 
-        if (thing.tag == "Player" && thing.name != "Blue_BetaRanger") //if collision is with another ranger
+        if (thing.tag == "Player" && thing.name != "Blue_BetaRanger(Clone)") //if collision is with another ranger
         {
             Start();
             enemyRanger = thing.gameObject.GetComponent<Player>();
