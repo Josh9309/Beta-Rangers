@@ -356,6 +356,7 @@ public class WorldController : MonoBehaviour {
         {
             goalP1.GetComponent<Goal>().PlayerNum = 1;
             goalP1.GetComponent<Goal>().RangerColor = Player1.RangerColor;
+            goalP1.GetComponent<Goal>().PlayerRangerType = player1.Ranger;
         }
         else
         {
@@ -366,6 +367,7 @@ public class WorldController : MonoBehaviour {
         {
             goalP2.GetComponent<Goal>().PlayerNum = 2;
             goalP2.GetComponent<Goal>().RangerColor = Player2.RangerColor;
+            goalP2.GetComponent<Goal>().PlayerRangerType = player2.Ranger;
         }
         else
         {
@@ -376,6 +378,7 @@ public class WorldController : MonoBehaviour {
         {
             goalP3.GetComponent<Goal>().PlayerNum = 3;
             goalP3.GetComponent<Goal>().RangerColor = Player3.RangerColor;
+            goalP3.GetComponent<Goal>().PlayerRangerType = player3.Ranger;
         }
         else
         {
@@ -386,6 +389,7 @@ public class WorldController : MonoBehaviour {
         {
             goalP4.GetComponent<Goal>().PlayerNum = 4;
             goalP4.GetComponent<Goal>().RangerColor = Player4.RangerColor;
+            goalP4.GetComponent<Goal>().PlayerRangerType = player4.Ranger;
         }
         else
         {

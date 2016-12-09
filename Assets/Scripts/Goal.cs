@@ -6,6 +6,7 @@ public class Goal : MonoBehaviour {
     ///attributes
     [SerializeField] private Color rangerColor;
     [SerializeField] private int playerNum;
+    private Player.RangerType playerRangerType;
     private Rigidbody2D rBody;
     bool loaded;
 
@@ -20,6 +21,12 @@ public class Goal : MonoBehaviour {
     {
         get { return playerNum; }
         set { playerNum = value; }
+    }
+
+    public Player.RangerType PlayerRangerType
+    {
+        get { return playerRangerType; }
+        set { playerRangerType = value; }
     }
 
 	// Use this for initialization
@@ -61,7 +68,32 @@ public class Goal : MonoBehaviour {
                         break;
                 }
 
+                switch (playerRangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        color = "(black)";
+                        break;
+                    case Player.RangerType.BlueRanger:
+                        color = "(blue)";
+                        break;
+                    case Player.RangerType.GreenRanger:
+                        color = "(green)";
+                        break;
+                    case Player.RangerType.PinkRanger:
+                        color = "(pink)";
+                        break;
+                    case Player.RangerType.RedRanger:
+                        color = "(red)";
+                        break;
+                    case Player.RangerType.YellowRanger:
+                        color = "(yellow)";
+                        break;
+                    default:
+                        Debug.LogError("No color for goal" + name);
+                        break;
+                }
 
+                //GetComponent<SpriteRenderer>().sprite = ("Art Assets/mechParts/" + part + color);
             }
         }
 	}    
