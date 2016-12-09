@@ -8,7 +8,7 @@ public class Goal : MonoBehaviour {
     [SerializeField] private int playerNum;
     private Player.RangerType playerRangerType;
     private Rigidbody2D rBody;
-    bool loaded;
+    [SerializeField] bool loaded;
 
     ///Properties
     public Color RangerColor
@@ -92,8 +92,13 @@ public class Goal : MonoBehaviour {
                         Debug.LogError("No color for goal" + name);
                         break;
                 }
-
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+                //Sprite s2 = Sprite.Create((part + color + ".png"), new Rect(), new Vector2(0, 0));
+                Sprite s = Resources.Load((part + color + ".png"), typeof(Sprite)) as Sprite;
+                GetComponent<SpriteRenderer>().sprite = s;
                 //GetComponent<SpriteRenderer>().sprite = ("Art Assets/mechParts/" + part + color);
+                Debug.Log(name + "sprite updated");
+                loaded = true;
             }
         }
 	}    
