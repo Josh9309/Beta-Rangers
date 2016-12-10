@@ -19,7 +19,7 @@ public class WorldController : MonoBehaviour {
     [SerializeField] private GameObject prefabRangerGreen;
     [SerializeField] private GameObject prefabRangerBlack;
     [SerializeField] private GameObject prefabRangerPink;
-    [SerializeField] private GameObject prefabGoal;
+    //[SerializeField] private GameObject prefabGoal;
     [SerializeField] private Vector3 p1Location;
     [SerializeField] private Vector3 p2Location;
     [SerializeField] private Vector3 p3Location;
@@ -347,10 +347,10 @@ public class WorldController : MonoBehaviour {
 
     private void SetupGoals()
     {
-        goalP1 = GameObject.Find("P1_Goal");
-        goalP2 = GameObject.Find("P2_Goal");
-        goalP3 = GameObject.Find("P3_Goal");
-        goalP4 = GameObject.Find("P4_Goal");
+        goalP1 = GameObject.Find("P1_Head_Goal");
+        goalP2 = GameObject.Find("P2_Torso_Goal");
+        goalP3 = GameObject.Find("P3_ArmR_Goal");
+        goalP4 = GameObject.Find("P4_ArmL_Goal");
 
         if (p1Active)
         {
