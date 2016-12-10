@@ -51,17 +51,16 @@ public class Goal : MonoBehaviour {
                 switch (playerNum)
                 {
                     case 1://head
-                        part = "mechHead";
+                        part = "Head";
                         break;
                     case 2://torso
-                        part = "torso";
+                        part = "Torso";
                         break;
                     case 3://right arm
-                        part = "arm";
+                        part = "Arm";
                         break;
                     case 4://left arm
-                        part = "arm";
-                        gameObject.transform.localScale = -gameObject.transform.localScale;
+                        part = "Arm";
                         break;
                     default:
                         Debug.LogError("No player number for goal " + name);
@@ -93,12 +92,15 @@ public class Goal : MonoBehaviour {
                         break;
                 }
                 gameObject.transform.localScale = new Vector3(1, 1, 1);
+                if(playerNum == 4)
+                {
+                    gameObject.transform.localScale = new Vector3(-1, 1, 1);
+                }
                 //Sprite s2 = Sprite.Create((part + color + ".png"), new Rect(), new Vector2(0, 0));
                 //Sprite s = Resources.Load((part + color + ".png"), typeof(Sprite)) as Sprite;
                 //Sprite s = Resources.Load<Sprite>((part + color + ".png"));
-                string s = ("Art Assets/mechParts/" + part + color);
-                Debug.Log(s);
-                GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(s);
+                GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(("mechParts/mech" + part + color));
+                //GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>(("mechParts/" + part + "lightsC"));
                 //GetComponent<SpriteRenderer>().sprite = ("Art Assets/mechParts/" + part + color);
                 Debug.Log(name + " sprite updated");
                 loaded = true;
