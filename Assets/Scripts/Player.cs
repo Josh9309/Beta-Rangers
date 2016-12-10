@@ -204,6 +204,11 @@ public abstract class Player : MonoBehaviour {
         set { keyPickup = value; }
     }
 
+    public float KeyCurrentTime
+    {
+        get { return keyCurrentTime; }
+    }
+
     public int SuperCurrent
     {
         get { return superCurrent; }
