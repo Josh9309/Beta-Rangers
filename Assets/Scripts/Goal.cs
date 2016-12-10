@@ -94,10 +94,13 @@ public class Goal : MonoBehaviour {
                 }
                 gameObject.transform.localScale = new Vector3(1, 1, 1);
                 //Sprite s2 = Sprite.Create((part + color + ".png"), new Rect(), new Vector2(0, 0));
-                Sprite s = Resources.Load((part + color + ".png"), typeof(Sprite)) as Sprite;
-                GetComponent<SpriteRenderer>().sprite = s;
+                //Sprite s = Resources.Load((part + color + ".png"), typeof(Sprite)) as Sprite;
+                //Sprite s = Resources.Load<Sprite>((part + color + ".png"));
+                string s = ("Art Assets/mechParts/" + part + color);
+                Debug.Log(s);
+                GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(s);
                 //GetComponent<SpriteRenderer>().sprite = ("Art Assets/mechParts/" + part + color);
-                Debug.Log(name + "sprite updated");
+                Debug.Log(name + " sprite updated");
                 loaded = true;
             }
         }
