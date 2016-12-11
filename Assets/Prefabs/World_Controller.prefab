@@ -51,12 +51,13 @@ MonoBehaviour:
   prefabRangerGreen: {fileID: 150316, guid: 56db18af7b148024cb096617259f6a1b, type: 2}
   prefabRangerBlack: {fileID: 185092, guid: 8820164d0bd359241861a1d315af5418, type: 2}
   prefabRangerPink: {fileID: 177226, guid: e7b35b318a8de764f8d268010789e713, type: 2}
-  prefabGoal: {fileID: 143154, guid: 77cf987eb9355474ca4234305870fff2, type: 2}
   p1Location: {x: -17.5300007, y: -.569999993, z: 0}
-  p2Location: {x: -19.3799992, y: -8.61999989, z: 0}
-  p3Location: {x: .939999998, y: 6.09000015, z: 0}
-  p4Location: {x: 18.7199993, y: -7.98000002, z: 0}
+  p2Location: {x: 15.7799997, y: -7.71000004, z: 0}
+  p3Location: {x: -17.7000008, y: -8.02000046, z: 0}
+  p4Location: {x: .270000011, y: 6.59000015, z: 0}
   keyMaxTime: 10
+  battleSetup: 0
+  winSetup: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -102,27 +103,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: p2Location.x
-      value: -19.3799992
+      value: 15.7799997
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: p2Location.y
-      value: -8.61999989
+      value: -7.71000004
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: p3Location.x
-      value: .939999998
+      value: -17.7000008
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: p3Location.y
-      value: 6.09000015
+      value: -8.02000046
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: p4Location.x
-      value: 18.7199993
+      value: .270000011
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: p4Location.y
-      value: -7.98000002
+      value: 6.59000015
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

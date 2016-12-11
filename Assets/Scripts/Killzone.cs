@@ -22,6 +22,7 @@ public class Killzone : MonoBehaviour {
         else if (thing.tag == "Key")
         {
             thing.GetComponent<Key>().droppedOffStage();
+            thing.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             thing.transform.position = GameObject.FindGameObjectWithTag("Key Spawn Point").transform.position;
         }
         else if (thing.tag == "Black Hole" || thing.tag == "Stat Dart")
