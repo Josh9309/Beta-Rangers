@@ -146,6 +146,7 @@ public abstract class Player : MonoBehaviour {
     private int cloudDamage;
     private float poisonedCurrentTime = 0;
     private float poisonedMaxTime;
+	private float vinesTime = 0;
 
     //animation Attributes
     [SerializeField]
@@ -274,6 +275,13 @@ public abstract class Player : MonoBehaviour {
     {
         get { return playerColor; }
     }
+
+	public float VinesTime{
+		get{return vinesTime;}
+		set{vinesTime=value;}
+	}
+
+
     #endregion
 
     #region Methods
