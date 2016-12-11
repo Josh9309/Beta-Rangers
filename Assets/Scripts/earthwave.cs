@@ -3,14 +3,9 @@ using System.Collections;
 
 public class earthwave : MonoBehaviour {
 
-	private enum AttackItem { EARTHWAVE, VINES};
-	private bool colliding = false;
-	
 	[SerializeField] private GameObject ranger;
 	private Player player;
 	private GameObject root;
-	[SerializeField] private AttackItem itemType;
-	
 	
 	private Animator animator;
 	[SerializeField] private int superValue;

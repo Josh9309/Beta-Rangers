@@ -535,6 +535,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 450208}
   - 60: {fileID: 6061146}
+  - 114: {fileID: 11433182}
   m_Layer: 0
   m_Name: vines
   m_TagString: Attack
@@ -553,6 +554,21 @@ GameObject:
   - 212: {fileID: 21245662}
   m_Layer: 0
   m_Name: f-leg-lower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &182734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 477766}
+  m_Layer: 0
+  m_Name: damageSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -805,7 +821,7 @@ Transform:
   - {fileID: 421338}
   - {fileID: 407518}
   m_Father: {fileID: 482580}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &421338
 Transform:
   m_ObjectHideFlags: 1
@@ -1066,6 +1082,18 @@ Transform:
   - {fileID: 440022}
   m_Father: {fileID: 407518}
   m_RootOrder: 1
+--- !u!4 &477766
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .159999996, y: 1.47000003, z: 0}
+  m_LocalScale: {x: 1.01159406, y: 1.01159501, z: 1.01159501}
+  m_Children: []
+  m_Father: {fileID: 482580}
+  m_RootOrder: 0
 --- !u!4 &479150
 Transform:
   m_ObjectHideFlags: 1
@@ -1097,9 +1125,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.3599997, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.93315029, y: 1.9331485, z: 1.9331485}
   m_Children:
+  - {fileID: 477766}
   - {fileID: 416874}
   - {fileID: 491130}
   m_Father: {fileID: 0}
@@ -1170,7 +1199,7 @@ Transform:
   - {fileID: 435566}
   - {fileID: 450208}
   m_Father: {fileID: 482580}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &497150
 Transform:
   m_ObjectHideFlags: 1
@@ -1368,7 +1397,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ranger: {fileID: 150316}
-  itemType: 0
   superValue: 0
 --- !u!114 &11432106
 MonoBehaviour:
@@ -1381,6 +1409,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277052f38a2689d4aa6add7f3e99a87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11433182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2570762840570641ab92650f0d4c629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ranger: {fileID: 150316}
+  superValue: 0
+  scale: {x: 0, y: 0, z: 0}
 --- !u!114 &11480514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1398,11 +1440,11 @@ MonoBehaviour:
   attack3Power: 30
   speed: 13
   jumpPower: 1200
-  superCost: 0
+  superCost: 50
   superMax: 100
   attack1SuperValue: 10
-  attack1CooldownTime: 1
-  attack2CooldownTime: 2
+  attack1CooldownTime: .100000001
+  attack2CooldownTime: .699999988
   ranger: 2
   playerNum: 1
   playerColor: {r: 0, g: 1, b: 0, a: 0}
@@ -1420,7 +1462,7 @@ MonoBehaviour:
   rangerAnimator: {fileID: 9532118}
   earthwave: {fileID: 120744}
   vines: {fileID: 177358}
-  vinesTime: 0
+  vinesStayTime: 7
 --- !u!114 &11491502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1433,7 +1475,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ranger: {fileID: 150316}
-  itemType: 0
   superValue: 0
 --- !u!212 &21207800
 SpriteRenderer:
@@ -2097,6 +2138,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: superMax
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

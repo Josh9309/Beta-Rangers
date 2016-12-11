@@ -147,6 +147,8 @@ public abstract class Player : MonoBehaviour {
     private float poisonedCurrentTime = 0;
     private float poisonedMaxTime;
 	private float vinesTime = 0;
+	private string colorString;
+	private GameObject damageSpawn;
 
     //animation Attributes
     [SerializeField]
@@ -299,6 +301,14 @@ public abstract class Player : MonoBehaviour {
         rBody = GetComponent<Rigidbody2D>();
         rBody.mass = 1.0f;
         keyDamage = 0;
+
+		damageSpawn = transform.FindChild ("damageSpawnPoint").gameObject;
+		if (ranger == RangerType.RedRanger) { colorString="red"; }
+		if (ranger == RangerType.YellowRanger) { colorString="yellow"; }
+		if (ranger == RangerType.GreenRanger) { colorString="green"; }
+		if (ranger == RangerType.BlueRanger) { colorString="blue"; }
+		if (ranger == RangerType.PinkRanger) { colorString="pink"; }
+		if (ranger == RangerType.BlackRanger) { colorString="black"; }
 	}
 	
     protected virtual void FixedUpdate()
@@ -605,6 +615,8 @@ public abstract class Player : MonoBehaviour {
     {
 		if (canBeHit) {
 			Health += mod;
+			//Debug.Log ("modhealth: "+mod.ToString()+", "+colorString);
+			worldControl.DamageSpawner.GetComponent<damageScript>().takeDamage(mod,colorString,damageSpawn.transform.position);
 			if (key != null) {
 				keyDamage -= mod;
 				if (keyDamage >= keyDamageMax) {

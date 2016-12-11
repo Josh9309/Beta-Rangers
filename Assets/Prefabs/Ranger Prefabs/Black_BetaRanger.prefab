@@ -365,6 +365,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &166336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462732}
+  m_Layer: 0
+  m_Name: damageSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &173308
 GameObject:
   m_ObjectHideFlags: 1
@@ -518,7 +533,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 450998}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &401956
 Transform:
   m_ObjectHideFlags: 1
@@ -718,9 +733,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.2000008, y: -4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.95556331, y: 1.95556331, z: 1.95556331}
   m_Children:
+  - {fileID: 462732}
   - {fileID: 465524}
   - {fileID: 401038}
   - {fileID: 480476}
@@ -737,6 +753,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 484800}
+  m_RootOrder: 0
+--- !u!4 &462732
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .1581662, y: 1.45315075, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 450998}
   m_RootOrder: 0
 --- !u!4 &464426
 Transform:
@@ -763,7 +791,7 @@ Transform:
   - {fileID: 433122}
   - {fileID: 477950}
   m_Father: {fileID: 450998}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &470608
 Transform:
   m_ObjectHideFlags: 1
@@ -851,7 +879,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 450998}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &481930
 Transform:
   m_ObjectHideFlags: 1
