@@ -17,6 +17,7 @@ TagManager:
   - Poison Cloud
   - Warp
   - earthwave
+  - Canvas
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - 
   - 
   - earthwave
-  - 
+  - Canvas
   - 
   - 
   - 

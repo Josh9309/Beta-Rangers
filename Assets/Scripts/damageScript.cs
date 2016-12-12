@@ -59,7 +59,7 @@ public class damageScript : MonoBehaviour {
 		if (color == "black") { damageText.color=black; }
 
 		GameObject tempText = Instantiate(damageSpawnPoint, position, Quaternion.identity) as GameObject;
-		tempText.transform.SetParent(GameObject.Find("Canvas").transform, false);
+		tempText.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
 
 		damageTexts.Add (tempText);
 		animators.Add (tempText.transform.FindChild("damageText").GetComponent<Animator>());

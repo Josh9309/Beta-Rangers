@@ -616,7 +616,7 @@ public abstract class Player : MonoBehaviour {
 		if (canBeHit) {
 			Health += mod;
 			//Debug.Log ("modhealth: "+mod.ToString()+", "+colorString);
-			worldControl.DamageSpawner.GetComponent<damageScript>().takeDamage(mod,colorString,damageSpawn.transform.position);
+			GameObject.Find("damageSpawner").GetComponent<damageScript>().takeDamage(mod,colorString,damageSpawn.transform.position);
 			if (key != null) {
 				keyDamage -= mod;
 				if (keyDamage >= keyDamageMax) {
