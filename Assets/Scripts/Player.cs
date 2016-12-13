@@ -616,7 +616,7 @@ public abstract class Player : MonoBehaviour {
 		if (canBeHit) {
 			Health += mod;
 			//Debug.Log ("modhealth: "+mod.ToString()+", "+colorString);
-			worldControl.DamageSpawner.GetComponent<damageScript>().takeDamage(mod,colorString,damageSpawn.transform.position);
+			//worldControl.DamageSpawner.GetComponent<damageScript>().takeDamage(mod,colorString,damageSpawn.transform.position);
 			if (key != null) {
 				keyDamage -= mod;
 				if (keyDamage >= keyDamageMax) {
@@ -659,6 +659,13 @@ public abstract class Player : MonoBehaviour {
                 key = other.gameObject.GetComponent<Key>();
                 keyDamage = 0;
                 key.pickedUp();
+            }
+        }
+        if (other.gameObject.tag == "Goal")//colliding with their goal
+        {
+            if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            {
+                key.GetComponent<Animator>().Play("BatteryUp");
             }
         }
         if (other.gameObject.tag == "Poison Cloud")
@@ -706,7 +713,7 @@ public abstract class Player : MonoBehaviour {
 		{
             if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
 			{
-				keyCurrentTime += Time.deltaTime;
+                keyCurrentTime += Time.deltaTime;
             }
 		}
         //poisoned
@@ -725,6 +732,16 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Goal")//colliding with their goal
+        {
+            if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            {
+                key.GetComponent<Animator>().Play("BatteryDown");
+            }
+        }
+    }
 
 	//enable air control
 	protected virtual void OnCollisionExit2D(Collision2D coll)
