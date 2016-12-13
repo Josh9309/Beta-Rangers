@@ -303,6 +303,7 @@ public abstract class Player : MonoBehaviour {
         keyDamage = 0;
 
 		damageSpawn = transform.FindChild ("damageSpawnPoint").gameObject;
+
 		if (ranger == RangerType.RedRanger) { colorString="red"; }
 		if (ranger == RangerType.YellowRanger) { colorString="yellow"; }
 		if (ranger == RangerType.GreenRanger) { colorString="green"; }
@@ -615,8 +616,10 @@ public abstract class Player : MonoBehaviour {
     {
 		if (canBeHit) {
 			Health += mod;
-			//Debug.Log ("modhealth: "+mod.ToString()+", "+colorString);
-			//worldControl.DamageSpawner.GetComponent<damageScript>().takeDamage(mod,colorString,damageSpawn.transform.position);
+			//if there is a damage spawner, spawn damage marker
+			if(GameObject.Find ("damageSpawner") != null){ 
+				GameObject.Find("damageSpawner").GetComponent<damageScript>().takeDamage(mod,colorString,damageSpawn.transform.position); 
+			}
 			if (key != null) {
 				keyDamage -= mod;
 				if (keyDamage >= keyDamageMax) {

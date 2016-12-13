@@ -33,9 +33,9 @@ public class damageScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-//		if (Input.GetKeyDown (KeyCode.Z)) {
-//			takeDamage( Random.Range(10,200) ,"blue", gameObject.transform.position);
-//		}
+		if (Input.GetKeyDown (KeyCode.Z)) {
+			takeDamage( (int)Random.Range(10,200) ,"blue", gameObject.transform.position);
+		}
 
 		for (int i=0; i<damageTexts.Count; i++) {
 			if (animators[i].GetCurrentAnimatorStateInfo(0).IsName ("done")) {
@@ -47,9 +47,9 @@ public class damageScript : MonoBehaviour {
 		}
 	}
 
-	public void takeDamage(float dmg, string color, Vector3 position){
+	public void takeDamage(int dmg, string color, Vector3 position){
 
-		damageText.text = ((int)dmg).ToString();
+		damageText.text = dmg.ToString();
 		damageText.gameObject.SetActive (true);
 		if (color == "red") { damageText.color=red; }
 		else if (color == "yellow") { damageText.color=yellow; }
@@ -59,7 +59,7 @@ public class damageScript : MonoBehaviour {
 		if (color == "black") { damageText.color=black; }
 
 		GameObject tempText = Instantiate(damageSpawnPoint, position, Quaternion.identity) as GameObject;
-		tempText.transform.SetParent(GameObject.Find("Canvas").transform, false);
+		tempText.transform.SetParent(GameObject.Find("WorldSpaceUI").transform, false);
 
 		damageTexts.Add (tempText);
 		animators.Add (tempText.transform.FindChild("damageText").GetComponent<Animator>());
