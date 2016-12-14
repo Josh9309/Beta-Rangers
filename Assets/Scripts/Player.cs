@@ -528,8 +528,15 @@ public abstract class Player : MonoBehaviour {
     {
         if (input.attack1 && attack1Available)
         {
-            //Debug.Log("att1");
-            rangerAnimator.Play("Melee");
+            if (Mathf.Abs(input.fwdInput) > input.delay) //make sure the input is greater than the input.delay
+            {
+                rangerAnimator.Play("MeleeMelee");
+            }
+            else {
+                //Debug.Log("att1");
+                rangerAnimator.Play("Melee");
+                //rangerAnimator.layer
+            }
 
             int attack1Range = 3; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
