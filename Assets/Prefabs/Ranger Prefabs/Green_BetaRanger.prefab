@@ -1443,7 +1443,7 @@ MonoBehaviour:
   superCost: 50
   superMax: 100
   attack1SuperValue: 10
-  attack1CooldownTime: .100000001
+  attack1CooldownTime: .119999997
   attack2CooldownTime: .699999988
   ranger: 2
   playerNum: 1
@@ -2142,6 +2142,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack1CooldownTime
+      value: .119999997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

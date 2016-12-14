@@ -41,7 +41,6 @@ public class WorldController : MonoBehaviour {
     public bool battleSetup = false;
     public bool winSetup = false;
     private GameUI gameUI;
-	[SerializeField] private damageScript damageSpawner;
 
     ///properties
     public cMenu CurrentMenu{
@@ -98,10 +97,6 @@ public class WorldController : MonoBehaviour {
     {
         get { return p4Active; }
     }
-
-	public damageScript DamageSpawner{
-		get { return damageSpawner; }
-	}
 
 
     ///Methods
