@@ -661,6 +661,13 @@ public abstract class Player : MonoBehaviour {
                 key.pickedUp();
             }
         }
+        if (other.gameObject.tag == "Goal")//colliding with their goal
+        {
+            if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            {
+                key.GetComponent<Animator>().Play("BatteryUp");
+            }
+        }
         if (other.gameObject.tag == "Poison Cloud")
         {
             cloudDamage = other.gameObject.GetComponent<PoisonCloud>().CloudDamage;
@@ -725,6 +732,16 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Goal")//colliding with their goal
+        {
+            if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            {
+                key.GetComponent<Animator>().Play("BatteryDown");
+            }
+        }
+    }
 
 	//enable air control
 	protected virtual void OnCollisionExit2D(Collision2D coll)

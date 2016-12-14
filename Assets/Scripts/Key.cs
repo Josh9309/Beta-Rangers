@@ -52,7 +52,6 @@ public class Key : MonoBehaviour {
 
     public void drop()
     {
-        
         rBody.WakeUp();
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<SpriteRenderer>().sortingOrder = 0;
@@ -67,6 +66,7 @@ public class Key : MonoBehaviour {
         }
         holder.GetComponent<Player>().KeyPickup = false;
         holder = null;
+        GetComponent<Animator>().Play("Still");
         Debug.Log("Key Dropped");
     }
 
