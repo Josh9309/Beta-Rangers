@@ -356,10 +356,12 @@ public abstract class Player : MonoBehaviour {
         if(dartEffect != StatusEffect.None)
         {
             dartCurrentTime += Time.deltaTime;
+
             if(dartCurrentTime >= dartMaxTime)
             {
                 dartCurrentTime = 0;
                 dartEffect = StatusEffect.None;
+                setColorOfRanger(Color.white);
             }
         }
 
@@ -703,19 +705,24 @@ public abstract class Player : MonoBehaviour {
                 {
                     case 1:
                         dartEffect = StatusEffect.AttackPower;
+                        setColorOfRanger(Color.red);
                         break;
                     case 2:
                         dartEffect = StatusEffect.Speed;
+                        setColorOfRanger(Color.yellow);
                         break;
                     case 3:
                         dartEffect = StatusEffect.Jump;
+                        setColorOfRanger(Color.green);
                         break;
                     default:
                         dartEffect = StatusEffect.None;
+                        setColorOfRanger(Color.white);
                         break;
                 }
                 dartCurrentTime = 0;
                 dartMaxTime = other.gameObject.GetComponent<statDartScript>().StatusTimeMax;
+                ModHealth(-other.gameObject.GetComponent<statDartScript>().DamageAmount);
                 Destroy(other.gameObject);
             }
         }
@@ -765,6 +772,15 @@ public abstract class Player : MonoBehaviour {
 			airControl= true;
 		}
 	}
+
+    protected virtual void setColorOfRanger(Color choiceColor)
+    {
+        SpriteRenderer[] sra = GetComponentsInChildren<SpriteRenderer>();
+        foreach(SpriteRenderer sr in sra)
+        {
+            sr.color = choiceColor;
+        }
+    }
 
     protected virtual void OnDrawGizmos() //used to draw gizmos for debugging
     {
