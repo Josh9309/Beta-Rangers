@@ -13,6 +13,10 @@ public class GameUI : MonoBehaviour {
     private Sprite p2RangerDead;
     private Sprite p3RangerDead;
     private Sprite p4RangerDead;
+    private Sprite p1RangerAlive;
+    private Sprite p2RangerAlive;
+    private Sprite p3RangerAlive;
+    private Sprite p4RangerAlive;
 
     //Ranger Profiles
     [SerializeField] private Sprite redRangerProfile;
@@ -121,6 +125,9 @@ public class GameUI : MonoBehaviour {
                     p1RangerDead = yellowDeadRangerProfile;
                     break;
             }
+            //set player 1 ranger alive sprite
+            p1RangerAlive = p1Profile.sprite;
+
             //setup player 1 health bar
             p1HealthBar.maxValue = worldControl.Player1.Health;
             p1HealthBar.value = worldControl.Player1.Health;
@@ -170,6 +177,9 @@ public class GameUI : MonoBehaviour {
                     p2RangerDead = yellowDeadRangerProfile;
                     break;
             }
+            //set player 2 ranger alive sprite
+            p2RangerAlive = p2Profile.sprite;
+
             //setup player 2 health bar
             p2HealthBar.maxValue = worldControl.Player2.Health;
             p2HealthBar.value = worldControl.Player2.Health;
@@ -219,6 +229,8 @@ public class GameUI : MonoBehaviour {
                     p3RangerDead = yellowDeadRangerProfile;
                     break;
             }
+            //set player 3 ranger alive sprite
+            p3RangerAlive = p3Profile.sprite;
             //setup player 3 health bar
             p3HealthBar.maxValue = worldControl.Player3.Health;
             p3HealthBar.value = worldControl.Player3.Health;
@@ -268,6 +280,8 @@ public class GameUI : MonoBehaviour {
                     p4RangerDead = yellowDeadRangerProfile;
                     break;
             }
+            //set player 4 ranger alive sprite
+            p4RangerAlive = p4Profile.sprite;
             //setup player 4 health bar
             p4HealthBar.maxValue = worldControl.Player4.Health;
             p4HealthBar.value = worldControl.Player4.Health;
@@ -294,6 +308,11 @@ public class GameUI : MonoBehaviour {
                 p1Profile.sprite = p1RangerDead;
                 p1HealthBar.value = 0;
             }
+            else if(p1Profile.sprite == p1RangerDead)
+            {
+                
+                p1Profile.sprite = p1RangerAlive;
+            }
         }
 
         if (worldControl.P2Active)
@@ -304,6 +323,11 @@ public class GameUI : MonoBehaviour {
             {
                 p2Profile.sprite = p2RangerDead;
                 p2HealthBar.value = 0;
+            }
+            else if (p2Profile.sprite == p2RangerDead)
+            {
+
+                p2Profile.sprite = p2RangerAlive;
             }
         }
 
@@ -316,6 +340,11 @@ public class GameUI : MonoBehaviour {
                 p3Profile.sprite = p3RangerDead;
                 p3HealthBar.value = 0;
             }
+            else if (p3Profile.sprite == p3RangerDead)
+            {
+
+                p3Profile.sprite = p3RangerAlive;
+            }
         }
 
         if (worldControl.P4Active)
@@ -326,6 +355,11 @@ public class GameUI : MonoBehaviour {
             {
                 p4Profile.sprite = p4RangerDead;
                 p4HealthBar.value = 0;
+            }
+            else if (p4Profile.sprite == p4RangerDead)
+            {
+
+                p4Profile.sprite = p4RangerAlive;
             }
         }
     }

@@ -617,6 +617,7 @@ public abstract class Player : MonoBehaviour {
             key.GetComponent<Key>().drop();
         }
         rangerAnimator.Play("Dead");
+        worldControl.StartCoroutine(worldControl.Respawn(playerNum, ranger));
         Destroy(gameObject);
         Debug.Log("Ranger has been destroyed");
 

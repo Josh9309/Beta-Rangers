@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class WorldController : MonoBehaviour {
-    
+    #region Attributes
     ///attributes
     public enum cMenu { MAINMENU, OPTIONS, PAUSE, BATTLE, LOADING, WIN};
     public enum cLevel { STAGE1 };
@@ -19,7 +19,6 @@ public class WorldController : MonoBehaviour {
     [SerializeField] private GameObject prefabRangerGreen;
     [SerializeField] private GameObject prefabRangerBlack;
     [SerializeField] private GameObject prefabRangerPink;
-    //[SerializeField] private GameObject prefabGoal;
     [SerializeField] private Vector3 p1Location;
     [SerializeField] private Vector3 p2Location;
     [SerializeField] private Vector3 p3Location;
@@ -41,7 +40,10 @@ public class WorldController : MonoBehaviour {
     public bool battleSetup = false;
     public bool winSetup = false;
     private GameUI gameUI;
+    [SerializeField] private float respawnTime = 3.0f;
+    #endregion
 
+    #region Properties
     ///properties
     public cMenu CurrentMenu{
         get { return currentMenu; }
@@ -97,8 +99,9 @@ public class WorldController : MonoBehaviour {
     {
         get { return p4Active; }
     }
+    #endregion
 
-
+    #region Methods
     ///Methods
 
     //called when the script instance is being loaded.
@@ -600,4 +603,169 @@ public class WorldController : MonoBehaviour {
         }
         Destroy(iceBlastShard);
     }
+
+    public IEnumerator Respawn(int playerNum, Player.RangerType rangeType)
+    {
+        //Wait for player respawn time
+        yield return new WaitForSeconds(respawnTime);
+
+        //Respawn the player
+        GameObject player;
+        //check which player to respawn
+        switch (playerNum)
+        {
+            case 1: //Respawn player 1
+                switch (p1RangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        player = Instantiate(prefabRangerBlack, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.BlueRanger:
+                        player = Instantiate(prefabRangerBlue, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.GreenRanger:
+                        player = Instantiate(prefabRangerGreen, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.PinkRanger:
+                        player = Instantiate(prefabRangerPink, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.RedRanger:
+                        player = Instantiate(prefabRangerRed, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.YellowRanger:
+                        player = Instantiate(prefabRangerYellow, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    default:
+                        player = new GameObject();
+                        Debug.LogError("Respawn Player 1 Error");
+                        break;
+                }
+                player1 = player.GetComponent<Player>();
+                Player1.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player1.PlayerNum = 1;
+                p1Active = true;
+                break;
+
+            case 2: //Respawn player 2
+                switch (p2RangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        player = Instantiate(prefabRangerBlack, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.BlueRanger:
+                        player = Instantiate(prefabRangerBlue, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.GreenRanger:
+                        player = Instantiate(prefabRangerGreen, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.PinkRanger:
+                        player = Instantiate(prefabRangerPink, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.RedRanger:
+                        player = Instantiate(prefabRangerRed, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.YellowRanger:
+                        player = Instantiate(prefabRangerYellow, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    default:
+                        player = new GameObject();
+                        Debug.LogError("Respawn Player 2 Error");
+                        break;
+                }
+                player2 = player.GetComponent<Player>();
+                Player2.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player2.PlayerNum = 2;
+                p2Active = true;
+                break;
+
+            case 3: //Respawn player 3
+                switch (p3RangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        player = Instantiate(prefabRangerBlack, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.BlueRanger:
+                        player = Instantiate(prefabRangerBlue, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.GreenRanger:
+                        player = Instantiate(prefabRangerGreen, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.PinkRanger:
+                        player = Instantiate(prefabRangerPink, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.RedRanger:
+                        player = Instantiate(prefabRangerRed, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.YellowRanger:
+                        player = Instantiate(prefabRangerYellow, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    default:
+                        player = new GameObject();
+                        Debug.LogError("Respawn Player 3 Error");
+                        break;
+                }
+                player3 = player.GetComponent<Player>();
+                Player3.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player3.PlayerNum = 3;
+                p3Active = true;
+                break;
+
+            case 4: //Respawn player 4
+                switch (p4RangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        player = Instantiate(prefabRangerBlack, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.BlueRanger:
+                        player = Instantiate(prefabRangerBlue, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.GreenRanger:
+                        player = Instantiate(prefabRangerGreen, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.PinkRanger:
+                        player = Instantiate(prefabRangerPink, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.RedRanger:
+                        player = Instantiate(prefabRangerRed, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.YellowRanger:
+                        player = Instantiate(prefabRangerYellow, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    default:
+                        player = new GameObject();
+                        Debug.LogError("Respawn Player 4 Error");
+                        break;
+                }
+                player4 = player.GetComponent<Player>();
+                Player4.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player4.PlayerNum = 4;
+                p4Active = true;
+                break;
+        }
+    }
+    #endregion
 }
