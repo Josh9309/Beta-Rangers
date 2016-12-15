@@ -46,7 +46,7 @@ public class PinkRanger : Player {
             {
                 b.transform.position = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
             }
-            b.GetComponent<statDartScript>().startUp(playerNum, facingLeft, StatDartVelocity, statTimeMax);
+            b.GetComponent<statDartScript>().startUp(playerNum, facingLeft, StatDartVelocity, statTimeMax,Attack2Power);
 
             StartCoroutine(Attack2Cooldown());
         }

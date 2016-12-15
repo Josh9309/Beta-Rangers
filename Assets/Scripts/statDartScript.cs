@@ -8,6 +8,7 @@ public class statDartScript : MonoBehaviour {
     private int effect;
     private Rigidbody2D rBody;
     protected WorldController worldControl;
+    private int damageAmount;
 
     public float PlayerNum
     {
@@ -23,6 +24,11 @@ public class statDartScript : MonoBehaviour {
         get { return effect; }
     }
 
+    public int DamageAmount
+    {
+        get { return damageAmount; }
+    }
+
     // Use this for initialization
     void Start() {
 
@@ -33,7 +39,7 @@ public class statDartScript : MonoBehaviour {
 
     }
 
-    public void startUp(int pNum, bool direction, float speed, float timeMax)//called by pink ranger and gives info needed for dart
+    public void startUp(int pNum, bool direction, float speed, float timeMax, int damage)//called by pink ranger and gives info needed for dart
     {
         worldControl = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<WorldController>();
         rBody = GetComponent<Rigidbody2D>();
@@ -48,5 +54,7 @@ public class statDartScript : MonoBehaviour {
             rBody.velocity = new Vector2(speed, 0);
         }
         effect = (int)(Random.Range(0, 3) + 1);
+        statTime = timeMax;
+        damageAmount = damage;
     }
 }
