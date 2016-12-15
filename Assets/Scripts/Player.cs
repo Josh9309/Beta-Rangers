@@ -153,6 +153,9 @@ public abstract class Player : MonoBehaviour {
     //animation Attributes
     [SerializeField]
     private Animator rangerAnimator;
+    private bool startedMoving = false;
+    private bool startedStill = false;
+
     #endregion
 
     #region Properties
@@ -460,7 +463,12 @@ public abstract class Player : MonoBehaviour {
     {
         if(Mathf.Abs(input.fwdInput)> input.delay) //make sure the input is greater than the input.delay
         {
-            rangerAnimator.Play("Run");
+            if (!startedMoving)
+            {
+                rangerAnimator.Play("Run");
+            }
+            startedMoving = true;
+            startedStill = false;
             if(airControl || grounded) //if aircontrol or grounded is true
             {
                 if (dartEffect == StatusEffect.Speed)
@@ -489,7 +497,11 @@ public abstract class Player : MonoBehaviour {
         }
         else
         {
-            //rangerAnimator.Play("Idle");
+            if (!startedStill) {
+                rangerAnimator.Play("Idle");
+                startedStill = true;
+            }
+            startedMoving = false;
         }
     }
 
