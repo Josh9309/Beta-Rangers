@@ -7,8 +7,8 @@ public class LoadingScene : MonoBehaviour {
 
     [SerializeField] private float loadTime = 4.0f;
     [SerializeField] private GameObject continueBtn;
-    [SerializeField] private GameObject loadingText;
-    [SerializeField] private GameObject loadingShuriken;
+    [SerializeField] private CanvasGroup continueGroup;
+    [SerializeField] private GameObject loadingGroup;
 
     // Use this for initialization
     void Start () {
@@ -24,9 +24,10 @@ public class LoadingScene : MonoBehaviour {
     {
         yield return new WaitForSeconds(loadTime);
 
-        loadingText.SetActive(false);
-        loadingShuriken.SetActive(false);
+        loadingGroup.SetActive(false);
 
+        continueGroup.alpha = 1;
+        continueGroup.interactable = true;
         continueBtn.SetActive(true);
         EventSystem.current.firstSelectedGameObject = continueBtn;
     }

@@ -592,7 +592,7 @@ public class WorldController : MonoBehaviour {
                 rangerRenders[i].color = Color.white;
             }
         }
-        rangerAnimator.Play("Idle");
+        //rangerAnimator.Play("Idle");
         Destroy(iceBlastShard);
     }
 }
