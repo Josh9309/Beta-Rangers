@@ -57,9 +57,9 @@ public class IceShuriken : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D thing)
     {
-        if(thing.tag == "Player" && thing.name != "Blue_BetaRanger(Clone)") //if collision is with another ranger
+        Start();
+        if (thing.tag == "Player" && thing.name != "Blue_BetaRanger(Clone)") //if collision is with another ranger
         {
-            Start();
             thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
             Debug.Log(thing.name + "hit with ice shuriken for " + damage);
             Destroy(gameObject); //destroys the shuriken

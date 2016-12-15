@@ -52,9 +52,9 @@ public class ElectricBall : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D thing)
     {
-        if(thing.tag == "Player" && thing.name != "Yellow_BetaRanger(Clone)") //if collision is with another ranger
+        Start();
+        if (thing.tag == "Player" && thing.name != "Yellow_BetaRanger(Clone)") //if collision is with another ranger
         {
-            Start();
             thing.gameObject.GetComponent<Player>().ModHealth(-damage); //gets the base player script and inflicts the damage on the player
             Debug.Log(thing.name + "hit with Electric Ball for " + damage);
             Destroy(gameObject); //destroys the Electric Ball

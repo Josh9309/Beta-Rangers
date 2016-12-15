@@ -46,8 +46,9 @@ public class vines : MonoBehaviour {
 			
 			if (other.tag == "Player") {
 				Player otherRanger;
-				otherRanger= other.GetComponent<Player>();
-				otherRanger.ModHealth(-player.Attack3Power); //decrease enemy ranger health by attack1Power damage
+                otherRanger = other.gameObject.GetComponent<Player>();
+                player = ranger.GetComponent<Player>();
+                otherRanger.ModHealth(-player.Attack3Power); //decrease enemy ranger health by attack1Power damage
 				Debug.Log(gameObject.name + " has hit " + other.name + " for " + player.Attack3Power + " damage");// debugs what ranger hit and for how much damage.
 			}
 		}
@@ -59,7 +60,7 @@ public class vines : MonoBehaviour {
 			if (other.tag == "Player") {
 				Player otherRanger;
 
-				otherRanger = other.GetComponent<Player>();
+				otherRanger = other.gameObject.GetComponent<Player>();
 				otherRanger.VinesTime += Time.deltaTime;
 				if( otherRanger.VinesTime > 1.2){
 					Debug.Log("vines damage");
