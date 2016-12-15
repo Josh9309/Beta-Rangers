@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class WorldController : MonoBehaviour {
-    
+    #region Attributes
     ///attributes
     public enum cMenu { MAINMENU, OPTIONS, PAUSE, BATTLE, LOADING, WIN};
     public enum cLevel { STAGE1 };
@@ -19,7 +19,6 @@ public class WorldController : MonoBehaviour {
     [SerializeField] private GameObject prefabRangerGreen;
     [SerializeField] private GameObject prefabRangerBlack;
     [SerializeField] private GameObject prefabRangerPink;
-    [SerializeField] private GameObject prefabGoal;
     [SerializeField] private Vector3 p1Location;
     [SerializeField] private Vector3 p2Location;
     [SerializeField] private Vector3 p3Location;
@@ -41,7 +40,10 @@ public class WorldController : MonoBehaviour {
     public bool battleSetup = false;
     public bool winSetup = false;
     private GameUI gameUI;
+    [SerializeField] private float respawnTime = 3.0f;
+    #endregion
 
+    #region Properties
     ///properties
     public cMenu CurrentMenu{
         get { return currentMenu; }
@@ -97,7 +99,9 @@ public class WorldController : MonoBehaviour {
     {
         get { return p4Active; }
     }
+    #endregion
 
+    #region Methods
     ///Methods
 
     //called when the script instance is being loaded.
@@ -108,7 +112,6 @@ public class WorldController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	    
 	}
 	
 	// Update is called once per frame
@@ -347,15 +350,16 @@ public class WorldController : MonoBehaviour {
 
     private void SetupGoals()
     {
-        goalP1 = GameObject.Find("P1_Goal");
-        goalP2 = GameObject.Find("P2_Goal");
-        goalP3 = GameObject.Find("P3_Goal");
-        goalP4 = GameObject.Find("P4_Goal");
+        goalP1 = GameObject.Find("P1_Head_Goal");
+        goalP2 = GameObject.Find("P2_Torso_Goal");
+        goalP3 = GameObject.Find("P3_ArmR_Goal");
+        goalP4 = GameObject.Find("P4_ArmL_Goal");
 
         if (p1Active)
         {
             goalP1.GetComponent<Goal>().PlayerNum = 1;
             goalP1.GetComponent<Goal>().RangerColor = Player1.RangerColor;
+            goalP1.GetComponent<Goal>().PlayerRangerType = player1.Ranger;
         }
         else
         {
@@ -366,6 +370,7 @@ public class WorldController : MonoBehaviour {
         {
             goalP2.GetComponent<Goal>().PlayerNum = 2;
             goalP2.GetComponent<Goal>().RangerColor = Player2.RangerColor;
+            goalP2.GetComponent<Goal>().PlayerRangerType = player2.Ranger;
         }
         else
         {
@@ -376,6 +381,7 @@ public class WorldController : MonoBehaviour {
         {
             goalP3.GetComponent<Goal>().PlayerNum = 3;
             goalP3.GetComponent<Goal>().RangerColor = Player3.RangerColor;
+            goalP3.GetComponent<Goal>().PlayerRangerType = player3.Ranger;
         }
         else
         {
@@ -386,6 +392,7 @@ public class WorldController : MonoBehaviour {
         {
             goalP4.GetComponent<Goal>().PlayerNum = 4;
             goalP4.GetComponent<Goal>().RangerColor = Player4.RangerColor;
+            goalP4.GetComponent<Goal>().PlayerRangerType = player4.Ranger;
         }
         else
         {
@@ -401,23 +408,29 @@ public class WorldController : MonoBehaviour {
         {
             Player ranger = players[i].GetComponent<Player>();
 
-            switch (ranger.PlayerNum)
+            if (ranger != null)
             {
-                case 1:
-                    player1 = ranger;
-                    break;
+                switch (ranger.PlayerNum)
+                {
+                    case 1:
+                        player1 = ranger;
+                        break;
 
-                case 2:
-                    Player2 = ranger;
-                    break;
+                    case 2:
+                        Player2 = ranger;
+                        break;
 
-                case 3:
-                    player3 = ranger;
-                    break;
+                    case 3:
+                        player3 = ranger;
+                        break;
 
-                case 4:
-                    player4 = ranger;
-                    break;
+                    case 4:
+                        player4 = ranger;
+                        break;
+                    default:
+                        Debug.LogError("Assign Player Error");
+                        break;
+                }
             }
         }
     }
@@ -484,6 +497,7 @@ public class WorldController : MonoBehaviour {
     {
         Player enemyRanger;
         SpriteRenderer[] rangerRenders;
+        Animator rangerAnimator;
 
         //determines which player is being frozen
         switch (playNum)
@@ -492,7 +506,7 @@ public class WorldController : MonoBehaviour {
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player1;
                 rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-
+                rangerAnimator = enemyRanger.RangerAnimator;
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
                 for (int i = 0; i < rangerRenders.Length; i++)
@@ -505,7 +519,7 @@ public class WorldController : MonoBehaviour {
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player2;
                 rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-
+                rangerAnimator = enemyRanger.RangerAnimator;
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
                 for (int i = 0; i < rangerRenders.Length; i++)
@@ -517,8 +531,8 @@ public class WorldController : MonoBehaviour {
             case 3:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player3; 
-                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>(); 
-
+                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
+                rangerAnimator = enemyRanger.RangerAnimator;
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
                 for (int i = 0; i < rangerRenders.Length; i++)
@@ -531,7 +545,7 @@ public class WorldController : MonoBehaviour {
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player4;
                 rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-
+                rangerAnimator = enemyRanger.RangerAnimator;
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
                 for (int i = 0; i < rangerRenders.Length; i++)
@@ -543,10 +557,14 @@ public class WorldController : MonoBehaviour {
             default:
                 Debug.LogError("Player number passed into frozen corroutine was invalid");
                 enemyRanger = null; //this should not trigger unless there is an error
-                rangerRenders = null; 
+                rangerRenders = null;
+                rangerAnimator = null;
                 break;
         }
-
+        if (enemyRanger != null)
+        {
+            rangerAnimator.Play("Frozen");
+        }
         //waits for a third of the freeze time
         yield return new WaitForSeconds(freezeTime/ 3);
         if(enemyRanger != null)
@@ -574,12 +592,180 @@ public class WorldController : MonoBehaviour {
             Debug.Log(enemyRanger.name + " is Unfrozen!");
             //Unfreezes the ranger and removes tint, it also destroys ice blast shard gameobject
             enemyRanger.frozen = false;
-            enemyRanger.gameObject.GetComponent<Animator>().enabled = true;
             for (int i = 0; i < rangerRenders.Length; i++)
             {
                 rangerRenders[i].color = Color.white;
             }
         }
+        if (enemyRanger != null)
+        {
+            rangerAnimator.Play("Idle");
+        }
         Destroy(iceBlastShard);
     }
+
+    public IEnumerator Respawn(int playerNum, Player.RangerType rangeType)
+    {
+        //Wait for player respawn time
+        yield return new WaitForSeconds(respawnTime);
+
+        //Respawn the player
+        GameObject player;
+        //check which player to respawn
+        switch (playerNum)
+        {
+            case 1: //Respawn player 1
+                switch (p1RangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        player = Instantiate(prefabRangerBlack, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.BlueRanger:
+                        player = Instantiate(prefabRangerBlue, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.GreenRanger:
+                        player = Instantiate(prefabRangerGreen, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.PinkRanger:
+                        player = Instantiate(prefabRangerPink, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.RedRanger:
+                        player = Instantiate(prefabRangerRed, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.YellowRanger:
+                        player = Instantiate(prefabRangerYellow, p1Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    default:
+                        player = new GameObject();
+                        Debug.LogError("Respawn Player 1 Error");
+                        break;
+                }
+                player1 = player.GetComponent<Player>();
+                Player1.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player1.PlayerNum = 1;
+                p1Active = true;
+                break;
+
+            case 2: //Respawn player 2
+                switch (p2RangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        player = Instantiate(prefabRangerBlack, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.BlueRanger:
+                        player = Instantiate(prefabRangerBlue, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.GreenRanger:
+                        player = Instantiate(prefabRangerGreen, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.PinkRanger:
+                        player = Instantiate(prefabRangerPink, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.RedRanger:
+                        player = Instantiate(prefabRangerRed, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.YellowRanger:
+                        player = Instantiate(prefabRangerYellow, p2Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    default:
+                        player = new GameObject();
+                        Debug.LogError("Respawn Player 2 Error");
+                        break;
+                }
+                player2 = player.GetComponent<Player>();
+                Player2.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player2.PlayerNum = 2;
+                p2Active = true;
+                break;
+
+            case 3: //Respawn player 3
+                switch (p3RangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        player = Instantiate(prefabRangerBlack, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.BlueRanger:
+                        player = Instantiate(prefabRangerBlue, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.GreenRanger:
+                        player = Instantiate(prefabRangerGreen, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.PinkRanger:
+                        player = Instantiate(prefabRangerPink, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.RedRanger:
+                        player = Instantiate(prefabRangerRed, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.YellowRanger:
+                        player = Instantiate(prefabRangerYellow, p3Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    default:
+                        player = new GameObject();
+                        Debug.LogError("Respawn Player 3 Error");
+                        break;
+                }
+                player3 = player.GetComponent<Player>();
+                Player3.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player3.PlayerNum = 3;
+                p3Active = true;
+                break;
+
+            case 4: //Respawn player 4
+                switch (p4RangerType)
+                {
+                    case Player.RangerType.BlackRanger:
+                        player = Instantiate(prefabRangerBlack, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.BlueRanger:
+                        player = Instantiate(prefabRangerBlue, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.GreenRanger:
+                        player = Instantiate(prefabRangerGreen, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.PinkRanger:
+                        player = Instantiate(prefabRangerPink, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.RedRanger:
+                        player = Instantiate(prefabRangerRed, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    case Player.RangerType.YellowRanger:
+                        player = Instantiate(prefabRangerYellow, p4Location, Quaternion.identity) as GameObject;
+                        break;
+
+                    default:
+                        player = new GameObject();
+                        Debug.LogError("Respawn Player 4 Error");
+                        break;
+                }
+                player4 = player.GetComponent<Player>();
+                Player4.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                player4.PlayerNum = 4;
+                p4Active = true;
+                break;
+        }
+    }
+    #endregion
 }

@@ -53,7 +53,7 @@ public class IceBlast : MonoBehaviour {
     {
         Player enemyRanger;
 
-        if (thing.tag == "Player" && thing.name != "Blue_BetaRanger") //if collision is with another ranger
+        if (thing.tag == "Player" && thing.name != "Blue_BetaRanger(Clone)") //if collision is with another ranger
         {
             Start();
             enemyRanger = thing.gameObject.GetComponent<Player>();
@@ -64,8 +64,6 @@ public class IceBlast : MonoBehaviour {
             //start frozen Corroutine
             StartCoroutine(blueRanger.WorldControl.Frozen(enemyRanger.PlayerNum, freezeTime, frozenDamage, gameObject));
 
-            //turn off animation
-            thing.GetComponent<Animator>().enabled = false;
 
             //turn off sprite render and Collider2D, then it makes rigidbody position frozen until frozen corroutine destroys ice blast shard.
             gameObject.GetComponent<SpriteRenderer>().enabled = false;

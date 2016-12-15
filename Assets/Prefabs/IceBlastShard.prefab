@@ -73,8 +73,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   moveLeft: 1
-  freezeTime: 2
-  frozenDamage: 5
+  freezeTime: 3
+  frozenDamage: 10
   rotationSpeed: 200
 --- !u!212 &21299440
 SpriteRenderer:
@@ -126,6 +126,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: freezeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: frozenDamage
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

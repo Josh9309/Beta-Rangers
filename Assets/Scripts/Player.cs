@@ -146,6 +146,9 @@ public abstract class Player : MonoBehaviour {
     private int cloudDamage;
     private float poisonedCurrentTime = 0;
     private float poisonedMaxTime;
+	private float vinesTime = 0;
+	private string colorString;
+	private GameObject damageSpawn;
 
     //animation Attributes
     [SerializeField]
@@ -202,6 +205,11 @@ public abstract class Player : MonoBehaviour {
     {
         get { return keyPickup; }
         set { keyPickup = value; }
+    }
+
+    public float KeyCurrentTime
+    {
+        get { return keyCurrentTime; }
     }
 
     public int SuperCurrent
@@ -269,6 +277,17 @@ public abstract class Player : MonoBehaviour {
     {
         get { return playerColor; }
     }
+
+	public float VinesTime{
+		get{return vinesTime;}
+		set{vinesTime=value;}
+	}
+
+    public Animator RangerAnimator
+    {
+        get { return rangerAnimator; }
+    }
+
     #endregion
 
     #region Methods
@@ -286,6 +305,14 @@ public abstract class Player : MonoBehaviour {
         rBody = GetComponent<Rigidbody2D>();
         rBody.mass = 1.0f;
         keyDamage = 0;
+
+		damageSpawn = transform.FindChild ("damageSpawnPoint").gameObject;
+		if (ranger == RangerType.RedRanger) { colorString="red"; }
+		if (ranger == RangerType.YellowRanger) { colorString="yellow"; }
+		if (ranger == RangerType.GreenRanger) { colorString="green"; }
+		if (ranger == RangerType.BlueRanger) { colorString="blue"; }
+		if (ranger == RangerType.PinkRanger) { colorString="pink"; }
+		if (ranger == RangerType.BlackRanger) { colorString="black"; }
 	}
 	
     protected virtual void FixedUpdate()
@@ -505,8 +532,15 @@ public abstract class Player : MonoBehaviour {
     {
         if (input.attack1 && attack1Available)
         {
-            //Debug.Log("att1");
-            rangerAnimator.Play("Melee");
+            if (Mathf.Abs(input.fwdInput) > input.delay) //make sure the input is greater than the input.delay
+            {
+                rangerAnimator.Play("MeleeMelee");
+            }
+            else {
+                //Debug.Log("att1");
+                rangerAnimator.Play("Melee");
+                //rangerAnimator.layer
+            }
 
             int attack1Range = 3; //the range of the melee attack for the ranger
             Collider2D[] cols; //holds the colliders of the gameobjects the ranger punches
@@ -583,6 +617,7 @@ public abstract class Player : MonoBehaviour {
             key.GetComponent<Key>().drop();
         }
         rangerAnimator.Play("Dead");
+        worldControl.StartCoroutine(worldControl.Respawn(playerNum, ranger));
         Destroy(gameObject);
         Debug.Log("Ranger has been destroyed");
 
@@ -592,6 +627,8 @@ public abstract class Player : MonoBehaviour {
     {
 		if (canBeHit) {
 			Health += mod;
+			//Debug.Log ("modhealth: "+mod.ToString()+", "+colorString);
+			GameObject.Find("damageSpawner").GetComponent<damageScript>().takeDamage(mod,colorString,damageSpawn.transform.position);
 			if (key != null) {
 				keyDamage -= mod;
 				if (keyDamage >= keyDamageMax) {
@@ -636,10 +673,25 @@ public abstract class Player : MonoBehaviour {
                 key.pickedUp();
             }
         }
+        if (other.gameObject.tag == "Goal")//colliding with their goal
+        {
+            if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            {
+                key.GetComponent<Animator>().Play("BatteryUp");
+            }
+        }
         if (other.gameObject.tag == "Poison Cloud")
         {
             cloudDamage = other.gameObject.GetComponent<PoisonCloud>().CloudDamage;
             poisonedMaxTime = other.gameObject.GetComponent<PoisonCloud>().PoisonTime;
+        }
+        if(other.gameObject.tag == "Warp")
+        {
+            if(ranger != RangerType.BlackRanger)
+            {
+                //ModHealth(other.gameObject.GetComponent<>().Damage);
+                ModHealth(-2);
+            }
         }
         if (other.gameObject.tag == "Stat Dart")
         {
@@ -692,6 +744,16 @@ public abstract class Player : MonoBehaviour {
         }
     }
 
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Goal")//colliding with their goal
+        {
+            if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
+            {
+                key.GetComponent<Animator>().Play("BatteryDown");
+            }
+        }
+    }
 
 	//enable air control
 	protected virtual void OnCollisionExit2D(Collision2D coll)

@@ -51,6 +51,8 @@ public class CharacterSelection : MonoBehaviour {
     private bool canStart = false;
     [SerializeField] private GameObject start;
     private WorldController worldControl;
+
+	[SerializeField] bool debugTesting;
     #endregion
 
     #region Properties
@@ -831,6 +833,10 @@ public class CharacterSelection : MonoBehaviour {
         {
             //sets the game to no longer be able to start if there is not enough confirmed players.
             canStart = false;
+
+			if(debugTesting){
+				canStart=true;
+			}
         }
 
         if (canStart) //if game is allowed to start
@@ -846,6 +852,47 @@ public class CharacterSelection : MonoBehaviour {
 
     private void TransferPlayers()
     {
+
+		//so that it can be tested with one controller
+		if (debugTesting) {
+			p2Active = true; //joins p2 to the game
+			
+			//removes p2 Join game banner
+			p2Group.transform.FindChild ("Join Game").gameObject.SetActive (false);
+			
+			//sets the current ranger choice as selected.
+			p2RangerArray [p2Current].Selected (p2Ranger, p2Group);
+			
+			canStart = true;
+
+			//check that this ranger is available
+
+			//set this ranger option as unavailable to other players
+			p1RangerArray [p2Current].SetUnavailable ();
+			p3RangerArray [p2Current].SetUnavailable ();
+			p4RangerArray [p2Current].SetUnavailable ();
+				
+			//update current players options
+			if (p1Active) {
+				p1RangerArray [p1Current].Selected (p1Ranger, p1Group);
+			}
+			if (p3Active) {
+				p3RangerArray [p3Current].Selected (p3Ranger, p3Group);
+			}
+			if (p4Active) {
+				p4RangerArray [p4Current].Selected (p4Ranger, p4Group);
+			}
+				
+			//display player as ready
+			p2Group.transform.FindChild ("Ready").gameObject.SetActive (true);
+				
+			//increase # of players confirmed by 1
+			playersConfirmed += 1;
+				
+			//locks it so that player has confirmed a choice
+			p2Confirmed = true;
+		}
+
         worldControl.SetPlayersActive(p1Active, p2Active, p3Active, p4Active);
 
         worldControl.SetRangerTypes(p1RangerArray[p1Current].RangerType, p2RangerArray[p2Current].RangerType, p3RangerArray[p3Current].RangerType, p4RangerArray[p4Current].RangerType);

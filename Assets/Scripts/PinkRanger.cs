@@ -32,6 +32,7 @@ public class PinkRanger : Player {
         input.ResetBtns();
     }
 
+    //STAT DART
     protected override void Attack2()
     {
         if (input.attack2 && attack2Available)
@@ -46,9 +47,12 @@ public class PinkRanger : Player {
                 b.transform.position = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
             }
             b.GetComponent<statDartScript>().startUp(playerNum, facingLeft, StatDartVelocity, statTimeMax);
+
+            StartCoroutine(Attack2Cooldown());
         }
     }
 
+    //POISON CLOUD
     protected override void SuperAttack()
     {
         if (input.attack3 && SuperCurrent >= SuperCost)

@@ -15,6 +15,9 @@ TagManager:
   - Black Hole
   - Stat Dart
   - Poison Cloud
+  - Warp
+  - earthwave
+  - Canvas
   layers:
   - Default
   - TransparentFX
@@ -24,8 +27,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - earthwave
+  - Canvas
   - 
   - 
   - 

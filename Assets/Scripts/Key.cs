@@ -28,12 +28,12 @@ public class Key : MonoBehaviour {
             if (holder.GetComponent<Player>().FacingLeft)//facing left
             {
                 transform.position = new Vector3(holder.transform.position.x + offsetX, holder.transform.position.y + offsetY, -1);
-                transform.rotation = Quaternion.Euler(0, 0, -78);
+                transform.rotation = Quaternion.Euler(0, 0, 12);
             }
             else//facing right
             {
                 transform.position = new Vector3(holder.transform.position.x - offsetX, holder.transform.position.y + offsetY, -1);
-                transform.rotation = Quaternion.Euler(0, 180, -78);
+                transform.rotation = Quaternion.Euler(0, 180, 12);
             }
         }
 
@@ -52,7 +52,6 @@ public class Key : MonoBehaviour {
 
     public void drop()
     {
-        
         rBody.WakeUp();
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<SpriteRenderer>().sortingOrder = 0;
@@ -67,6 +66,7 @@ public class Key : MonoBehaviour {
         }
         holder.GetComponent<Player>().KeyPickup = false;
         holder = null;
+        GetComponent<Animator>().Play("Still");
         Debug.Log("Key Dropped");
     }
 

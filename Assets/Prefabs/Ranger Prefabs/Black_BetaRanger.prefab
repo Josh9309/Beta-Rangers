@@ -102,9 +102,11 @@ GameObject:
   - 4: {fileID: 480476}
   - 212: {fileID: 21294034}
   - 50: {fileID: 5051088}
+  - 58: {fileID: 5845220}
+  - 114: {fileID: 11467354}
   m_Layer: 0
   m_Name: Warp Ball
-  m_TagString: Untagged
+  m_TagString: Warp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,6 +365,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &166336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462732}
+  m_Layer: 0
+  m_Name: damageSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &173308
 GameObject:
   m_ObjectHideFlags: 1
@@ -421,7 +438,6 @@ GameObject:
   - 61: {fileID: 6150898}
   - 50: {fileID: 5048638}
   - 114: {fileID: 11484194}
-  - 95: {fileID: 9537942}
   m_Layer: 0
   m_Name: Black_BetaRanger
   m_TagString: Player
@@ -516,7 +532,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 450998}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &401956
 Transform:
   m_ObjectHideFlags: 1
@@ -716,9 +732,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5799999, y: -2.55999994, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.95556331, y: 1.95556331, z: 1.95556331}
   m_Children:
+  - {fileID: 462732}
   - {fileID: 465524}
   - {fileID: 401038}
   - {fileID: 480476}
@@ -735,6 +752,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 484800}
+  m_RootOrder: 0
+--- !u!4 &462732
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 166336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .1581662, y: 1.45315075, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 450998}
   m_RootOrder: 0
 --- !u!4 &464426
 Transform:
@@ -761,7 +790,7 @@ Transform:
   - {fileID: 433122}
   - {fileID: 477950}
   m_Father: {fileID: 450998}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &470608
 Transform:
   m_ObjectHideFlags: 1
@@ -849,7 +878,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 450998}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &481930
 Transform:
   m_ObjectHideFlags: 1
@@ -952,6 +981,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &5845220
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127656}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: .383489609
 --- !u!61 &6102320
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -995,23 +1037,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &9537942
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 185092}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11406732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1021,6 +1046,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 277052f38a2689d4aa6add7f3e99a87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11467354
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03d57415219716499b09bcb0aba464e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11484194
@@ -1036,17 +1072,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 180
   attack1Power: 10
-  attack2Power: 0
+  attack2Power: 5
   attack3Power: 0
   speed: 11
   jumpPower: 1200
   superCost: 50
   superMax: 100
   attack1SuperValue: 10
-  attack1CooldownTime: 1
-  attack2CooldownTime: 3
+  attack1CooldownTime: .119999997
+  attack2CooldownTime: 0
   ranger: 4
-  playerNum: 1
+  playerNum: 4
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   keyDamageMax: 50
   keyPickup: 1
@@ -1060,14 +1096,15 @@ MonoBehaviour:
   canBeHit: 1
   frozen: 0
   rangerAnimator: {fileID: 9525106}
-  WarpBall: {fileID: 127656}
+  WarpBallObj: {fileID: 127656}
   BlackHolePrefab: {fileID: 167020, guid: 2f9c764f91d2ad74baa65298bac4fada, type: 2}
   BlackHoleStrength: 25
   BlackHolePullRange: 10
   BlackHoleSpeed: 2
   BlackHoleMoveTime: 5
   BlackHoleStillTime: 5
-  warpTimeMax: 2
+  warpTimeMax: 1
+  warpSpeed: 17
   verInput: 0
   VERTICAL_AXIS: Warp_Vertical
 --- !u!212 &21202122
@@ -1563,7 +1600,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Hitbox
+      value: Warp
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: check
@@ -1607,7 +1644,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack2Power
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack3Power
@@ -1667,7 +1704,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: warpTimeMax
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_SortingOrder
@@ -1675,12 +1712,24 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack2CooldownTime
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: warpSpeed
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack1CooldownTime
+      value: .119999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: WarpBallObj
+      value: 
+      objectReference: {fileID: 127656}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 185092}

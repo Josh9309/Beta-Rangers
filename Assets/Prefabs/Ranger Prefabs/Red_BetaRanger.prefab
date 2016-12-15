@@ -80,6 +80,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &113452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 438716}
+  m_Layer: 0
+  m_Name: damageSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &114928
 GameObject:
   m_ObjectHideFlags: 1
@@ -107,7 +122,6 @@ GameObject:
   - 61: {fileID: 6138016}
   - 50: {fileID: 5098138}
   - 114: {fileID: 11457202}
-  - 95: {fileID: 9561482}
   m_Layer: 0
   m_Name: Red_BetaRanger
   m_TagString: Player
@@ -684,9 +698,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.96000004, y: -4.76999998, z: 0}
+  m_LocalPosition: {x: .209999993, y: 0, z: 0}
   m_LocalScale: {x: 1.95556295, y: 1.95556295, z: 1.95556295}
   m_Children:
+  - {fileID: 438716}
   - {fileID: 426398}
   - {fileID: 479260}
   - {fileID: 440952}
@@ -706,7 +721,7 @@ Transform:
   - {fileID: 468340}
   - {fileID: 463720}
   m_Father: {fileID: 425380}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &431646
 Transform:
   m_ObjectHideFlags: 1
@@ -772,6 +787,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 409510}
   m_RootOrder: 0
+--- !u!4 &438716
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0507802814, y: 1.45315111, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 425380}
+  m_RootOrder: 0
 --- !u!4 &440024
 Transform:
   m_ObjectHideFlags: 1
@@ -797,7 +824,7 @@ Transform:
   - {fileID: 458030}
   - {fileID: 490046}
   m_Father: {fileID: 425380}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &445182
 Transform:
   m_ObjectHideFlags: 1
@@ -810,7 +837,7 @@ Transform:
   m_Children:
   - {fileID: 433496}
   m_Father: {fileID: 425380}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &450018
 Transform:
   m_ObjectHideFlags: 1
@@ -980,7 +1007,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425380}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &479376
 Transform:
   m_ObjectHideFlags: 1
@@ -1126,23 +1153,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &9561482
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118354}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &9576122
 Animator:
   serializedVersion: 3
@@ -1222,7 +1232,7 @@ MonoBehaviour:
   superCost: 70
   superMax: 100
   attack1SuperValue: 10
-  attack1CooldownTime: 1
+  attack1CooldownTime: .119999997
   attack2CooldownTime: 5
   ranger: 1
   playerNum: 1
@@ -1932,6 +1942,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: playerNum
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack1CooldownTime
+      value: .119999997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
