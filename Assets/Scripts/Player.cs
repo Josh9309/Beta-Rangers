@@ -283,6 +283,10 @@ public abstract class Player : MonoBehaviour {
 		set{vinesTime=value;}
 	}
 
+    public Animator RangerAnimator
+    {
+        get { return rangerAnimator; }
+    }
 
     #endregion
 

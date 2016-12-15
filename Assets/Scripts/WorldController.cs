@@ -503,7 +503,7 @@ public class WorldController : MonoBehaviour {
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player1;
                 rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-                rangerAnimator = enemyRanger.gameObject.GetComponentInChildren<Animator>();
+                rangerAnimator = enemyRanger.RangerAnimator;
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
                 for (int i = 0; i < rangerRenders.Length; i++)
@@ -516,7 +516,7 @@ public class WorldController : MonoBehaviour {
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player2;
                 rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-                rangerAnimator = enemyRanger.gameObject.GetComponentInChildren<Animator>();
+                rangerAnimator = enemyRanger.RangerAnimator;
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
                 for (int i = 0; i < rangerRenders.Length; i++)
@@ -529,7 +529,7 @@ public class WorldController : MonoBehaviour {
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player3; 
                 rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-                rangerAnimator = enemyRanger.gameObject.GetComponentInChildren<Animator>();
+                rangerAnimator = enemyRanger.RangerAnimator;
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
                 for (int i = 0; i < rangerRenders.Length; i++)
@@ -542,7 +542,7 @@ public class WorldController : MonoBehaviour {
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player4;
                 rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-                rangerAnimator = enemyRanger.gameObject.GetComponentInChildren<Animator>();
+                rangerAnimator = enemyRanger.RangerAnimator;
                 Debug.Log(enemyRanger.name + " is Frozen!");
                 enemyRanger.frozen = true; //sets frozen status effect to true
                 for (int i = 0; i < rangerRenders.Length; i++)
@@ -558,7 +558,10 @@ public class WorldController : MonoBehaviour {
                 rangerAnimator = null;
                 break;
         }
-        rangerAnimator.Play("Frozen");
+        if (enemyRanger != null)
+        {
+            rangerAnimator.Play("Frozen");
+        }
         //waits for a third of the freeze time
         yield return new WaitForSeconds(freezeTime/ 3);
         if(enemyRanger != null)
@@ -586,13 +589,15 @@ public class WorldController : MonoBehaviour {
             Debug.Log(enemyRanger.name + " is Unfrozen!");
             //Unfreezes the ranger and removes tint, it also destroys ice blast shard gameobject
             enemyRanger.frozen = false;
-            enemyRanger.gameObject.GetComponent<Animator>().enabled = true;
             for (int i = 0; i < rangerRenders.Length; i++)
             {
                 rangerRenders[i].color = Color.white;
             }
         }
-        //rangerAnimator.Play("Idle");
+        if (enemyRanger != null)
+        {
+            rangerAnimator.Play("Idle");
+        }
         Destroy(iceBlastShard);
     }
 }
