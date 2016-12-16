@@ -332,30 +332,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Run
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 97232342c53718b45ac101132c410ee7, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
---- !u!1102 &110257696
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: ranger-run
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -527,7 +504,7 @@ AnimatorStateMachine:
     m_Position: {x: 432, y: 72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110251200}
-    m_Position: {x: 684, y: 120, z: 0}
+    m_Position: {x: 744, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110282002}
     m_Position: {x: 528, y: -12, z: 0}
@@ -549,9 +526,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 110247284}
     m_Position: {x: 216, y: 240, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 110257696}
-    m_Position: {x: 251, y: 305, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

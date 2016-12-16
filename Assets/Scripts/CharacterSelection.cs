@@ -367,7 +367,7 @@ public class CharacterSelection : MonoBehaviour {
                 }
                 else if (p4Input.dodgeInput < 0 && p4Input.dodge) //if LB was pressed
                 {
-                    p1Current--; //move selector to the left
+                    p4Current--; //move selector to the left
 
                     //does not let the selector go past the beginning of the ranger choices
                     if (p4Current < 0)

@@ -34,11 +34,15 @@ public class vines : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		time += Time.deltaTime;
-		if(time > ranger.GetComponent<GreenRanger>().vinesStayTime){
-			Debug.Log("time up");
-			gameObject.SetActive(false);
-			time=0;
-		}
+        if (ranger.GetComponent<GreenRanger>() != null)
+        {
+            if (time > ranger.GetComponent<GreenRanger>().vinesStayTime)
+            {
+                Debug.Log("time up");
+                gameObject.SetActive(false);
+                time = 0;
+            }
+        }
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
