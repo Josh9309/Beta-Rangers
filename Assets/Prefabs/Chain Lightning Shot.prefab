@@ -73,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   moveLeft: 1
-  chainRadius: 10
+  chainRadius: 40
   ChainLightingAsset: {fileID: 126338, guid: 4bbd2cae1a6e56747984318c76dbe887, type: 2}
 --- !u!212 &21203282
 SpriteRenderer:
@@ -116,7 +116,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: chainRadius
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ChainLightingAsset

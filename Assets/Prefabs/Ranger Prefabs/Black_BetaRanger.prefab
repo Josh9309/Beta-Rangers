@@ -1079,7 +1079,7 @@ MonoBehaviour:
   superCost: 50
   superMax: 100
   attack1SuperValue: 10
-  attack1CooldownTime: .119999997
+  attack1CooldownTime: .239999995
   attack2CooldownTime: 0
   ranger: 4
   playerNum: 4
@@ -1724,7 +1724,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attack1CooldownTime
-      value: .119999997
+      value: .239999995
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: WarpBallObj
