@@ -99,6 +99,11 @@ public class WorldController : MonoBehaviour {
     {
         get { return p4Active; }
     }
+
+    public Player.RangerType WinnerType
+    {
+        get { return winnerType; }
+    }
     #endregion
 
     #region Methods
