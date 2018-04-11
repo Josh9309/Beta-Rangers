@@ -192,7 +192,7 @@ public class CharacterSelection : MonoBehaviour {
                     p1Active = true; //joins p1 to the game
 
                     //removes p1 Join game banner
-                    p1Group.transform.FindChild("Join Game").gameObject.SetActive(false);
+                    p1Group.transform.Find("Join Game").gameObject.SetActive(false);
 
                     //sets the current ranger choice as selected.
                     p1RangerArray[p1Current].Selected(p1Ranger, p1Group);
@@ -205,7 +205,7 @@ public class CharacterSelection : MonoBehaviour {
                     p2Active = true; //joins p2 to the game
 
                     //removes p2 Join game banner
-                    p2Group.transform.FindChild("Join Game").gameObject.SetActive(false);
+                    p2Group.transform.Find("Join Game").gameObject.SetActive(false);
 
                     //sets the current ranger choice as selected.
                     p2RangerArray[p2Current].Selected(p2Ranger, p2Group);
@@ -218,7 +218,7 @@ public class CharacterSelection : MonoBehaviour {
                     p3Active = true; //joins p3 to the game
 
                     //removes p3 Join game banner
-                    p3Group.transform.FindChild("Join Game").gameObject.SetActive(false);
+                    p3Group.transform.Find("Join Game").gameObject.SetActive(false);
 
                     //sets the current ranger choice as selected.
                     p3RangerArray[p3Current].Selected(p3Ranger, p3Group);
@@ -231,7 +231,7 @@ public class CharacterSelection : MonoBehaviour {
                     p4Active = true; //joins p4 to the game
 
                     //removes p4 Join game banner
-                    p4Group.transform.FindChild("Join Game").gameObject.SetActive(false);
+                    p4Group.transform.Find("Join Game").gameObject.SetActive(false);
 
                     //sets the current ranger choice as selected.
                     p4RangerArray[p4Current].Selected(p4Ranger, p4Group);
@@ -416,7 +416,7 @@ public class CharacterSelection : MonoBehaviour {
                         }
 
                         //display player as ready
-                        p1Group.transform.FindChild("Ready").gameObject.SetActive(true);
+                        p1Group.transform.Find("Ready").gameObject.SetActive(true);
 
                         //increase # of players confirmed by 1
                         playersConfirmed += 1;
@@ -453,7 +453,7 @@ public class CharacterSelection : MonoBehaviour {
                         }
 
                         //display player as ready
-                        p2Group.transform.FindChild("Ready").gameObject.SetActive(true);
+                        p2Group.transform.Find("Ready").gameObject.SetActive(true);
 
                         //increase # of players confirmed by 1
                         playersConfirmed += 1;
@@ -490,7 +490,7 @@ public class CharacterSelection : MonoBehaviour {
                         }
 
                         //display player as ready
-                        p3Group.transform.FindChild("Ready").gameObject.SetActive(true);
+                        p3Group.transform.Find("Ready").gameObject.SetActive(true);
 
                         //increase # of players confirmed by 1
                         playersConfirmed += 1;
@@ -527,7 +527,7 @@ public class CharacterSelection : MonoBehaviour {
                         }
 
                         //display player as ready
-                        p4Group.transform.FindChild("Ready").gameObject.SetActive(true);
+                        p4Group.transform.Find("Ready").gameObject.SetActive(true);
 
                         //increase # of players confirmed by 1
                         playersConfirmed += 1;
@@ -571,7 +571,7 @@ public class CharacterSelection : MonoBehaviour {
                     }
 
                     //remove player ready banner
-                    p1Group.transform.FindChild("Ready").gameObject.SetActive(false);
+                    p1Group.transform.Find("Ready").gameObject.SetActive(false);
 
                     //decrease # of players confirmed
                     playersConfirmed--;
@@ -604,7 +604,7 @@ public class CharacterSelection : MonoBehaviour {
                     }
 
                     //remove player ready banner
-                    p2Group.transform.FindChild("Ready").gameObject.SetActive(false);
+                    p2Group.transform.Find("Ready").gameObject.SetActive(false);
 
                     //decrease # of players confirmed
                     playersConfirmed--;
@@ -637,7 +637,7 @@ public class CharacterSelection : MonoBehaviour {
                     }
 
                     //remove player ready banner
-                    p3Group.transform.FindChild("Ready").gameObject.SetActive(false);
+                    p3Group.transform.Find("Ready").gameObject.SetActive(false);
 
                     //decrease # of players confirmed
                     playersConfirmed--;
@@ -670,7 +670,7 @@ public class CharacterSelection : MonoBehaviour {
                     }
 
                     //remove player ready banner
-                    p4Group.transform.FindChild("Ready").gameObject.SetActive(false);
+                    p4Group.transform.Find("Ready").gameObject.SetActive(false);
 
                     //decrease # of players confirmed
                     playersConfirmed--;
@@ -703,10 +703,10 @@ public class CharacterSelection : MonoBehaviour {
                     p1Current = 0;
 
                     //turn Join game banner back on
-                    p1Group.transform.FindChild("Join Game").gameObject.SetActive(true);
+                    p1Group.transform.Find("Join Game").gameObject.SetActive(true);
 
                     //make sure taken banner is off
-                    p1Group.transform.FindChild("Taken").gameObject.SetActive(false);
+                    p1Group.transform.Find("Taken").gameObject.SetActive(false);
 
                     //set player to inactive
                     p1Active = false;
@@ -726,10 +726,10 @@ public class CharacterSelection : MonoBehaviour {
                     p2Current = 0;
 
                     //turn Join game banner back on
-                    p2Group.transform.FindChild("Join Game").gameObject.SetActive(true);
+                    p2Group.transform.Find("Join Game").gameObject.SetActive(true);
 
                     //make sure taken banner is off
-                    p2Group.transform.FindChild("Taken").gameObject.SetActive(false);
+                    p2Group.transform.Find("Taken").gameObject.SetActive(false);
 
                     //set player to inactive
                     p2Active = false;
@@ -749,10 +749,10 @@ public class CharacterSelection : MonoBehaviour {
                     p3Current = 0;
 
                     //turn Join game banner back on
-                    p3Group.transform.FindChild("Join Game").gameObject.SetActive(true);
+                    p3Group.transform.Find("Join Game").gameObject.SetActive(true);
 
                     //make sure taken banner is off
-                    p3Group.transform.FindChild("Taken").gameObject.SetActive(false);
+                    p3Group.transform.Find("Taken").gameObject.SetActive(false);
 
                     //set player to inactive
                     p3Active = false;
@@ -772,10 +772,10 @@ public class CharacterSelection : MonoBehaviour {
                     p4Current = 0;
 
                     //turn Join game banner back on
-                    p4Group.transform.FindChild("Join Game").gameObject.SetActive(true);
+                    p4Group.transform.Find("Join Game").gameObject.SetActive(true);
 
                     //make sure taken banner is off
-                    p4Group.transform.FindChild("Taken").gameObject.SetActive(false);
+                    p4Group.transform.Find("Taken").gameObject.SetActive(false);
 
                     //set player to inactive
                     p4Active = false;
@@ -858,7 +858,7 @@ public class CharacterSelection : MonoBehaviour {
 			p2Active = true; //joins p2 to the game
 			
 			//removes p2 Join game banner
-			p2Group.transform.FindChild ("Join Game").gameObject.SetActive (false);
+			p2Group.transform.Find ("Join Game").gameObject.SetActive (false);
 			
 			//sets the current ranger choice as selected.
 			p2RangerArray [p2Current].Selected (p2Ranger, p2Group);
@@ -884,7 +884,7 @@ public class CharacterSelection : MonoBehaviour {
 			}
 				
 			//display player as ready
-			p2Group.transform.FindChild ("Ready").gameObject.SetActive (true);
+			p2Group.transform.Find ("Ready").gameObject.SetActive (true);
 				
 			//increase # of players confirmed by 1
 			playersConfirmed += 1;

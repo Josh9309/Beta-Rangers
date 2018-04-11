@@ -32,7 +32,7 @@ public class MenuScript : MonoBehaviour {
         optionGroup.interactable = true;
 
         //make controls btn the current selected 
-        EventSystem.current.SetSelectedGameObject(optionGroup.transform.FindChild("ControlsBtn").gameObject);
+        EventSystem.current.SetSelectedGameObject(optionGroup.transform.Find("ControlsBtn").gameObject);
     }
 
     public void SwitchControls()
@@ -48,7 +48,7 @@ public class MenuScript : MonoBehaviour {
         controlsGroup.interactable = true;
 
         //make controls back button the current selected
-        EventSystem.current.SetSelectedGameObject(controlsGroup.transform.FindChild("BackBtn").gameObject);
+        EventSystem.current.SetSelectedGameObject(controlsGroup.transform.Find("BackBtn").gameObject);
     }
 
     public void SwitchCredits()
@@ -64,7 +64,7 @@ public class MenuScript : MonoBehaviour {
         creditsGroup.interactable = true;
 
         //make controls back button the current selected
-        EventSystem.current.SetSelectedGameObject(creditsGroup.transform.FindChild("BackBtn").gameObject);
+        EventSystem.current.SetSelectedGameObject(creditsGroup.transform.Find("BackBtn").gameObject);
     }
 
     public void LoadScene(string scene)

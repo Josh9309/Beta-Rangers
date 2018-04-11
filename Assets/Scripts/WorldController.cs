@@ -481,6 +481,7 @@ public class WorldController : MonoBehaviour {
                 g.GetComponent<RedRanger>().enabled = false;
                 g.GetComponent<Collider2D>().enabled = false;
                 g.GetComponent<Rigidbody2D>().Sleep();
+                g.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 break;
             case Player.RangerType.YellowRanger:
                 g = Instantiate(prefabRangerYellow, new Vector3(0, 0), Quaternion.identity) as GameObject;

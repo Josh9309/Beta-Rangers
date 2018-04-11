@@ -21,7 +21,7 @@ public class vines : MonoBehaviour {
 	}
 
 	public void Attach(){
-		transform.position = ranger.transform.FindChild("GroundCheck").transform.position;
+		transform.position = ranger.transform.Find("GroundCheck").transform.position;
 		transform.localScale = scale;
 
 	}

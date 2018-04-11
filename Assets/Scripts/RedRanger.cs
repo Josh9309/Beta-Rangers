@@ -13,9 +13,9 @@ public class RedRanger : Player {
         playerColor = Color.red;
 
 		//use the alternate attack using the hitboxes
-		sword = gameObject.transform.FindChild("Sword").gameObject;
+		sword = gameObject.transform.Find("Sword").gameObject;
 		sword.SetActive (false);
-		punch = gameObject.transform.FindChild ("Fist").gameObject;
+		punch = gameObject.transform.Find ("Fist").gameObject;
 		punch.SetActive (false);
 	}
 	

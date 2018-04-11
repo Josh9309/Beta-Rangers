@@ -62,7 +62,7 @@ public class damageScript : MonoBehaviour {
 		tempText.transform.SetParent(GameObject.Find("WorldSpaceUI").transform, false);
 
 		damageTexts.Add (tempText);
-		animators.Add (tempText.transform.FindChild("damageText").GetComponent<Animator>());
+		animators.Add (tempText.transform.Find("damageText").GetComponent<Animator>());
 	}
 
 
