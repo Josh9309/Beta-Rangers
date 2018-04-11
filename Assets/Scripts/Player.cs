@@ -309,7 +309,7 @@ public abstract class Player : MonoBehaviour {
         rBody.mass = 1.0f;
         keyDamage = 0;
 
-		damageSpawn = transform.FindChild ("damageSpawnPoint").gameObject;
+		damageSpawn = transform.Find ("damageSpawnPoint").gameObject;
 		if (ranger == RangerType.RedRanger) { colorString="red"; }
 		if (ranger == RangerType.YellowRanger) { colorString="yellow"; }
 		if (ranger == RangerType.GreenRanger) { colorString="green"; }

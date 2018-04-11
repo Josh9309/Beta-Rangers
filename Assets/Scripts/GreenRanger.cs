@@ -15,7 +15,7 @@ public class GreenRanger : Player {
         playerColor = Color.green;
 
 		//use the alternate attack using the hitboxes
-		vines.GetComponent<vines>().scale = transform.FindChild("GroundCheck").transform.localScale;
+		vines.GetComponent<vines>().scale = transform.Find("GroundCheck").transform.localScale;
 		vines.GetComponent<vines> ().Detach ();
 
 		vines.SetActive (false);

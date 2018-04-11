@@ -53,7 +53,7 @@ public class RangerChoice : MonoBehaviour {
 
         if (!available)
         {
-            playerGroup.transform.FindChild("Taken").gameObject.SetActive(true);
+            playerGroup.transform.Find("Taken").gameObject.SetActive(true);
         }
     }
 
@@ -62,7 +62,7 @@ public class RangerChoice : MonoBehaviour {
         selectedSymbol.SetActive(false);
         if (!available)
         {
-            playerGroup.transform.FindChild("Taken").gameObject.SetActive(false);
+            playerGroup.transform.Find("Taken").gameObject.SetActive(false);
         }
     }
 
