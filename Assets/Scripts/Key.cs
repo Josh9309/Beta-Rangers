@@ -8,6 +8,7 @@ public class Key : MonoBehaviour {
     private Rigidbody2D rBody;
     private float offsetX = 1;
     private float offsetY = .25f;
+    private AudioSource batteryAudioSource;
 
     //properties
     public GameObject Holder
@@ -16,9 +17,14 @@ public class Key : MonoBehaviour {
         set { holder = value; }
     }
 
+    public AudioSource BatteryAudioSource
+    {
+        get { return batteryAudioSource; }
+    }
 	// Use this for initialization
 	void Start () {
         rBody = GetComponent<Rigidbody2D>();
+        batteryAudioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame

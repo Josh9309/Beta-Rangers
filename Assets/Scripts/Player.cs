@@ -156,6 +156,8 @@ public abstract class Player : MonoBehaviour {
     private bool startedMoving = false;
     private bool startedStill = false;
 
+    //Sounds Attributes
+    protected AudioSource rangerAudio;
     #endregion
 
     #region Properties
@@ -316,6 +318,8 @@ public abstract class Player : MonoBehaviour {
 		if (ranger == RangerType.BlueRanger) { colorString="blue"; }
 		if (ranger == RangerType.PinkRanger) { colorString="pink"; }
 		if (ranger == RangerType.BlackRanger) { colorString="black"; }
+
+        rangerAudio = GetComponent<AudioSource>();
 	}
 	
     protected virtual void FixedUpdate()
@@ -509,6 +513,8 @@ public abstract class Player : MonoBehaviour {
     {
 		if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
+            rangerAudio.clip = SoundManager.Instance.GetJump();
+            rangerAudio.Play();
             rangerAnimator.Play("Jump");
             if (dartEffect == StatusEffect.Jump)
             {
@@ -548,6 +554,7 @@ public abstract class Player : MonoBehaviour {
         {
             if (Mathf.Abs(input.fwdInput) > input.delay) //make sure the input is greater than the input.delay
             {
+               
                 rangerAnimator.Play("MeleeMelee");
             }
             else {
@@ -579,10 +586,14 @@ public abstract class Player : MonoBehaviour {
 					if(canBeHit){
                         if (dartEffect == StatusEffect.AttackPower)
                         {
+                            rangerAudio.clip = SoundManager.Instance.GetPunch();
+                            rangerAudio.Play();
                             ranger.ModHealth(-(attack1Power / 2));
                         }
                         else
                         {
+                            rangerAudio.clip = SoundManager.Instance.GetPunch();
+                            rangerAudio.Play();
                             ranger.ModHealth(-attack1Power); //decrease enemy ranger health by attack1Power damage
                         }
                     SuperCurrent += attack1SuperValue; //increase super meter by attack 1 super value
@@ -630,6 +641,7 @@ public abstract class Player : MonoBehaviour {
         {
             key.GetComponent<Key>().drop();
         }
+        SoundManager.Instance.PlayDeath();
         rangerAnimator.Play("Dead");
         worldControl.StartCoroutine(worldControl.Respawn(playerNum, ranger));
         Destroy(gameObject);
@@ -693,6 +705,7 @@ public abstract class Player : MonoBehaviour {
         {
             if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
             {
+                key.BatteryAudioSource.Play();
                 key.GetComponent<Animator>().Play("BatteryUp");
             }
         }
@@ -771,6 +784,7 @@ public abstract class Player : MonoBehaviour {
         {
             if (key != null && playerNum == other.gameObject.GetComponent<Goal>().PlayerNum)//has the key and same color
             {
+                key.BatteryAudioSource.Stop();
                 key.GetComponent<Animator>().Play("BatteryDown");
             }
         }
