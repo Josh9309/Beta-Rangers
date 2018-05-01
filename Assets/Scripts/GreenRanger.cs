@@ -41,7 +41,7 @@ public class GreenRanger : Player {
 		if (input.attack2 && attack2Available && grounded)
 		{
 			if(playerNum == 1){Debug.Log("att2");}
-
+            SoundManager.Instance.PlaySound(rangerAudio, "Earth Wave");
 			canMove=false;
 			vines.GetComponent<vines>().Attach();
 

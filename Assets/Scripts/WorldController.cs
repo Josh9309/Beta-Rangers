@@ -19,6 +19,7 @@ public class WorldController : MonoBehaviour {
     [SerializeField] private GameObject prefabRangerGreen;
     [SerializeField] private GameObject prefabRangerBlack;
     [SerializeField] private GameObject prefabRangerPink;
+    [SerializeField] private GameObject soundManagerPrefab;
     [SerializeField] private Vector3 p1Location;
     [SerializeField] private Vector3 p2Location;
     [SerializeField] private Vector3 p3Location;
@@ -113,6 +114,10 @@ public class WorldController : MonoBehaviour {
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        if(SoundManager.Instance == null)
+        {
+            Instantiate<GameObject>(soundManagerPrefab);
+        }
     }
 
     // Use this for initialization
@@ -449,49 +454,41 @@ public class WorldController : MonoBehaviour {
 
     private void setupWin()
     {
-        GameObject g;
+        GameObject winner = null;
         switch (winnerType)
         {
             case Player.RangerType.BlackRanger:
-                g = Instantiate(prefabRangerBlack, new Vector3(0, 0), Quaternion.identity) as GameObject;
-                g.GetComponent<BlackRanger>().enabled = false;
-                g.GetComponent<Collider2D>().enabled = false;
-                g.GetComponent<Rigidbody2D>().Sleep();
+                winner = Instantiate(prefabRangerBlack, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                winner.GetComponent<BlackRanger>().enabled = false;
                 break;
             case Player.RangerType.BlueRanger:
-                g = Instantiate(prefabRangerBlue, new Vector3(0, 0), Quaternion.identity) as GameObject;
-                g.GetComponent<BlueRanger>().enabled = false;
-                g.GetComponent<Collider2D>().enabled = false;
-                g.GetComponent<Rigidbody2D>().Sleep();
+                winner = Instantiate(prefabRangerBlue, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                winner.GetComponent<BlueRanger>().enabled = false;
                 break;
             case Player.RangerType.GreenRanger:
-                g = Instantiate(prefabRangerGreen, new Vector3(0, 0), Quaternion.identity) as GameObject;
-                g.GetComponent<GreenRanger>().enabled = false;
-                g.GetComponent<Collider2D>().enabled = false;
-                g.GetComponent<Rigidbody2D>().Sleep();
+                winner = Instantiate(prefabRangerGreen, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                winner.GetComponent<GreenRanger>().enabled = false;
                 break;
             case Player.RangerType.PinkRanger:
-                g = Instantiate(prefabRangerPink, new Vector3(0, 0), Quaternion.identity) as GameObject;
-                g.GetComponent<PinkRanger>().enabled = false;
-                g.GetComponent<Collider2D>().enabled = false;
-                g.GetComponent<Rigidbody2D>().Sleep();
+                winner = Instantiate(prefabRangerPink, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                winner.GetComponent<PinkRanger>().enabled = false;
                 break;
             case Player.RangerType.RedRanger:
-                g = Instantiate(prefabRangerRed, new Vector3(0, 0), Quaternion.identity) as GameObject;
-                g.GetComponent<RedRanger>().enabled = false;
-                g.GetComponent<Collider2D>().enabled = false;
-                g.GetComponent<Rigidbody2D>().Sleep();
-                g.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                winner = Instantiate(prefabRangerRed, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                winner.GetComponent<RedRanger>().enabled = false;
                 break;
             case Player.RangerType.YellowRanger:
-                g = Instantiate(prefabRangerYellow, new Vector3(0, 0), Quaternion.identity) as GameObject;
-                g.GetComponent<YellowRanger>().enabled = false;
-                g.GetComponent<Collider2D>().enabled = false;
-                g.GetComponent<Rigidbody2D>().Sleep();
+                winner = Instantiate(prefabRangerYellow, new Vector3(0, 0), Quaternion.identity) as GameObject;
+                winner.GetComponent<YellowRanger>().enabled = false;
                 break;
             default:
                 break;
         }
+
+        //turn off rigidbody, collider and then freeze the winning rangers position.
+        winner.GetComponent<Collider2D>().enabled = false;
+        winner.GetComponent<Rigidbody2D>().Sleep();
+        winner.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     void levelSelect()

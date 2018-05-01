@@ -37,6 +37,7 @@ public class BlackRanger : Player {
             
             if (warpTimeCurrent >= warpTimeMax || !Input.GetButton(input.ATTACK2_AXIS))
             {
+                SoundManager.Instance.PlaySound(rangerAudio, "Teleport Poof", 0.5f);
                 StartCoroutine(Attack2Cooldown());
                 transform.transform.position = WarpBallObj.transform.position;
                 WarpBallObj.SetActive(false);

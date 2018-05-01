@@ -18,6 +18,7 @@ TagManager:
   - Warp
   - earthwave
   - Canvas
+  - Sound Manager
   layers:
   - Default
   - TransparentFX

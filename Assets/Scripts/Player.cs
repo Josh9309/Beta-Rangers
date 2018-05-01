@@ -513,8 +513,7 @@ public abstract class Player : MonoBehaviour {
     {
 		if(input.jump && grounded) // if jump button is pressed and player is grounded
         {
-            rangerAudio.clip = SoundManager.Instance.GetJump();
-            rangerAudio.Play();
+            SoundManager.Instance.PlaySound(rangerAudio, "Jump", 1.0f);
             rangerAnimator.Play("Jump");
             if (dartEffect == StatusEffect.Jump)
             {
