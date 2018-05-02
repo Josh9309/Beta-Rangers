@@ -57,4 +57,22 @@ public class RedRanger : Player {
 			SuperCurrent -= SuperCost;
 		}
 	}
+
+    public void PlaySwordSounds(int swordStage) //0 = swordEnter, 1 = swordSwing, 2 = swordSheath
+    {
+        switch (swordStage)
+        {
+            case 0:
+                SoundManager.Instance.PlaySound(rangerAudio, "RedSwordEnter");
+                break;
+
+            case 1:
+                SoundManager.Instance.PlaySound(rangerAudio, "RedSwordSwing");
+                break;
+
+            case 2:
+                SoundManager.Instance.PlaySound(rangerAudio, "RedSwordExit");
+                break;
+        }
+    }
 }

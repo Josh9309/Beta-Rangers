@@ -293,6 +293,10 @@ public abstract class Player : MonoBehaviour {
         get { return rangerAnimator; }
     }
 
+    public AudioSource RangerAudio
+    {
+        get { return rangerAudio; }
+    }
     #endregion
 
     #region Methods

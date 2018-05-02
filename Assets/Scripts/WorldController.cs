@@ -508,62 +508,40 @@ public class WorldController : MonoBehaviour {
             case 1:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player1;
-                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-                rangerAnimator = enemyRanger.RangerAnimator;
-                Debug.Log(enemyRanger.name + " is Frozen!");
-                enemyRanger.frozen = true; //sets frozen status effect to true
-                for (int i = 0; i < rangerRenders.Length; i++)
-                {
-                    rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
-                }
                 break;
 
             case 2:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player2;
-                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-                rangerAnimator = enemyRanger.RangerAnimator;
-                Debug.Log(enemyRanger.name + " is Frozen!");
-                enemyRanger.frozen = true; //sets frozen status effect to true
-                for (int i = 0; i < rangerRenders.Length; i++)
-                {
-                    rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
-                }
                 break;
 
             case 3:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player3; 
-                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-                rangerAnimator = enemyRanger.RangerAnimator;
-                Debug.Log(enemyRanger.name + " is Frozen!");
-                enemyRanger.frozen = true; //sets frozen status effect to true
-                for (int i = 0; i < rangerRenders.Length; i++)
-                {
-                    rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
-                }
                 break;
 
             case 4:
                 //gets the ranger and the sprite renderer for the ranger
                 enemyRanger = player4;
-                rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
-                rangerAnimator = enemyRanger.RangerAnimator;
-                Debug.Log(enemyRanger.name + " is Frozen!");
-                enemyRanger.frozen = true; //sets frozen status effect to true
-                for (int i = 0; i < rangerRenders.Length; i++)
-                {
-                    rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
-                }
                 break;
 
             default:
-                Debug.LogError("Player number passed into frozen corroutine was invalid");
+                Debug.Assert(false,"Player number passed into frozen corroutine was invalid");
                 enemyRanger = null; //this should not trigger unless there is an error
                 rangerRenders = null;
                 rangerAnimator = null;
                 break;
         }
+        SoundManager.Instance.PlaySound(enemyRanger.RangerAudio, "Frozen", 0.5f);
+        rangerRenders = enemyRanger.gameObject.GetComponentsInChildren<SpriteRenderer>();
+        rangerAnimator = enemyRanger.RangerAnimator;
+        Debug.Log(enemyRanger.name + " is Frozen!");
+        enemyRanger.frozen = true; //sets frozen status effect to true
+        for (int i = 0; i < rangerRenders.Length; i++)
+        {
+            rangerRenders[i].color = Color.cyan; //adds a cyan tint to ranger to show that the ranger is frozen
+        }
+
         if (enemyRanger != null)
         {
             rangerAnimator.Play("Frozen");

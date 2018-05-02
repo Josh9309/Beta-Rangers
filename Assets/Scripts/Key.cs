@@ -59,6 +59,7 @@ public class Key : MonoBehaviour {
     public void drop()
     {
         rBody.WakeUp();
+        batteryAudioSource.Stop();
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<SpriteRenderer>().sortingOrder = 0;
         if (holder.GetComponent<Player>().FacingLeft) {
