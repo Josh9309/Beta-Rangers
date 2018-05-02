@@ -35,8 +35,8 @@ public class SoundManager : MonoBehaviour {
             audioLibrary.Add(sounds[i].name, sounds[i]);
             Debug.Log("Sound Loaded: " + sounds[i].name);
         }
+
         deathSource.clip = audioLibrary["Death"];
-       
 	}
 	
 	// Update is called once per frame
